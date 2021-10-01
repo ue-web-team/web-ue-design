@@ -1,3 +1,7 @@
 export { default as UButton } from '@/components/u-button/UButton.vue'
 export { default as UCheckbox } from '@/components/u-checkbox/Ucheckbox.vue'
-//import 'virtual:windi.css'
+export { default as URadio } from '@/components/u-radio/URadio.vue'
+export { default as UToggle } from '@/components/u-toggle/UToggle.vue'
+export { default as UDialog } from '@/components/u-dialog/UDialog.vue'
+export { default as UAccordionPanel } from '@/components/u-accordion-panel/UAccordionPanel.vue'
+import 'virtual:windi.css'

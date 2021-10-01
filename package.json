@@ -1,19 +1,30 @@
 {
-  "name": "@ue-web-team/ue-design",
-  "version": "0.0.0",
+  "name": "@vejron/ue-design",
+  "version": "0.2.1",
   "description": "UE Component library (Vue 3 + Typescript) Component",
+  "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/ue-design.umd.js",
+  "module": "./dist/ue-design.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ue-design.es.js",
+      "require": "./dist/ue-design.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:library": "vite build --config vite-lib.config.ts",
     "serve": "vite preview",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "publish:library": "npm publish --access public"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.4.1",
     "vue": "^3.2.13"
   },
   "devDependencies": {
