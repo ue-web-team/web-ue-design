@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "build:library": "vite build --config vite-lib.config.ts",
     "serve": "vite preview",
     "publish:library": "npm publish --access public"
