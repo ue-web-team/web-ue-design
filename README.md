@@ -13,3 +13,6 @@ first change version field in package then:
 
 After that publish with  
 `npm run publish:library`
+
+### inspiration 
+Material style wave https://github.com/justintaddei/v-wave
