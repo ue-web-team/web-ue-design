@@ -17,6 +17,7 @@ const isDialogOpen = ref(false);
     <main class="grid grid-cols-1 gap-8">
       <UCard>
         <template #header>Buttons</template>
+        <p class="mb-4">Default, outlined and warning</p>
         <div class="flex flex-wrap gap-4">
           <UButton><template #before><i-mdi-cog /></template>With icon before</UButton>
           <UButton outline ><template #after><i-mdi-account /></template>And after</UButton>
@@ -26,6 +27,16 @@ const isDialogOpen = ref(false);
           <UButton outline warn >Button</UButton>
           <UButton disabled rounded outline warn @click="isDialogOpen = true" >Button</UButton>
           <UButton disabled warn >Button</UButton>
+        </div>
+        <p class="my-4">Icon Buttons</p>
+        <div class="flex flex-wrap gap-4">
+          <UIconButton plain><i-mdi-cog /></UIconButton>
+          <UIconButton><i-mdi-cog /></UIconButton>
+          <UIconButton outline ><i-mdi-account /></UIconButton>
+          <UIconButton warn ><i-mdi-alert/></UIconButton>
+          <UIconButton outline warn ><i-mdi-food/></UIconButton>
+          <UIconButton disabled outline warn @click="isDialogOpen = true" ><i-mdi-account-cowboy-hat/></UIconButton>
+          <UIconButton disabled warn ><i-mdi-wheelchair-accessibility/></UIconButton>
         </div>
       </UCard>
       <UCard>
