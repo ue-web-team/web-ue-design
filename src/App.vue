@@ -18,8 +18,8 @@ const isDialogOpen = ref(false);
       <UCard>
         <template #header>Buttons</template>
         <div class="flex flex-wrap gap-4">
-          <UButton >Button</UButton>
-          <UButton outline >Button</UButton>
+          <UButton><template #before><i-mdi-cog /></template>With icon before</UButton>
+          <UButton outline ><template #after><i-mdi-account /></template>And after</UButton>
           <UButton rounded >Button</UButton>
           <UButton rounded outline >Button</UButton>
           <UButton warn >Button</UButton>

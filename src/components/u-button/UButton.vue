@@ -1,6 +1,12 @@
 <template>
-  <button class @pointerdown="onClicked" :class="buttonClasses" :disabled="disabled">
+  <button class @pointerdown="onDown" :class="buttonClasses" :disabled="disabled">
+  <span class="mr-2" v-if="$slots.before">
+    <slot name="before"></slot>
+  </span>
     <slot></slot>
+    <span class="ml-2" v-if="$slots.after">
+    <slot name="after"></slot>
+  </span>
   </button>
 </template>
 
@@ -34,12 +40,13 @@ const buttonClasses = computed(() => {
     props.outline ? 'border-2 border-green-500 bg-white hover:bg-green-200' : 'bg-green-500 hover:(bg-green-700 text-white)',
     props.warn ? props.outline ? 'border-orange-500 hover:bg-orange-200' : 'bg-orange-500 hover:(bg-orange-700 text-white)' : '',
     props.rounded ? 'rounded-full' : 'rounded',
-    'focus-style relative overflow-hidden transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
+    'focus-style flex items-center relative overflow-hidden transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
   ]
 })
 
 // material ripple effect
-const onClicked = (e: PointerEvent) => {
+const onDown = (e: PointerEvent) => {
+  if(props.disabled) return;
   const button = e.currentTarget as HTMLButtonElement;
   const rect = button.getBoundingClientRect()
   const { x, y } = getRelativePointer(e, rect)
