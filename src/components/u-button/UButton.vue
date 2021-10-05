@@ -1,121 +1,44 @@
 <template>
-  <button
-    class="bg-red-500"
-    :class="buttonClassObject"
-    type="button"
-    :title="title"
-    :aria-label="title"
-    :disabled="disabled"
-    @click="onClick($event)"
-  >
+  <button :class="buttonClasses" :disabled="disabled">
     <slot></slot>
   </button>
 </template>
-<script lang="ts">
-export default {
-  name: 'UButton',
-  props: {
-    label: {
-      type: String,
-      required: false,
-      default: undefined,
-    },
-    title: {
-      type: String,
-      required: false,
-      default: undefined,
-    },
-    type: {
-      type: String,
-      required: false,
-      default: 'default',
-      validator(type: string) {
-        return ['default', 'outlined', 'text'].includes(type)
-      },
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+
+<script setup lang="ts">
+import { computed, PropType } from 'vue';
+
+const props = defineProps({
+  loading: {
+    type: Boolean as PropType<boolean>
   },
-  emits: ['click'],
-  computed: {
-    buttonClassObject() {
-      return {
-        'is-default': this.type === 'default',
-        'is-outlined': this.type === 'outlined',
-        'is-text': this.type === 'text',
-      }
-    },
+  outline: {
+    type: Boolean as PropType<boolean>,
+    default: false,
   },
-  methods: {
-    onClick(event: any) {
-      this.$emit('click', event)
-    },
+  rounded: {
+    type: Boolean as PropType<boolean>,
+    default: false,
   },
-}
+  warn: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    required: false,
+    default: false,
+  },
+})
+const buttonClasses = computed(() => {
+  return [
+    props.outline ? 'border-2 border-green-500 bg-white hover:bg-green-200' : 'bg-green-500 hover:(bg-green-700 text-white)',
+    props.warn ? props.outline? 'border-orange-500 hover:bg-orange-200': 'bg-orange-500 hover:(bg-orange-700 text-white)': '',
+    props.rounded ? 'rounded-full': 'rounded',
+    'focus-style transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
+
+  ]
+})
+
 </script>
 <style scoped>
-button {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 32px;
-  padding: 0 16px;
-  border-radius: 4px;
-  position: relative;
-}
-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: 4px;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.15s ease-in-out;
-  background-color: black;
-}
-button:hover::before {
-  opacity: 0.1;
-}
-button:active::before {
-  opacity: 0.2;
-}
-button.is-default {
-  /*background-color: black;*/
-  border: 1px solid black;
-  color: white;
-}
-button.is-outlined {
-  background-color: transparent;
-  border: 1px solid black;
-  color: black;
-}
-button.is-text {
-  background-color: transparent;
-  border: none;
-  color: black;
-}
-span {
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.25px;
-}
-button.is-default:disabled,
-button.is-outlined:disabled,
-button.is-text:disabled {
-  border-color: #eeeeee;
-  background-color: #eeeeee;
-  cursor: not-allowed;
-}
-button:disabled::before {
-  display: none;
-}
-button:disabled > span {
-  color: #757575;
-}
 </style>

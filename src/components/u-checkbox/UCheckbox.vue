@@ -1,5 +1,5 @@
 <template>
-  <input v-model="model" type="checkbox" />
+  <input class="focus-style" v-model="model" type="checkbox" />
 </template>
 
 <script setup lang="ts">
@@ -46,7 +46,6 @@ input[type="checkbox"] {
     width: 100%;
     height: 100%;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L18 7" /></svg>');
-    color: greenyellow;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
   }
 }

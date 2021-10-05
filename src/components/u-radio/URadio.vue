@@ -1,5 +1,5 @@
 <template>
-  <input v-model="model" type="radio" />
+  <input class="focus-style" v-model="model" type="radio" />
 </template>
 
 <script setup lang="ts">

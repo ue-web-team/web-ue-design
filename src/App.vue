@@ -12,46 +12,58 @@ const isDialogOpen = ref(false);
 <template>
   <div class="max-w-5xl mx-auto px-6 mt-8">
     <header>
-      <h1 class="text-2xl sm:text-4xl font-semibold">Umea Component Library (UCL)</h1>
+      <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-8 divide-gray-300 <md:divide-y">
-      <div class="py-6">
-        <UButton @click="isDialogOpen = true">Hello</UButton>
+    <main class="grid grid-cols-1 gap-8">
+      <UCard>
+        <template #header>Buttons</template>
+        <div class="flex flex-wrap gap-4">
+          <UButton >Button</UButton>
+          <UButton outline >Button</UButton>
+          <UButton rounded >Button</UButton>
+          <UButton rounded outline >Button</UButton>
+          <UButton warn >Button</UButton>
+          <UButton outline warn >Button</UButton>
+          <UButton disabled rounded outline warn @click="isDialogOpen = true" >Button</UButton>
+          <UButton disabled warn >Button</UButton>
+        </div>
+      </UCard>
+      <UCard>
+        <template #header>Dialog</template>
+        <UButton @click="isDialogOpen = true">Open dialog</UButton>
         <UDialog v-model:open="isDialogOpen" title="Change candy preference">
-          bla bla
+          Det här är en tillgänglig dialog med fokus-fälla rätt role attribut osv.
+          finns ilite olika varianter med stäng om man klickar utanför ellr på esc
           <template #actions>
-            <UButton @click="isDialogOpen = false">Cancel</UButton>
+            <UButton outline @click="isDialogOpen = false">Cancel</UButton>
+            <UButton @click="isDialogOpen = false">Ok</UButton>
           </template>
         </UDialog>
-      </div>
-      <div class="py-6">
-        <UButton>Hello</UButton>
-      </div>
-
-      <div class="py-6">
-        <div class="flex items-center gap-2">
+      </UCard>
+      <UCard>
+        <template #header>Checkbox / toggle</template>
+        <div class="grid grid-cols-1 gap-2">
+          <div class="flex items-center gap-2">
           <UToggle v-model="checked" id="id1" />
           <label for="id1">I want candy</label>
         </div>
         <div class="flex items-center gap-2">
-          <UToggle disabled v-model="checked" id="id1" />
-          <label for="id1">I want disabled candy</label>
-        </div>
-      </div>
-
-      <div class="py-6">
-        <div class="flex items-center gap-2">
-          <UCheckbox v-model="checked" id="id1" />
-          <label for="id1">I want candy</label>
-        </div>
-        <div class="flex items-center gap-2">
-          <UCheckbox disabled v-model="checked" id="id2" />
+          <UToggle disabled v-model="checked" id="id2" />
           <label for="id2">I want disabled candy</label>
         </div>
-      </div>
-
-      <div class="py-6">
-        <fieldset class="border-green-700 border-2 px-2 pt-2 pb-4 rounded-md">
+        <div class="flex items-center gap-2">
+          <UCheckbox v-model="checked" id="id3" />
+          <label for="id3">I want candy</label>
+        </div>
+        <div class="flex items-center gap-2">
+          <UCheckbox disabled v-model="checked" id="id4" />
+          <label for="id4">I want disabled candy</label>
+        </div>
+        </div>
+      </UCard>
+      <UCard>
+        <template #header>Radio with fieldset</template>
+        <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md flex flex-col gap-2">
           <legend class="px-2">Candy selection</legend>
           <div class="pl-2 flex items-center gap-2">
             <URadio value="kola" v-model="radio" id="id11" />
@@ -66,13 +78,15 @@ const isDialogOpen = ref(false);
             <label for="id32">I want disabled suris</label>
           </div>
         </fieldset>
-        {{ radio }}
-      </div>
-
-      <div class="py-6">
+      </UCard>
+      <UCard>
+        <template #header>Disclosure</template>
         <UAccordionPanel title="What candy do u like?">All of them!!</UAccordionPanel>
-        ???
-      </div>
+      </UCard>
+
+      
+
+     
     </main>
   </div>
 </template>

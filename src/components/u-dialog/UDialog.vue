@@ -26,20 +26,15 @@
           >
             <div
               style="max-height: min(95vh, 1200px)"
-              class="flex flex-col w-full max-w-md px-6 pt-2 pb-6 overflow-auto text-left mx-auto transition-all transform bg-white shadow-xl rounded-2xl"
+              class="flex flex-col w-full max-w-md px-6 pt-2 pb-6 overflow-auto text-left mx-auto transition-all transform bg-white shadow-xl rounded-lg"
             >
-              <DialogTitle
-                as="h1"
-                class="my-3 text-lg md:text-2xl font-medium leading-6 text-gray-900"
-              >{{ title }}</DialogTitle>
+              <DialogTitle as="h1" class="my-3 text-xl md:text-2xl text-gray-900">{{ title }}</DialogTitle>
 
-              <div>
-                <p class="text-sm text-gray-600">
-                  <slot name="default"></slot>
-                </p>
+              <div class="text-gray-700">
+                <slot name="default"></slot>
               </div>
 
-              <div class="mt-4 flex justify-end">
+              <div class="mt-4 flex gap-4 justify-end">
                 <slot name="actions"></slot>
               </div>
             </div>

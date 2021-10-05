@@ -1,7 +1,7 @@
 <template>
   <Disclosure v-slot="{ open }">
     <DisclosureButton
-      class="flex justify-between border-2 border-green-600 items-center w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors duration-300 hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+      class="focus-style flex justify-between bg-gray-200 items-center w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors duration-300 hover:bg-gray-300"
     >
       <span>{{ title }}</span>
       <svg :class="open ? 'rotate-x-180' : ''" class="transform transition-transform duration-300 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
