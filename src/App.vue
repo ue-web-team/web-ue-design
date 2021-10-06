@@ -26,6 +26,11 @@ const isDialogOpen = ref(false);
               <i-mdi-cog />
             </template>With icon before
           </UButton>
+          <UButton loading>
+            <template #before>
+              <i-mdi-cog />
+            </template>Loading
+          </UButton>
           <UButton outline>
             <template #after>
               <i-mdi-account />
