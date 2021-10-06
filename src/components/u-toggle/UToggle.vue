@@ -6,10 +6,6 @@
 import { computed, WritableComputedRef } from "vue";
 const props = defineProps({
   modelValue: Boolean,
-  toggle: {
-    type: Boolean,
-    default: false
-  }
 });
 const emit = defineEmits(["update:modelValue"]);
 const model: WritableComputedRef<boolean> = computed({
@@ -23,36 +19,19 @@ const model: WritableComputedRef<boolean> = computed({
 </script>
 
 <style scoped lang="postcss">
-
 input[type="checkbox"] {
-  position: relative;
-  width: 2.25rem;
-  height: 1.25rem;
-  border-radius: 1.25rem;
-  border: 2px solid green;
-  display: block;
-  appearance: none;
-  -webkit-appearance: none;
-  transform-origin: center center;
-  &:disabled {
-    opacity: 0.6;
-    filter: grayscale(1);
-  }
+  @apply relative w-9 h-5 rounded-xl border-2 border-green-500 cursor-pointer
+  block appearance-none origin-center disabled:(opacity-60 filter grayscale);
+
   &::before {
+    @apply w-5 h-5 rounded-full absolute bg-gray-400;
     content: "";
-    width: 1.25rem;
-    height: 1.25rem;
-    background: green;
-    transform: translate3D(-7%, -10%, 0) scale(0.65);
-    border-radius: 100%;
-    position: absolute;
+    transform: translate3D(-10%, -10%, 0) scale(0.65);
     transition: transform 0.2s ease;
   }
-   &:checked::before {
-   
+  &:checked::before {
+    @apply bg-green-500;
     transform: translate3D(65%, -10%, 0) scale(0.65);
-   
   }
 }
-
 </style>

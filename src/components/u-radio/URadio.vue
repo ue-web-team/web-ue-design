@@ -20,33 +20,21 @@ const model: WritableComputedRef<string> = computed({
 
 <style scoped lang="postcss">
 input[type="radio"] {
-  position: relative;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 100%;
-  border: 2px solid green;
-  appearance: none;
-  -webkit-appearance: none;
-  &:disabled {
-    opacity: 0.6;
-    filter: grayscale(1);
-  }
+   @apply relative w-5 h-5 rounded-full border-2 border-green-500 appearance-none
+  disabled:(opacity-60 filter grayscale);
+
   &:checked::before {
     transform: scale(.7);
-    opacity: 1;
+    @apply opacity-100 scale-75;
   }
   &::before {
-    position: absolute;
+    @apply absolute block w-full h-full rounded-full bg-green-500 opacity-0;
+  
     content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    //border: 3px solid white;
-    background-color: green;
+   
     transition: opacity 0.2s ease, transform 0.2s ease;
     transform: scale(.1);
-    opacity: 0;
+
   }
 }
 </style>

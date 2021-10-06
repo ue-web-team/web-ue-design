@@ -64,6 +64,10 @@ const props = defineProps({
     default: "Ingen titel",
     type: String as PropType<string>
   },
+  evil: {
+    default: false,
+    type: Boolean as PropType<boolean>
+  }
 })
 const emit = defineEmits(["update:open"]);
 const isOpen = ref(props.open);

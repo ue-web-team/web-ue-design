@@ -4,6 +4,7 @@ import { resolve } from 'path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import typescript from '@rollup/plugin-typescript'
 import WindiCSS from 'vite-plugin-windicss'
+import fs from 'fs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,9 +15,18 @@ export default defineConfig({
     vue(),
     WindiCSS(),
     visualizer({
-      open: true,
+      open: false,
       title: 'UCL Bundle Visualizer',
     }),
+    {
+      name: 'copy tailwind config',
+      generateBundle() {
+        fs.copyFileSync(
+          resolve('./src/config/theme.ts'),
+          resolve('./dist/theme.ts')
+        );
+      }
+    }
   ],
   resolve: {
     alias: {

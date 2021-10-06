@@ -1,5 +1,5 @@
 <template>
-  <button class @pointerdown="onDown" :class="buttonClasses" :disabled="disabled">
+  <button @pointerdown="onDown" :class="buttonClasses" :disabled="disabled">
   <span class="mr-2" v-if="$slots.before">
     <slot name="before"></slot>
   </span>
@@ -41,7 +41,7 @@ const buttonClasses = computed(() => {
     props.outline ? 'border-2 border-green-500 bg-white hover:bg-green-200' : 'bg-green-500 hover:(bg-green-700 text-white)',
     props.warn ? props.outline ? 'border-orange-500 hover:bg-orange-200' : 'bg-orange-500 hover:(bg-orange-700 text-white)' : '',
     props.rounded ? 'rounded-full' : 'rounded',
-    'focus-style flex items-center relative overflow-hidden transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
+    'focus-style inline-flex items-center relative overflow-hidden transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
   ]
 })
 

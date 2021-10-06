@@ -24,28 +24,17 @@ const model: WritableComputedRef<boolean> = computed({
 
 <style scoped lang="postcss">
 input[type="checkbox"] {
-  position: relative;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 100%;
-  border: 2px solid green;
-  appearance: none;
-  -webkit-appearance: none;
-  &:disabled {
-    opacity: 0.6;
-    filter: grayscale(1);
-  }
+  @apply relative w-5 h-5 rounded-full border-2 border-green-500 appearance-none
+  disabled:(opacity-60 filter grayscale);
+ 
   &:checked::before {
     transform: rotateZ(35deg);
-    opacity: 0;
+    @apply opacity-0 transform-gpu rotate-z-45;
   }
   &::before {
-    position: absolute;
+    @apply block w-full h-full;
     content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L18 7" /></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%2300C853"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L18 7" /></svg>');
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
   }
 }

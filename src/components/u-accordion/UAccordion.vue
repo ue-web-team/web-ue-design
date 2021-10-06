@@ -6,11 +6,6 @@
 
 <script setup lang="ts">
 import { PropType, watch, ref } from "vue"
-import {
-  Disclosure,
-  DisclosurePanel,
-  DisclosureButton
-} from "@headlessui/vue"
 
 const props = defineProps({
   multi: {
@@ -19,12 +14,12 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(["update:open"]);
-const isOpen = ref(props.open);
+/*const isOpen = ref(props.open);
 watch(() => props.open, (value: boolean) => {
   isOpen.value = value;
 });
 const closeModal = () => {
   //isOpen.value = false;
   emit("update:open", false);
-};
+};*/
 </script>

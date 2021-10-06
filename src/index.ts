@@ -1,4 +1,5 @@
 export { default as UButton } from '@/components/u-button/UButton.vue'
+export { default as UIconButton } from '@/components/u-icon-button/UIconButton.vue'
 export { default as UCheckbox } from '@/components/u-checkbox/Ucheckbox.vue'
 export { default as URadio } from '@/components/u-radio/URadio.vue'
 export { default as UToggle } from '@/components/u-toggle/UToggle.vue'
