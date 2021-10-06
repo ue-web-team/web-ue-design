@@ -20,7 +20,7 @@ const model: WritableComputedRef<boolean> = computed({
 
 <style scoped lang="postcss">
 input[type="checkbox"] {
-  @apply relative w-9 h-5 rounded-xl border-2 border-green-500 cursor-pointer
+  @apply relative w-9 h-5 rounded-xl border-2 border-primary-500 cursor-pointer
   block appearance-none origin-center disabled:(opacity-60 filter grayscale);
 
   &::before {
@@ -30,7 +30,7 @@ input[type="checkbox"] {
     transition: transform 0.2s ease;
   }
   &:checked::before {
-    @apply bg-green-500;
+    @apply bg-primary-500;
     transform: translate3D(65%, -10%, 0) scale(0.65);
   }
 }

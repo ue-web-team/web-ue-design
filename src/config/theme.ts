@@ -3,7 +3,7 @@ import { Theme } from "windicss/types/interfaces";
 const theme: Theme = {
   extend: {
     colors: {
-      green: {
+      primary: {
         DEFAULT: "#00C853",
         "50": "#AFFFD0",
         "100": "#95FFC1",
@@ -16,7 +16,7 @@ const theme: Theme = {
         "800": "#002F14",
         "900": "#000000",
       },
-      orange: {
+      warn: {
         DEFAULT: "#E92362",
         "50": "#FEF4F7",
         "100": "#FCDCE6",

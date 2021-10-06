@@ -38,8 +38,8 @@ const props = defineProps({
 })
 const buttonClasses = computed(() => {
   return [
-    props.outline ? 'border-2 border-green-500 bg-white hover:bg-green-200' : 'bg-green-500 hover:(bg-green-700 text-white)',
-    props.warn ? props.outline ? 'border-orange-500 hover:bg-orange-200' : 'bg-orange-500 hover:(bg-orange-700 text-white)' : '',
+    props.outline ? 'border-2 border-primary-500 bg-white hover:bg-primary-200' : 'bg-primary-500 hover:(bg-primary-700 text-white)',
+    props.warn ? props.outline ? 'border-warn-500 hover:bg-warn-200' : 'bg-warn-500 hover:(bg-warn-700 text-white)' : '',
     props.rounded ? 'rounded-full' : 'rounded',
     'focus-style inline-flex items-center relative overflow-hidden transition-colors duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
   ]

@@ -20,7 +20,7 @@ const model: WritableComputedRef<string> = computed({
 
 <style scoped lang="postcss">
 input[type="radio"] {
-   @apply relative w-5 h-5 rounded-full border-2 border-green-500 appearance-none
+   @apply relative w-5 h-5 rounded-full border-2 border-primary-500 appearance-none
   disabled:(opacity-60 filter grayscale);
 
   &:checked::before {
@@ -28,7 +28,7 @@ input[type="radio"] {
     @apply opacity-100 scale-75;
   }
   &::before {
-    @apply absolute block w-full h-full rounded-full bg-green-500 opacity-0;
+    @apply absolute block w-full h-full rounded-full bg-primary-500 opacity-0;
   
     content: "";
    
