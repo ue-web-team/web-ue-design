@@ -47,7 +47,7 @@ const buttonClasses = computed(() => {
   ]
 })
 
-const { onDown } = useRippleEffect(props.disabled)
+const { onDown } = useRippleEffect(isDisabled.value as boolean)
 
 
 </script>
