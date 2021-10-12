@@ -1,5 +1,10 @@
 <template>
-  <button class="focus-style w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden transition-colors duration-300 !disabled:(bg-gray-200 border-gray-400 text-gray-500)" @pointerdown="onDown" :class="buttonClasses" :disabled="disabled">
+  <button
+    class="focus-style w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden transition-all transform-gpu ease-out duration-200 active:scale-95 !disabled:(bg-gray-200 border-gray-400 text-gray-500)"
+    @pointerdown="onDown"
+    :class="buttonClasses"
+    :disabled="disabled"
+  >
     <slot />
   </button>
 </template>
@@ -30,10 +35,11 @@ const props = defineProps({
     default: false,
   },
 })
+
 const buttonClasses = computed(() => {
-  if(props.plain) {
+  if (props.plain) {
     return [
-    'hover:bg-gray-300 active:bg-gray-400',
+      'hover:bg-gray-300 active:bg-gray-400',
     ]
   }
   return [

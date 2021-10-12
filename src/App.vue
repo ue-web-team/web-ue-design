@@ -4,11 +4,17 @@
 import { ref } from "vue";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import UButton from "./components/u-button/UButton.vue";
+import UCard from "./components/u-card/UCard.vue";
 
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 const checked = ref(false);
 const radio = ref("");
 const isDialogOpen = ref(false);
+
+const currentPage = ref(1)
+const total = ref(12);
+const perPage = 3
+const onPageClick = (page: any) => { console.log(page); currentPage.value = page;}
 </script>
 
 <template>
@@ -16,7 +22,7 @@ const isDialogOpen = ref(false);
     <header>
       <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>
-    <main class="grid grid-cols-1 gap-8">
+    <main class="grid grid-cols-1 gap-8 mb-26">
       <UCard>
         <template #header>Buttons</template>
         <p class="mb-4">Default, outlined and warning</p>
@@ -124,6 +130,21 @@ const isDialogOpen = ref(false);
       <UCard>
         <template #header>Disclosure</template>
         <UAccordionPanel title="What candy do u like?">All of them!!</UAccordionPanel>
+      </UCard>
+
+      <UCard>
+        <template #header>Pagination</template>
+        <template #actions>
+          <div class="my-4 flex justify-between">
+            Page {{currentPage}} of {{total}}
+            <UPagination
+              :current="currentPage"
+              :total="total"
+              :perPage="perPage"
+              @page-changed="onPageClick($event)"
+            ></UPagination>
+          </div>
+        </template>
       </UCard>
 
       <!--UCard>

@@ -5,6 +5,7 @@ export { default as URadio } from '@/components/u-radio/URadio.vue'
 export { default as UToggle } from '@/components/u-toggle/UToggle.vue'
 export { default as UDialog } from '@/components/u-dialog/UDialog.vue'
 export { default as UAccordionPanel } from '@/components/u-accordion-panel/UAccordionPanel.vue'
+export { default as UPagination } from '@/components/u-pagination/Upagination.vue'
 
 export { default as theme } from '@/config/theme'
 import 'virtual:windi.css'
