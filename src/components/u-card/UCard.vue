@@ -24,8 +24,8 @@ import { PropType } from 'vue';
 
 const props = defineProps({
   isLoading: {
-    required: true,
-    type: Boolean as PropType<boolean>
+    type: Boolean as PropType<boolean>,
+    default: false,
   }
 })
 

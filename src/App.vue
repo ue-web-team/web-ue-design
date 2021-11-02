@@ -27,6 +27,11 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
         <template #header>Buttons</template>
         <p class="mb-4">Default, outlined and warning</p>
         <div class="flex flex-wrap gap-4">
+          <UButton plain>
+            <template #after>
+              <i-mdi-chevron-down />
+            </template>Plain with icon
+          </UButton>
           <UButton>
             <template #before>
               <i-mdi-cog />
