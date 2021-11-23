@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, WritableComputedRef } from "vue";
+/*import { computed, WritableComputedRef } from "vue";
 const props = defineProps({
   modelValue: Boolean,
   toggle: {
@@ -19,7 +19,7 @@ const model: WritableComputedRef<boolean> = computed({
   set(newValue: boolean): void {
     emit("update:modelValue", newValue);
   },
-});
+});*/
 </script>
 
 <style scoped lang="postcss">

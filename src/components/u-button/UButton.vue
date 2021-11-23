@@ -1,15 +1,26 @@
 <template>
-  <button @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled">
-  <span v-if="loading" class="mr-2 animate-spin">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z" fill="currentColor"/></svg>
-  </span>
-  <span class="mr-2" v-if="$slots.before && !loading">
-    <slot name="before"></slot>
-  </span>
+  <button class="focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled">
+    <span v-if="loading" class="mr-2 animate-spin">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        aria-hidden="true"
+        role="img"
+        width="1em"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 24 24"
+      >
+        <path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z" fill="currentColor" />
+      </svg>
+    </span>
+    <span class="mr-2" v-if="$slots.before && !loading">
+      <slot name="before"></slot>
+    </span>
     <slot></slot>
     <span class="ml-2" v-if="$slots.after">
-    <slot name="after"></slot>
-  </span>
+      <slot name="after"></slot>
+    </span>
   </button>
 </template>
 
@@ -18,52 +29,132 @@ import { computed, PropType } from 'vue';
 import { useRippleEffect } from '../../logic/use-ripple'
 
 const props = defineProps({
-  loading: {
-    type: Boolean as PropType<boolean>
+  kind: {
+    type: String as PropType<string>,
+    default: 'dark',
+    validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1
   },
+
   outline: {
     type: Boolean as PropType<boolean>,
     default: false,
   },
-  rounded: {
-    type: Boolean as PropType<boolean>,
-    default: false,
+
+  loading: {
+    type: Boolean as PropType<boolean>
   },
-  plain: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
-  warn: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
+
   disabled: {
     type: Boolean as PropType<boolean>,
-    required: false,
+    default: false,
+  },
+
+  hover: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+
+  active: {
+    type: Boolean as PropType<boolean>,
     default: false,
   },
 })
 const isDisabled = computed(() => props.disabled || props.loading)
 const buttonClasses = computed(() => {
-  const classes = [
-    'focus-style min-h-11 inline-flex justify-center items-center relative overflow-hidden transition-all duration-300 px-4 py-2 font-semibold !disabled:(bg-gray-200 border-gray-400 text-gray-500)',
-    'transform-gpu ease-out duration-200 active:scale-95 hover:bg-gray-300 active:bg-gray-400'
-  ];
-  if(props.plain) {
-    return [
-      props.rounded ? 'rounded-full' : 'rounded',
-      ...classes
-    ]
-  }
+ 
   return [
-    props.outline ? 'border-2 border-primary-500 bg-white hover:bg-primary-200' : 'bg-primary-500 hover:(bg-primary-700 text-white)',
-    props.warn ? props.outline ? 'border-warn-500 hover:bg-warn-200' : 'bg-warn-500 hover:(bg-warn-700 text-white)' : '',
-    props.rounded ? 'rounded-full' : 'rounded',
-    ...classes
-  ]
+    props.kind,
+    props.outline ? 'outline' : '',
+    props.hover ? 'hover': '',
+    props.active ? 'active': '',
+  ];
 })
-
-const { onDown } = useRippleEffect(isDisabled.value as boolean)
-
-
+const onDown = () => {};
+//const { onDown } = useRippleEffect(isDisabled.value as boolean)
 </script>
+
+<style lang="postcss" scoped>
+button {
+  @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold;
+  @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
+  @apply !disabled:(bg-gray-200 border-gray-400 text-gray-500);
+  &.dark {
+    @apply bg-primary text-white;
+    &:hover, &.hover, &:active, &.active {
+      @apply bg-primary-600;
+    }
+  }
+  &.light {
+    @apply bg-primary-100 text-black;
+    &:hover, &.hover {
+      @apply bg-white;
+    }
+    &:active, &.active {
+      @apply bg-primary-600 text-white;
+    }
+  }
+  &.white {
+    @apply bg-white text-black;
+     &:hover, &.hover {
+      @apply bg-primary-100;
+    }
+    &:active, &.active {
+      @apply bg-primary-600 text-white;
+    }
+  }
+  &.ghost {
+     &:hover, &.hover {
+       @apply bg-gray-300
+     }
+      &:active, &.active {
+      @apply bg-gray-600 text-white;
+    }
+  }
+  &.warn {
+     @apply bg-red text-white;
+    &:hover, &.hover, &:active, &.active {
+      @apply bg-red-600;
+    }
+  }
+}
+
+button.outline {
+  @apply border-2;
+  &.dark {
+    @apply border-primary bg-transparent text-black;
+    &:hover, &.hover {
+      @apply bg-primary-100;
+    }
+    &:active, &.active {
+      @apply bg-primary text-white;
+    }
+  }
+  &.light {
+    @apply border-primary-100 bg-transparent text-primary-100;
+     &:hover, &.hover {
+      @apply bg-white text-primary border-primary;
+    }
+    &:active, &.active {
+      @apply bg-primary-600 border-primary-100 text-white;
+    }
+  }
+  &.white {
+    @apply border-white bg-transparent text-white;
+     &:hover, &.hover {
+      @apply bg-primary-100 text-black;
+    }
+    &:active, &.active {
+      @apply bg-primary-600 text-white;
+    }
+  }
+  &.warn {
+    @apply border-red bg-transparent text-black;
+     &:hover, &.hover {
+      @apply bg-red-100 text-black;
+    }
+    &:active, &.active {
+      @apply bg-red text-white;
+    }
+  }
+}
+</style>

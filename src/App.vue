@@ -14,7 +14,7 @@ const isDialogOpen = ref(false);
 const currentPage = ref(1)
 const total = ref(12);
 const perPage = 3
-const onPageClick = (page: any) => { console.log(page); currentPage.value = page;}
+const onPageClick = (page: any) => { console.log(page); currentPage.value = page; }
 </script>
 
 <template>
@@ -23,97 +23,169 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
       <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>
     <main class="grid grid-cols-1 gap-8 mb-26">
-      <UCard>
-        <template #header>Buttons</template>
-        <p class="mb-4">Default, outlined and warning</p>
-        <div class="flex flex-wrap gap-4">
-          <UButton plain>
-            <template #after>
-              <i-mdi-chevron-down />
-            </template>Plain with icon
-          </UButton>
-          <UButton>
-            <template #before>
+      <Buttons></Buttons>
+      <IconButtons></IconButtons>
+      <FormElements></FormElements>
+      <UCard focusable>
+        <UCardHeader>
+          <UCardTitle>Button styles</UCardTitle>
+        </UCardHeader>
+        <UCardContent>
+          <p class="mb-4">Default, outlined and warning</p>
+          <div class="flex flex-wrap gap-4">
+            <UButton plain>
+              <template #after>
+                <i-mdi-chevron-down />
+              </template>Plain with icon
+            </UButton>
+            <UButton>
+              <template #before>
+                <i-mdi-cog />
+              </template>With icon before
+            </UButton>
+            <UButton loading>
+              <template #before>
+                <i-mdi-cog />
+              </template>Loading
+            </UButton>
+            <UButton outline>
+              <template #after>
+                <i-mdi-account />
+              </template>And after
+            </UButton>
+            <UButton rounded>Button</UButton>
+            <UButton rounded outline>Button</UButton>
+            <UButton warn>Button</UButton>
+            <UButton outline warn>Button</UButton>
+            <UButton disabled rounded outline warn @click="isDialogOpen = true">Button</UButton>
+            <UButton disabled warn>Button</UButton>
+          </div>
+          <p class="my-4">Icon Buttons</p>
+          <div class="flex flex-wrap gap-4">
+            <UIconButton plain>
               <i-mdi-cog />
-            </template>With icon before
-          </UButton>
-          <UButton loading>
-            <template #before>
+            </UIconButton>
+            <UIconButton>
               <i-mdi-cog />
-            </template>Loading
-          </UButton>
-          <UButton outline>
-            <template #after>
+            </UIconButton>
+            <UIconButton outline>
               <i-mdi-account />
-            </template>And after
-          </UButton>
-          <UButton rounded>Button</UButton>
-          <UButton rounded outline>Button</UButton>
+            </UIconButton>
+            <UIconButton warn>
+              <i-mdi-alert />
+            </UIconButton>
+            <UIconButton outline warn>
+              <i-mdi-food />
+            </UIconButton>
+            <UIconButton disabled outline warn @click="isDialogOpen = true">
+              <i-mdi-account-cowboy-hat />
+            </UIconButton>
+            <UIconButton disabled warn>
+              <i-mdi-wheelchair-accessibility />
+            </UIconButton>
+          </div>
+        </UCardContent>
+        <UCardActions>
           <UButton warn>Button</UButton>
-          <UButton outline warn>Button</UButton>
-          <UButton disabled rounded outline warn @click="isDialogOpen = true">Button</UButton>
-          <UButton disabled warn>Button</UButton>
-        </div>
-        <p class="my-4">Icon Buttons</p>
-        <div class="flex flex-wrap gap-4">
-          <UIconButton plain>
-            <i-mdi-cog />
-          </UIconButton>
-          <UIconButton>
-            <i-mdi-cog />
-          </UIconButton>
-          <UIconButton outline>
-            <i-mdi-account />
-          </UIconButton>
-          <UIconButton warn>
-            <i-mdi-alert />
-          </UIconButton>
-          <UIconButton outline warn>
-            <i-mdi-food />
-          </UIconButton>
-          <UIconButton disabled outline warn @click="isDialogOpen = true">
-            <i-mdi-account-cowboy-hat />
-          </UIconButton>
           <UIconButton disabled warn>
-            <i-mdi-wheelchair-accessibility />
-          </UIconButton>
-        </div>
+              <i-mdi-wheelchair-accessibility />
+            </UIconButton>
+        </UCardActions>
       </UCard>
+      <UCard focusable>
+        <UCardHeader title="Dialog" level="3">Dialogs</UCardHeader>
+        <UCardContent>
+          <UButton @click="isDialogOpen = true">Open dialog</UButton>
+          <UDialog v-model:open="isDialogOpen" title="Change candy preference">
+            Det här är en tillgänglig dialog med fokus-fälla rätt role attribut osv.
+            stänger om man klickar utanför eller på esc
+            <template
+              #actions
+            >
+              <UButton outline @click="isDialogOpen = false">Cancel</UButton>
+              <UButton @click="isDialogOpen = false">Ok</UButton>
+            </template>
+          </UDialog>
+        </UCardContent>
+      </UCard>
+
       <UCard>
-        <template #header>Dialog</template>
-        <UButton @click="isDialogOpen = true">Open dialog</UButton>
-        <UDialog v-model:open="isDialogOpen" title="Change candy preference">
-          Det här är en tillgänglig dialog med fokus-fälla rätt role attribut osv.
-          stänger om man klickar utanför ellr på esc
-          <template
-            #actions
-          >
-            <UButton outline @click="isDialogOpen = false">Cancel</UButton>
-            <UButton @click="isDialogOpen = false">Ok</UButton>
-          </template>
-        </UDialog>
+        <UCardHeader title="Dialog">Radio, checkbox and fieldset</UCardHeader>
+        <UCardContent class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md flex flex-col gap-2">
+          <legend class="px-2">Candy radio</legend>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="radio" value="kola" v-model="radio" id="id11" />
+            <label for="id11">I want kola</label>
+          </div>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="radio" value="dumle" v-model="radio" id="id22" />
+            <label for="id22">I want dumle</label>
+          </div>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="radio" disabled value="suris" v-model="radio" id="id32" />
+            <label for="id32">I want disabled suris</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md flex flex-col gap-2">
+          <legend class="px-2">Candy checkbox</legend>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="checkbox" id="id-checkbox-1" />
+            <label for="id-checkbox-1">I want kola</label>
+          </div>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="checkbox" id="id-checkbox-2" />
+            <label for="id-checkbox-2">I want dumle</label>
+          </div>
+          <div class="pl-2 flex items-center gap-2">
+            <input type="checkbox" disabled  id="id-checkbox-3" />
+            <label for="id-checkbox-3">I want disabled suris</label>
+          </div>
+        </fieldset>
+        
+        <label class="block">
+          Select candy
+          <select class="mt-1 block">
+            <option>Alla</option>
+            <option>Kola</option>
+            <option>Dumle</option>
+          </select>
+        </label>
+     
+
+        <label class="block">
+          Select multiple candy
+          <select class="mt-1 block" multiple>
+            <option>Alla</option>
+            <option>Kola</option>
+            <option>Dumle</option>
+          </select>
+        </label>
+        
+        <label class="block">
+          Text input
+          <input type="text" class="mt-1 block" >
+        </label>
+
+        <label class="block">
+          Date input
+          <input type="date" class="mt-1 block" >
+        </label>
+
+        <label class="block">
+          Textarea
+          <textarea class="mt-1 block w-full" rows="3"></textarea>
+        </label>
+
+        <label class="block">
+          Search input
+          <input type="search" class="mt-1 block" >
+        </label>
+        
+        </UCardContent>
       </UCard>
-      <UCard>
-        <template #header>Checkbox / toggle</template>
-        <div class="grid grid-cols-1 gap-2">
-          <div class="flex items-center gap-2">
-            <UToggle v-model="checked" id="id1" />
-            <label for="id1">I want candy</label>
-          </div>
-          <div class="flex items-center gap-2">
-            <UToggle disabled v-model="checked" id="id2" />
-            <label for="id2">I want disabled candy</label>
-          </div>
-          <div class="flex items-center gap-2">
-            <UCheckbox v-model="checked" id="id3" />
-            <label for="id3">I want candy</label>
-          </div>
-          <div class="flex items-center gap-2">
-            <UCheckbox disabled v-model="checked" id="id4" />
-            <label for="id4">I want disabled candy</label>
-          </div>
-        </div>
-      </UCard>
+
       <UCard>
         <template #header>Radio with fieldset</template>
         <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md flex flex-col gap-2">
@@ -141,7 +213,7 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
         <template #header>Pagination</template>
         <template #actions>
           <div class="my-4 flex justify-between">
-            Page {{currentPage}} of {{total}}
+            Page {{ currentPage }} of {{ total }}
             <UPagination
               :current="currentPage"
               :total="total"

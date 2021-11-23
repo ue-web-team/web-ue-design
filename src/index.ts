@@ -8,4 +8,5 @@ export { default as UAccordionPanel } from '@/components/u-accordion-panel/UAcco
 export { default as UPagination } from '@/components/u-pagination/Upagination.vue'
 
 export { default as theme } from '@/config/theme'
+export { default as forms } from '@/plugin'
 import 'virtual:windi.css'

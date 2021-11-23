@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.1",
+    "mini-svg-data-uri": "^1.4.3",
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -39,9 +40,9 @@
     "unplugin-icons": "^0.12.9",
     "unplugin-vue-components": "^0.15.2",
     "vite": "^2.5.10",
-    "vite-plugin-windicss": "^1.4.4",
+    "vite-plugin-windicss": "^1.5.1",
     "vitepress": "^0.19.1",
     "vue-tsc": "^0.3.0",
-    "windicss": "^3.1.7"
+    "windicss": "^3.2.1"
   }
 }

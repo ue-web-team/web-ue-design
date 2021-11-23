@@ -1,6 +1,6 @@
 <template>
   <button
-    class="focus-style w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden transition-all transform-gpu ease-out duration-200 active:scale-95 !disabled:(bg-gray-200 border-gray-400 text-gray-500)"
+    class="focus-style"
     @pointerdown="onDown"
     :class="buttonClasses"
     :disabled="disabled"
@@ -14,40 +14,80 @@ import { computed, PropType } from 'vue';
 import { useRippleEffect } from '../../logic/use-ripple'
 
 const props = defineProps({
-  loading: {
-    type: Boolean as PropType<boolean>
+  kind: {
+    type: String as PropType<string>,
+    default: 'dark',
+    validator: (value: string) => ['dark', 'ghost'].indexOf(value) !== -1
   },
+
   outline: {
     type: Boolean as PropType<boolean>,
     default: false,
   },
-  plain: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
-  warn: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
+
   disabled: {
     type: Boolean as PropType<boolean>,
-    required: false,
+    default: false,
+  },
+
+  hover: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+
+  active: {
+    type: Boolean as PropType<boolean>,
     default: false,
   },
 })
 
 const buttonClasses = computed(() => {
-  if (props.plain) {
-    return [
-      'hover:bg-gray-300 active:bg-gray-400',
-    ]
-  }
   return [
-    props.outline ? 'border-2 border-primary-500 bg-white hover:bg-primary-200' : 'bg-primary-500 hover:(bg-primary-700 text-white)',
-    props.warn ? props.outline ? 'border-warn-500 hover:bg-warn-200' : 'bg-warn-500 hover:(bg-warn-700 text-white)' : '',
-  ]
+    props.kind,
+    props.outline ? 'outline' : '',
+    props.hover ? 'hover': '',
+    props.active ? 'active': '',
+  ];
 })
 
 const { onDown } = useRippleEffect(props.disabled)
 
 </script>
+
+<style lang="postcss" scoped>
+button {
+  @apply w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden;
+  @apply transition-all transform-gpu ease-out duration-200 active:scale-95;
+  @apply !disabled:(bg-gray-200 border-gray-400 text-gray-500);
+  &.dark {
+    @apply bg-primary text-white;
+    &:hover, &.hover {
+      @apply bg-primary-600;
+    }
+    &:active, &.active {
+      @apply bg-primary-600;
+    }
+  }
+  &.ghost {
+     &:hover, &.hover {
+       @apply bg-gray-300
+     }
+      &:active, &.active {
+      @apply bg-gray-600 text-white;
+    }
+  }
+}
+
+button.outline {
+  @apply border-2;
+  &.dark {
+    @apply border-primary bg-transparent text-black;
+    &:hover, &.hover {
+      @apply bg-primary-100;
+    }
+    &:active, &.active {
+      @apply bg-primary text-white;
+    }
+  }
+}
+</style>

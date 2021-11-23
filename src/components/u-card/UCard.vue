@@ -1,31 +1,35 @@
 <template>
   <section
-    class="relative bg-gradient-to-br from-white via-white to-gray-100 shadow-lg border-2 border-gray-300 rounded"
+    :aria-labelledby="titleId"
+    :tabindex="focusable? 0: -1"
+    class="focus-style relative bg-gradient-to-br from-white via-white to-gray-100 shadow-lg border border-gray-100 rounded-md"
   >
-    <div class="absolute w-full h-6 sm:rounded-xl overflow-hidden">
-    
-    </div>
-
-    <div class="px-4 md:px-8 py-2 md:py-4 text-xl md:text-2xl border-b border-gray-200">
-      <slot name="header" />
-    </div>
-    <div class="p-4 md:p-8">
-      <slot />
-    </div>
-    <div v-if="$slots.actions" class="px-4 md:px-8 border-t border-gray-200">
-      <slot name="actions" />
-    </div>
+    <slot />
   </section>
 </template>
 
 
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType, ref } from 'vue';
+import { provide } from 'vue'
+import { useId } from '../../logic/use-id';
+import { CardContext } from './UCardContext';
+
+// provide id of card to nested components
+const titleId = ref(`u-card-${useId()}`);
+const api = {
+  titleId,
+};
+provide(CardContext, api);
 
 const props = defineProps({
   isLoading: {
     type: Boolean as PropType<boolean>,
     default: false,
+  },
+  focusable: {
+    type: Boolean as PropType<boolean>,
+    default: false
   }
 })
 

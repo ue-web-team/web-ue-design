@@ -1,13 +1,25 @@
+@font-face {
+  font-family: 'Source Sans';
+  src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=block') format("truetype-variations");
+  font-weight: 1 999;
+}
+
+html {
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif !important;
+}
+
 .focus-style {
   @apply focus:outline-none
-         focus-visible:ring-2
+         focus-visible:ring-3
          focus-visible:ring-offset-1
-         focus-visible:ring-warn-500
-         focus-visible:ring-opacity-55;
+         focus-visible:ring-blue-500
+         focus-visible:ring-opacity-75;
 }
 
 span.ripple {
   position: absolute;
+  pointer-events: none;
   border-radius: 100%;
   transform: scale(0);
   animation: ripple 600ms linear;
@@ -20,3 +32,17 @@ span.ripple {
     opacity: 0;
   }
 }
+
+
+.table {
+  @apply table-fixed w-full;
+  td, th {
+    @apply px-3 py-4;
+  }
+  th:first-of-type {
+     @apply text-left;
+  }
+  button {
+    @apply m-auto;
+  }
+ }
