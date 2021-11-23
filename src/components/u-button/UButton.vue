@@ -107,7 +107,7 @@ button {
        @apply bg-gray-300
      }
       &:active, &.active {
-      @apply bg-gray-600 text-white;
+      @apply bg-gray-500 text-white;
     }
   }
   &.warn {

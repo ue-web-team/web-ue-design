@@ -49,14 +49,14 @@ export default plugin(
           "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
           "--tw-ring-offset-width": "0px",
           "--tw-ring-offset-color": "#fff",
-          "--tw-ring-color": theme("colors.primary.600") as string,
+          "--tw-ring-color": theme("colors.blue.DEFAULT") as string,
           "--tw-ring-offset-shadow":
             "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
           "--tw-ring-shadow":
-            "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+            "var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
           "box-shadow":
             "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
-          "border-color": theme("colors.primary.600") as string,
+          "border-color": theme("colors.blue.DEFAULT") as string,
         },
       },
 
@@ -86,11 +86,18 @@ export default plugin(
         "min-height": "1.5em",
       },
 
+      textarea: {
+        "padding-top": spacing(2),
+        "padding-right": spacing(3),
+        "padding-bottom": spacing(2),
+        "padding-left": spacing(3),
+        "font-size": "initial",
+        "line-height": "inherit",
+      },
+
       select: {
         "background-image": `url("${svgToDataUri(
-          `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${theme(
-            "colors.gray.500"
-          )}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
+          `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 8l4 4 4-4"/></svg>`
         )}")`,
         "background-position": `right ${spacing(2)} center`,
         "background-repeat": "no-repeat",
@@ -101,6 +108,7 @@ export default plugin(
         "padding-left": spacing(3),
         "-webkit-print-color-adjust": "exact",
         "color-adjust": "exact",
+
       },
 
       "[multiple]": {
@@ -133,20 +141,11 @@ export default plugin(
         "flex-shrink": "0",
         height: spacing(4),
         width: spacing(4),
-        color: theme("colors.primary.600") as string,
+        color: theme("colors.primary.DEFAULT") as string,
         "background-color": "#fff",
-        "border-color": theme("colors.primary.600") as string,
-        "border-width": "2px",
-      },
-
-      ["[type='checkbox']"]: {
-        "border-radius": "none",
-        ["&:checked::before"]: {
-          "background-image": `url("${svgToDataUri(
-            '<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z"/></svg>'
-          )}")`,
-        },
-        
+        "border-color": theme("colors.black.DEFAULT") as string,
+        "border-width": "1px",
+        "border-radius": "3px"
       },
       ["[type='radio']"]: {
         "border-radius": "100%",
@@ -162,7 +161,7 @@ export default plugin(
   [type='checkbox']:checked,
   [type='radio']:checked
       `]: {
-        "border-color": "transparent",
+        //"border-color": "transparent",
         "background-color": "currentColor",
         "background-size": "100% 100%",
         "background-position": "center",
@@ -187,8 +186,8 @@ export default plugin(
   [type='radio']:checked:hover,
   [type='radio']:checked:focus
       `]: {
-        "border-color": "transparent",
-        "background-color": "currentColor",
+        //"border-color": "transparent",
+        //"background-color": "currentColor",
       },
 
       ["[type='checkbox']:indeterminate"]: {
@@ -226,10 +225,11 @@ export default plugin(
       },
     });
     addComponents({
-      ".btn": {
-        padding: ".5rem 1rem",
-        borderRadius: ".25rem",
-        fontWeight: "600",
+      ".light-check": {
+        
+        "&:checked": {
+          "border-color": "#fff",
+        },
       },
       ".btn-blue": {
         backgroundColor: "#3490dc",

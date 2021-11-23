@@ -18,7 +18,7 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-6 mt-8">
+  <div class="max-w-5xl mx-auto px-6 mt-8 text-black">
     <header>
       <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>

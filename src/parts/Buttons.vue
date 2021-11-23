@@ -24,7 +24,7 @@
             <UButton active>Simple states</UButton>
           </td>
           <td>
-            <UButton class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90">Simple states</UButton>
+            <UButton class="ring-3 ring-offset-1 ring-blue">Simple states</UButton>
           </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               outline
             >Simple states</UButton>
           </td>
@@ -59,7 +59,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="ghost"
             >Simple states</UButton>
           </td>
@@ -78,7 +78,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="warn"
             >Simple states</UButton>
           </td>
@@ -97,7 +97,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="warn"
             >Simple states</UButton>
           </td>
@@ -116,7 +116,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="light"
             >Simple states</UButton>
           </td>
@@ -134,7 +134,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="light"
               outline
             >Simple states</UButton>
@@ -154,7 +154,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="white"
             >Simple states</UButton>
           </td>
@@ -172,7 +172,7 @@
           </td>
           <td>
             <UButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring-3 ring-offset-1 ring-blue"
               kind="white"
               outline
             >Simple states</UButton>
