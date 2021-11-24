@@ -18,11 +18,12 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-6 mt-8 text-black">
+  <div class="max-w-6xl mx-auto px-6 mt-8 text-black">
     <header>
       <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>
     <main class="grid grid-cols-1 gap-8 mb-26">
+      <Colors></Colors>
       <Buttons></Buttons>
       <IconButtons></IconButtons>
       <FormElements></FormElements>

@@ -16,4 +16,5 @@ export { default as UPagination } from '@/components/u-pagination/Upagination.vu
 export { colors } from '@/config/colors'
 export { theme } from '@/config/theme'
 export { default as forms } from '@/plugin'
+import '@/assets/base.postcss'
 import 'virtual:windi.css'

@@ -1,5 +1,5 @@
 <template>
-  <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="card">
+  <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="focus-style card">
   <div class="rounded-t-md overflow-hidden">
     <UProgressBar :loading="isLoading" />
   </div>
@@ -41,8 +41,7 @@ const props = defineProps({
 
 <style lang="postcss" scoped>
 .card {
-  @extend focus-style;
-  @apply relative rounded-md;
+  @apply relative rounded-lg;
   background-color: v-bind("props.color");
 }
 </style>
