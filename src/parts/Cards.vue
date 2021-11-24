@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 place-items-start gap-4">
 
       <UCard focusable>
-        <UCardHeader title="Dialog" level="3">Standard</UCardHeader>
+        <UCardHeader><UCardTitle>Standard</UCardTitle></UCardHeader>
         <UCardContent>"Vanligt" kort med header och action bar. En dialog i det här fallet</UCardContent>
         <UCardActions>
           <UButton class="w-full" @click="isDialogOpen = true">Open dialog</UButton>
@@ -20,24 +20,24 @@
           </UDialog>
         </UCardActions>
       </UCard>
-
+      
       <UCard :color="colors.blue['200']" focusable>
-        <UCardHeader title="Dialog" level="3">Rubrik som är ganska lång</UCardHeader>
+        <UCardHeader>Rubrik som är ganska lång</UCardHeader>
         <UCardContent>Vi hjälper dig med några enkla tips på hur du kan sänka din förbrukning. Genom att sänka din energi-förbrukning sparar du både pengar och gör gott för miljön.</UCardContent>
       </UCard>
 
       <UCard :color="colors.lime['200']" focusable>
-        <UCardHeader title="Dialog" level="3">Kort rubrik</UCardHeader>
+        <UCardHeader>Kort rubrik</UCardHeader>
         <UCardContent>Vi hjälper dig med några enkla tips på hur du kan sänka din förbrukning. Genom att sänka din energi-förbrukning sparar du både pengar och gör gott för miljön.</UCardContent>
       </UCard>
 
       <UCard class="text-white" :color="colors.primary['400']" focusable>
-        <UCardHeader title="Dialog" level="3">Ljus text på mörkare</UCardHeader>
+        <UCardHeader>Ljus text på mörkare</UCardHeader>
         <UCardContent>Vi hjälper dig med några enkla tips på hur du kan sänka din förbrukning. Genom att sänka din energi-förbrukning sparar du både pengar och gör gott för miljön.</UCardContent>
       </UCard>
       
       <UCard class="text-white" :color="colors.red['400']" focusable>
-        <UCardHeader title="Dialog" level="3">Du har fakturor dom snart ska betalas</UCardHeader>
+        <UCardHeader>Du har fakturor dom snart ska betalas</UCardHeader>
         <UCardContent>Vi hjälper inte dig om du inte har råd men du kan vända dig till valfritt låneinstitut</UCardContent>
         <UCardActions>
           <UButton kind="white" outline class="w-full" @click="isDialogOpen = true">Visa räkningen</UButton>
@@ -45,7 +45,7 @@
       </UCard>
 
        <UCard :color="colors.blue['100']" focusable>
-        <UCardHeader title="Dialog" level="3">Din årsförbrukning 1898:</UCardHeader>
+        <UCardHeader>Din årsförbrukning 1898:</UCardHeader>
         <UCardContent>
           <div class="flex items-center text-3xl font-bold">
             <i-fa-solid:house-damage class="text-blue-200 text-5xl mr-2"/>

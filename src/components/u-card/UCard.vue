@@ -1,6 +1,9 @@
 <template>
   <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="card">
-    <slot />
+  <div class="rounded-t-md overflow-hidden">
+    <UProgressBar :loading="isLoading" />
+  </div>
+<slot />
   </section>
 </template>
 
@@ -11,6 +14,7 @@ import { provide } from 'vue'
 import { colors } from '../../config/colors';
 import { useId } from '../../logic/use-id';
 import { CardContext } from './UCardContext';
+import UProgressBar from '../u-progress-bar/UProgressBar.vue';
 
 // provide id of card to nested components
 const titleId = ref(`u-card-${useId()}`);

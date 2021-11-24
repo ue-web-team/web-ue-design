@@ -21,10 +21,10 @@ export default defineConfig({
     {
       name: 'copy tailwind config',
       generateBundle() {
-        fs.copyFileSync(
+        /*fs.copyFileSync(
           resolve('./src/config/theme.ts'),
           resolve('./dist/theme.ts')
-        );
+        );*/
         fs.copyFileSync(
           resolve('./src/assets/base.postcss'),
           resolve('./dist/base.postcss')

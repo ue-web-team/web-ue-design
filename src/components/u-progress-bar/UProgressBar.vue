@@ -220,7 +220,7 @@ onMounted(() => {
 
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .peg {
   display: block;
   position: absolute;
@@ -229,6 +229,5 @@ onMounted(() => {
   bottom: 0;
   width: 100%;
   opacity: 1;
-  box-shadow: 0 0 10px #ffb602, 0 0 5px #ffb602;
 }
 </style>
