@@ -7,6 +7,7 @@ export { default as UDialog } from '@/components/u-dialog/UDialog.vue'
 export { default as UAccordionPanel } from '@/components/u-accordion-panel/UAccordionPanel.vue'
 export { default as UPagination } from '@/components/u-pagination/Upagination.vue'
 
+export { default as colors } from '@/config/colors'
 export { default as theme } from '@/config/theme'
 export { default as forms } from '@/plugin'
 import 'virtual:windi.css'

@@ -1,9 +1,5 @@
 <template>
-  <section
-    :aria-labelledby="titleId"
-    :tabindex="focusable? 0: -1"
-    class="focus-style relative bg-gradient-to-br from-white via-white to-gray-100 shadow-lg border border-gray-100 rounded-md"
-  >
+  <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="card">
     <slot />
   </section>
 </template>
@@ -12,6 +8,7 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
 import { provide } from 'vue'
+import { colors } from '../../config/colors';
 import { useId } from '../../logic/use-id';
 import { CardContext } from './UCardContext';
 
@@ -23,6 +20,10 @@ const api = {
 provide(CardContext, api);
 
 const props = defineProps({
+  color: {
+    type: String as PropType<string>,
+    default: colors.gray['100']
+  },
   isLoading: {
     type: Boolean as PropType<boolean>,
     default: false,
@@ -32,5 +33,12 @@ const props = defineProps({
     default: false
   }
 })
-
 </script>
+
+<style lang="postcss" scoped>
+.card {
+  @extend focus-style;
+  @apply relative rounded-md;
+  background-color: v-bind("props.color");
+}
+</style>

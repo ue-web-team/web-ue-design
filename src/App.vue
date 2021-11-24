@@ -26,6 +26,7 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
       <Buttons></Buttons>
       <IconButtons></IconButtons>
       <FormElements></FormElements>
+      <Cards></Cards>
       <UCard focusable>
         <UCardHeader>
           <UCardTitle>Button styles</UCardTitle>

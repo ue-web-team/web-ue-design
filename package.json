@@ -29,7 +29,7 @@
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.0.2",
+    "@iconify/json": "^1.1.432",
     "@rollup/plugin-typescript": "^8.2.5",
     "@types/node": "^16.9.6",
     "@vitejs/plugin-vue": "^1.9.0",
