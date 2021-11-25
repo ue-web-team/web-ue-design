@@ -65,5 +65,20 @@
         </tr>
       </tbody>
     </table>
+    <h3 class="text-xl my-4">Usage</h3>
+    <Prism language="html" class="codesnippet">{{ code }}</Prism>
   </article>
 </template>
+
+<script setup lang="ts">
+import Prism from "@/lib/code-block"
+
+const code =
+  `<!-- Variants. default(dark), ghost -->
+<UIconButton><i-mdi-cog /></UIconButton>
+<UIconButton kind="ghost"><i-mdi-cog /></UIconButton>
+
+<!-- whith outline (not ghost) -->
+<UIconButton outline><i-mdi-cog /></UIconButton>
+`
+</script>

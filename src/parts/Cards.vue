@@ -79,15 +79,44 @@
         <p>Apple pie sugar plum candy canes cake danish lemon drops. Jelly lemon drops cake tart gummies icing cake. Sweet apple pie pie tootsie roll croissant topping I love tiramisu.</p>
       </UCardContent>
       <UCardActions>
-          <UButton kind="white" @click="isLoading = !isLoading">{{isLoading? 'Sluta ladda': 'Börja ladda'}}</UButton>
-        </UCardActions>
+        <UButton
+          kind="white"
+          @click="isLoading = !isLoading"
+        >{{ isLoading ? 'Sluta ladda' : 'Börja ladda' }}</UButton>
+      </UCardActions>
     </UCard>
+
+    <h3 class="text-xl my-4">Usage</h3>
+    <Prism language="html" class="codesnippet">{{ code }}</Prism>
   </article>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { colors } from '@/config/colors'
+import Prism from "@/lib/code-block"
 const isDialogOpen = ref(false);
 const isLoading = ref(false);
+
+const code =
+  `
+<!-- Wrapper with responsive padding and loading indicator -->
+<UCard :isLoading="isLoading" :color="colors.red['100']" focusable>
+   <UCardHeader>
+     <UCardTitle>This is the accesible card title</UCardTitle>
+   </UCardHeader>
+   <UCardContent>
+     ...Put card content here...
+     has padding that matches UCardHeader
+     but can be omitted. 
+   </UCardContent>
+   <UCardActions>
+     <!-- padded container with flex end and gap sizing for actions -->
+     <UButton
+       kind="white"
+       @click="isLoading = !isLoading"
+     >{{ isLoading ? 'Sluta ladda' : 'Börja ladda' }}</UButton>
+   </UCardActions>
+ </UCard>
+`
 </script>

@@ -206,5 +206,43 @@
       <UButton disabled outline>Button</UButton>
       <UButton disabled>Button</UButton>
     </div>
+    <h3 class="text-xl my-4">Usage</h3>
+    <Prism language="html" class="codesnippet">{{ code }}</Prism>
   </article>
 </template>
+
+<script setup lang="ts">
+import Prism from "@/lib/code-block"
+
+const code =
+  `<!-- Variants. default(dark), ghost, warn, light, white -->
+<UButton> Button text </UButton>
+<UButton kind="ghost"> Button text </UButton>
+<UButton kind="warn"> Button text </UButton>
+<UButton kind="light"> Button text </UButton>
+<UButton kind="white"> Button text </UButton>
+
+<!-- whith outline (not ghost) -->
+<UButton outline> Button text </UButton>
+<UButton kind="warn" outline> Button text </UButton>
+<UButton kind="light" outline> Button text </UButton>
+<UButton kind="white" outline> Button text </UButton>
+
+<!-- loading -->
+<UButton loading> Button text </UButton>
+
+<!-- icons (after and before)-->
+<UButton loading>
+  <template #after>
+    <i-mdi-account />
+  </template>
+  Button text
+</UButton>
+<UButton loading>
+  <template #before>
+    <i-mdi-account />
+  </template>
+  Button text
+</UButton>
+`
+</script>

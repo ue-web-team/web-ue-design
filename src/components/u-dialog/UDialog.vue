@@ -25,14 +25,13 @@
             leave-to="opacity-0 scale-95"
           >
             <div
-              style="max-height: min(95vh, 1200px)"
-              class="flex flex-col w-full max-w-md px-6 pt-2 pb-6 overflow-auto text-left mx-auto transition-all transform bg-white shadow-xl rounded-lg"
+              :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
+              class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform bg-white shadow-xl rounded-lg"
             >
-              <DialogTitle as="h1" class="my-3 text-xl md:text-2xl text-gray-900">{{ title }}</DialogTitle>
-
-              <div class="text-gray-700">
+              <DialogTitle as="h1" class="pb-2 text-xl font-bold md:(pb-4 text-2xl)">{{ title }}</DialogTitle>
+              <DialogDescription class="overflow-auto">
                 <slot name="default"></slot>
-              </div>
+              </DialogDescription>
 
               <div class="mt-4 flex gap-4 justify-end">
                 <slot name="actions"></slot>
@@ -47,15 +46,21 @@
 
 <script setup lang="ts">
 import { PropType, watch, ref } from "vue"
+import { colors } from '../../config/colors';
 import {
   TransitionRoot,
   TransitionChild,
   Dialog,
   DialogOverlay,
   DialogTitle,
+  DialogDescription,
 } from "@headlessui/vue"
 
 const props = defineProps({
+  color: {
+    type: String as PropType<string>,
+    default: colors.gray['100']
+  },
   open: {
     required: true,
     type: Boolean as PropType<boolean>
@@ -64,7 +69,7 @@ const props = defineProps({
     default: "Ingen titel",
     type: String as PropType<string>
   },
-  evil: {
+  requireInteraction: {
     default: false,
     type: Boolean as PropType<boolean>
   }
@@ -75,7 +80,8 @@ watch(() => props.open, (value: boolean) => {
   isOpen.value = value;
 });
 const closeModal = () => {
-  //isOpen.value = false;
-  emit("update:open", false);
+  if(!props.requireInteraction) {
+    emit("update:open", false);
+  }
 };
 </script>
