@@ -5,11 +5,15 @@
     <div v-for="palette in all" :key="palette.name">
       <p class="font-bold mb-2 mt4">{{ palette.name }}</p>
       <div class="flex gap-2 overflow-y-auto">
-        <div class="w-26" v-for="color in palette.colors" :key="color.name">
-        <div class="text-xs p-1 w-full rounded h-16 border border-black" :style="{'background-color': color.value, 'color': contrastColor({bgColor: color.value})}">
-        {{ color.value }}
-        </div>
-        {{ color.name }}
+        <div class="block w-26" v-for="color in palette.colors" :key="color.name">
+          <button
+            @click="onColorSelect(color)"
+            class="text-xs p-1 w-full rounded h-16 border border-black transition-colors hover:border-2 active:opacity-75"
+            :style="{ 'background-color': color.value, 'color': contrastColor({ bgColor: color.value }) }"
+          >
+          {{ color.value }}
+          </button>
+          {{ color.name }}
         </div>
       </div>
     </div>
@@ -30,4 +34,8 @@ const all = Object.keys(colors).map(name => ({
   }))
 })).filter(item => !['transparent', 'white'].includes(item.name))
 console.log('ssssssssssss', all)
+
+const onColorSelect = ({ name, value }: { name: string, value: string }) => {
+  navigator.clipboard.writeText(value)
+}
 </script>

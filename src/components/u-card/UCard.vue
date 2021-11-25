@@ -1,6 +1,6 @@
 <template>
   <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="focus-style card">
-  <div class="rounded-t-md overflow-hidden">
+  <div class="absolute rounded-t-lg h-8 w-full overflow-hidden pointer-events-none">
     <UProgressBar :loading="isLoading" />
   </div>
 <slot />
