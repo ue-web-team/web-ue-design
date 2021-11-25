@@ -2,7 +2,7 @@
   <article>
     <h2 class="text-3xl border-b pb-4 mb-4 font-medium">Color palette</h2>
 
-    <div v-for="palette in all" :key="palette.name">
+    <div v-for="palette in items" :key="palette.name">
       <p class="font-bold mb-2 mt4">{{ palette.name }}</p>
       <div class="flex gap-2 overflow-y-auto">
         <div class="block w-26" v-for="color in palette.colors" :key="color.name">
@@ -26,6 +26,7 @@ import { colors } from '../config/colors'
 import { contrastColor } from '../logic/contrast'
 const isDialogOpen = ref(false);
 const isLoading = ref(false);
+const items = ref(null);
 const all = Object.keys(colors).map(name => ({
   name,
   colors: Object.keys(colors[name]).map(grade => ({
@@ -34,6 +35,7 @@ const all = Object.keys(colors).map(name => ({
   }))
 })).filter(item => !['transparent', 'white'].includes(item.name))
 console.log('ssssssssssss', all)
+items.value = all;
 
 const onColorSelect = ({ name, value }: { name: string, value: string }) => {
   navigator.clipboard.writeText(value)
