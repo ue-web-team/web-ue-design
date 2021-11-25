@@ -9,7 +9,7 @@
           <button
             @click="onColorSelect(color)"
             class="text-xs p-1 w-full rounded h-16 border border-black transition-colors hover:border-2 active:opacity-75"
-            :style="{ 'background-color': color.value, 'color': contrastColor({ bgColor: color.value }) }"
+            :style="{ 'background-color': color.value }"
           >
           {{ color.value }}
           </button>
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { colors } from '../config/colors'
-import { contrastColor } from '../logic/contrast'
+//import { contrastColor } from '../logic/contrast'
 const isDialogOpen = ref(false);
 const isLoading = ref(false);
 const items = ref(null);
