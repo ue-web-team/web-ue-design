@@ -1,7 +1,7 @@
 <template>
   <article>
     <h2 class="text-3xl border-b pb-4 mb-6 font-medium bg-li">Cards</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-start gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <UCard focusable>
         <UCardHeader>
           <UCardTitle>Standard</UCardTitle>

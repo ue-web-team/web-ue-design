@@ -1,7 +1,7 @@
 <template>
   <article>
     <h2 class="text-3xl border-b pb-4 mb-4 font-medium">Dialogs</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-start gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <UCard :color="colors.gray['100']">
         <UCardHeader>
           <UCardTitle>Dialog 1</UCardTitle>
@@ -71,7 +71,7 @@
           <UCardTitle>Dialog 4</UCardTitle>
         </UCardHeader>
         <UCardContent>
-          Allvarlig dialog som kräver ett val. kan inte avslutas med click utanför eller 'esc'
+          Allvarlig dialog som kräver ett val. kan inte avslutas med klick utanför eller 'esc'
           <UDialog require-interaction class="text-white" :color="colors.red['600']" v-model:open="isDialogOpen4" title="Hipp färg">
             Allvarlig dialog som kräver ett val. kan inte avslutas med click utanför eller 'esc'
             <template

@@ -1,9 +1,9 @@
 <template>
   <section :aria-labelledby="titleId" :tabindex="focusable ? 0 : -1" class="focus-style card">
-  <div class="absolute rounded-t-lg h-8 w-full overflow-hidden pointer-events-none">
-    <UProgressBar :loading="isLoading" />
-  </div>
-<slot />
+    <div class="absolute rounded-t-lg h-8 w-full overflow-hidden pointer-events-none">
+      <UProgressBar :loading="isLoading" />
+    </div>
+    <slot />
   </section>
 </template>
 
@@ -41,7 +41,7 @@ const props = defineProps({
 
 <style lang="postcss" scoped>
 .card {
-  @apply relative rounded-lg;
+  @apply relative flex flex-col rounded-lg;
   background-color: v-bind("props.color");
 }
 </style>

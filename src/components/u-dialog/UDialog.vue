@@ -26,9 +26,9 @@
           >
             <div
               :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
-              class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform bg-white shadow-xl rounded-lg"
+              class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
             >
-              <DialogTitle as="h1" class="pb-2 text-xl font-bold md:(pb-4 text-2xl)">{{ title }}</DialogTitle>
+              <DialogTitle as="h2" class="pb-2 text-xl font-bold md:(pb-4 text-2xl)">{{ title }}</DialogTitle>
               <DialogDescription class="overflow-auto">
                 <slot name="default"></slot>
               </DialogDescription>
@@ -59,7 +59,7 @@ import {
 const props = defineProps({
   color: {
     type: String as PropType<string>,
-    default: colors.gray['100']
+    default: colors.white.DEFAULT
   },
   open: {
     required: true,
