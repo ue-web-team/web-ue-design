@@ -1,7 +1,7 @@
 <template>
   <nav
     aria-label="pagination"
-    class="text-sm sm:text-base flex justify-end rounded-lg text-gray-700"
+    class="text-sm sm:text-base flex justify-end rounded-lg"
   >
     <ul class="flex items-center">
       <li class="pr-3">
@@ -44,7 +44,7 @@
           href="javascript:;"
           @click="changePage(page)"
           :class="{
-            'bg-gradient-to-br from-primary-500 to-primary-700 text-white':
+            'bg-gradient-to-br from-primary-300 to-primary-400 font-medium text-white':
               current === page,
           }"
           class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center"
