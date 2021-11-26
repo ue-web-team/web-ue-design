@@ -29,6 +29,7 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
       <FormElements></FormElements>
       <Cards></Cards>
       <Dialogs></Dialogs>
+      <Pagination></Pagination>
       <UCard focusable>
         <UCardHeader>
           <UCardTitle>Button styles</UCardTitle>
