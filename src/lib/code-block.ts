@@ -27,7 +27,7 @@ export default Vue.defineComponent({
       props.code || (slotsData.length > 0 ? slotsData[0].children : "");
     const { inline, language } = props;
     const prismLanguage = Prism.languages[language];
-    const className = `language-${language} rounded-lg !bg-black !text-sm`;
+    const className = `language-${language} rounded-lg !bg-black !text-sm relative`;
 
     if (inline) {
       return (): VNode =>
@@ -45,6 +45,10 @@ export default Vue.defineComponent({
           class: className,
           innerHTML: d,
         }),
+        h("p", {
+          class: "bg-white absolute top-0 px-2 border-2 border-black rounded-bl text-black rounded-tr-md right-0",
+          innerHTML: props.language,
+        })
       ]);
   },
 });
