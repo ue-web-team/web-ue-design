@@ -13,7 +13,7 @@
           </thead>
           <tbody>
             <tr v-for="person in pagedList">
-              <td class="py-2">{{ person.name }}</td>
+              <td class="py-2 truncate">{{ person.name }}</td>
               <td>{{ person.gender }}</td>
               <td class="text-right">{{ person.balance }}</td>
             </tr>

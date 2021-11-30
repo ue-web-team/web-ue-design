@@ -1,8 +1,18 @@
 <template>
   <nav
     aria-label="pagination"
-    class="text-sm sm:text-base flex justify-end rounded-lg"
+    class="text-sm sm:(text-base justify-between) flex w-full justify-end"
   >
+    <span class="hidden sm:block">
+      {{ t('pagination.page') }}
+      <span class="font-semibold">{{ current }}</span>
+      {{ t('pagination.of') }}
+      <span>
+        {{
+          Math.ceil(total / perPage)
+        }}
+      </span>
+    </span>
     <ul class="flex items-center">
       <li class="pr-3">
         <a
@@ -109,6 +119,8 @@ const props = defineProps({
       switch (message) {
         case 'pagination.previus': return 'föregående'
         case 'pagination.next': return 'nästa'
+        case 'pagination.of': return 'av'
+        case 'pagination.page': return 'sida'
       }
     }
   }
