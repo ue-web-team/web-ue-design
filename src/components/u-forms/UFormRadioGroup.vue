@@ -1,24 +1,28 @@
+
 <template>
   <div class="flex flex-col">
-    <label :for="inputId">{{ label }} {{ required ? '*' : '' }}</label>
-    <select
-      class="mt-1 u-form-control"
+    <fieldset
+      class="border-gray-600 border-2 px-3 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
       :class="{ 'border-red': !!errorMessage }"
-      :id="inputId"
-      :aria-describedby="errorId"
       :aria-invalid="!!errorMessage"
-      :aria-required="required"
-      :name="name"
-      :value="inputValue"
-      @blur="handleBlur"
-      @change="handleChange"
     >
-      <option
-        v-for="(item, index) in options"
-        :key="`${name}-option-${index}`"
-        :value="item"
-      >{{ item }}</option>
-    </select>
+      <legend class="px-2">{{ legend }}</legend>
+      <div class="pl-2 flex items-center gap-2" v-for="(item, index) in options" :key="`${name}-option-${index}`">
+        <input
+          class="focus-style u-form-control"
+          type="radio"
+          :name="name"
+          :id="`${inputId}-${index}`"
+          :value="item"
+          :checked="inputValue == item"
+          :aria-required="required"
+          :aria-describedby="errorId"
+          @blur="handleBlur"
+          @change="handleChange"
+        />
+        <label :for="`${inputId}-${index}`">{{ item }}</label>
+      </div>
+    </fieldset>
     <p role="alert" :id="errorId" class="text-red-400" v-show="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
@@ -28,7 +32,7 @@ import { useField } from "vee-validate";
 import { ref, watch } from "vue";
 import { useId } from '../../logic/use-id';
 
-const inputId = ref(`u-form-select-${useId()}`);
+const inputId = ref(`u-form-radio-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
 
 const props = defineProps({
@@ -47,7 +51,7 @@ const props = defineProps({
   placeholder: {
     type: String
   },
-  label: {
+  legend: {
     type: String,
     required: true,
   },

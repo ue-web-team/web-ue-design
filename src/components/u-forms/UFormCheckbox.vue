@@ -30,9 +30,6 @@ const inputId = ref(`u-form-checkbox-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
 
 const props = defineProps({
-  modelValue: {
-    type: null,
-  },
   value: {
     type: String,
   },

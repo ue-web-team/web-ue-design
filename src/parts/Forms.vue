@@ -60,7 +60,7 @@
               type="text"
             />
             <UFormText required label="Enter your email" name="email" type="email" />
-            <UFormSelect label="What gender?" name="gender" :items="genders" />
+            <UFormSelect label="What gender?" name="gender" :options="genders" />
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -82,13 +82,13 @@
             @invalid-submit="onInvalidSubmit"
           >
             <UFormText
-              placeholder="name placheholder"
               required
-              label="Enter your name"
-              name="name"
+              label="Your billing address"
+              name="address"
               type="text"
             />
-          
+            <UFormRadioGroup :options="billingOptions" legend="Billing options" name="billing"/>
+           
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -125,8 +125,7 @@ const initialFormValues2 = {
 };
 
 const initialFormValues3 = {
-  name: 'Markus Marklund',
-  email: 'marcus.marklund@aik.se',
+  address: "Marklunds kurva 12",
   billing: 'Paper invoice'
 };
 
@@ -152,11 +151,10 @@ const schema2 = yup.object().shape({
 });
 
 const schema3 = yup.object().shape({
-  name: yup.string().required(),
-  email: yup.string().email().required(),
-  gender: yup.string()
+  address: yup.string().required(),
+  billing: yup.string()
     .required()
-    .notOneOf(["None", "Undetermined"], "En könstillhörighet är viktigt! Även om den är normbrytande"),
+    .notOneOf(["Paper invoice"], "Vi är en papperslös organisation 😘"),
 });
 
 </script>
