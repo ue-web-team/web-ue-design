@@ -1,5 +1,5 @@
 <template>
-  <form ref="formRef" @submit="onSubmit">
+  <form ref="formRef" novalidate @submit="onSubmit">
     <slot />
   </form>
 </template>
@@ -33,9 +33,9 @@ const focusFirstInvalid = (formRoot: HTMLBaseElement, errors: any) => {
   if (nodelist) {
     // iterate over all controls in the form and focus on the first invalid
     const controls = Array.from(nodelist) as HTMLInputElement[];
-    for (const node of controls) {
-      if (errors[node.name]) {
-        node.focus();
+    for (const control of controls) {
+      if (errors[control.name]) {
+        control.focus();
         break;
       }
     }
