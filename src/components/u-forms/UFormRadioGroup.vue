@@ -23,7 +23,8 @@
         <label :for="`${inputId}-${index}`">{{ item }}</label>
       </div>
     </fieldset>
-    <p role="alert" :id="errorId" class="text-red-400" v-show="errorMessage">{{ errorMessage }}</p>
+    <p role="alert" aria-atomic="true" :id="errorId" class="text-red-400 text-sm mt-1" v-show="errorMessage">{{ errorMessage }}</p>
+    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
   </div>
 </template>
 
@@ -58,6 +59,9 @@ const props = defineProps({
   required: {
     type: Boolean,
     default: false
+  },
+  hint: {
+    type: String,
   }
 });
 
@@ -77,7 +81,7 @@ watch(inputValue, (newValue) => {
   if (newValue === props.modelValue) {
     return;
   }
-  //emit("update:modelValue", newValue);
+  emit("update:modelValue", newValue);
 });
 
 watch(

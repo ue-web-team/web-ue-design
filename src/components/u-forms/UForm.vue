@@ -18,7 +18,7 @@ const props = defineProps({
     required: true,
   }
 });
-const emit = defineEmits(['submit', 'invalid-submit']);
+const emit = defineEmits(['submit', 'invalid-submit', 'submitting']);
 
 const formRef = ref();
 

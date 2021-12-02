@@ -10,22 +10,31 @@
       :aria-required="required"
       :name="name"
       :value="inputValue"
+      :disabled="disabled"
       @blur="handleBlur"
       @change="handleChange"
     >
       <option
-        v-for="(item, index) in options"
+        v-for="(option, index) in options"
         :key="`${name}-option-${index}`"
-        :value="item"
-      >{{ item }}</option>
+        :disabled="optionDisabled(option)"
+        :value="optionValue(option)"
+      >{{ optionLabel(option) }}</option>
     </select>
-    <p role="alert" :id="errorId" class="text-red-400" v-show="errorMessage">{{ errorMessage }}</p>
+    <p
+      role="alert"
+      aria-atomic="true"
+      :id="errorId"
+      class="text-red-400 text-sm mt-1"
+      v-show="errorMessage"
+    >{{ errorMessage }}</p>
+    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
-import { ref, watch } from "vue";
+import { onMounted, PropType, ref, watch } from "vue";
 import { useId } from '../../logic/use-id';
 
 const inputId = ref(`u-form-select-${useId()}`);
@@ -37,23 +46,27 @@ const props = defineProps({
     default: "",
   },
   options: {
-    type: Array,
+    type: Array as PropType<any[]>,
     default: () => ([])
   },
   name: {
     type: String,
     required: true,
   },
-  placeholder: {
-    type: String
-  },
   label: {
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   required: {
     type: Boolean,
     default: false
+  },
+  hint: {
+    type: String,
   }
 });
 
@@ -73,7 +86,7 @@ watch(inputValue, (newValue) => {
   if (newValue === props.modelValue) {
     return;
   }
-  //emit("update:modelValue", newValue);
+  emit("update:modelValue", newValue);
 });
 
 watch(
@@ -85,4 +98,25 @@ watch(
     inputValue.value = newModel;
   }
 );
+
+const optionValue = (option: string | number | any) => {
+  if (typeof option === 'object') {
+    return option?.value;
+  }
+  return option;
+}
+
+const optionDisabled = (option: string | number | any) => {
+  if (typeof option === 'object') {
+    return option?.disabled;
+  }
+  return false;
+}
+
+const optionLabel = (option: string | number | any) => {
+  if (typeof option === 'object') {
+    return option?.label;
+  }
+  return option;
+}
 </script>

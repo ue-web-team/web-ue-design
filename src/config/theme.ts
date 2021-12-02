@@ -5,7 +5,7 @@ export const theme: Theme = {
     colors,
     extend: {
       fontFamily: {
-        sans: ['OutfitVariable', 'sans-serif'],
+        sans: ['UrbanistVariable', 'sans-serif'],
       }
     }
 };

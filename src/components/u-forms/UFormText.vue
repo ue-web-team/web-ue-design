@@ -12,6 +12,8 @@
       :value="inputValue"
       :name="name"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
+      :disabled="disabled"
       @blur="handleBlur"
       @change="handleChange"
     ></textarea>
@@ -27,10 +29,19 @@
       :value="inputValue"
       :name="name"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
+      :disabled="disabled"
       @blur="handleBlur"
       @change="handleChange"
     />
-    <p role="alert" :id="errorId" class="text-red-400" v-show="errorMessage">{{ errorMessage }}</p>
+    <p
+      role="alert"
+      aria-atomic="true"
+      :id="errorId"
+      class="text-red-400 text-sm mt-1"
+      v-show="errorMessage"
+    >{{ errorMessage }}</p>
+    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
   </div>
 </template>
 
@@ -66,9 +77,20 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  autocomplete: {
+    type: String,
+    default: "",
+  },
   required: {
     type: Boolean,
     default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  hint: {
+    type: String,
   }
 });
 

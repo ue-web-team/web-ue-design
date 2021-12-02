@@ -58,6 +58,11 @@ export default plugin(
             "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
           "border-color": theme("colors.blue.DEFAULT") as string,
         },
+        "&:disabled": {
+          "border-color": theme("colors.gray.200") as string,
+          "color": theme("colors.gray.200") as string,
+          
+        }
       },
 
       "input::-moz-placeholder, textarea::-moz-placeholder": {
@@ -231,13 +236,14 @@ export default plugin(
           "border-color": "#fff",
         },
       },
-      ".btn-blue": {
-        backgroundColor: "#3490dc",
-        color: "#fff",
+      "a.link": {
+        color: theme("colors.primary.DEFAULT") as string,
+        "font-weight": "600",
+        "text-decoration": "underline",
         "&:hover": {
-          backgroundColor: "#2779bd",
-        },
-      },
+          color: theme("colors.black.DEFAULT") as string,
+        }
+      }
     });
   }
 );

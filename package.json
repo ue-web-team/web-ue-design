@@ -25,9 +25,13 @@
     "yalc": "yalc publish --no-scripts"
   },
   "dependencies": {
+    "@fontsource/arimo": "^4.5.0",
     "@fontsource/inter": "^4.5.1",
+    "@fontsource/jost": "^4.5.1",
     "@fontsource/outfit": "^4.5.0",
     "@fontsource/raleway": "^4.5.0",
+    "@fontsource/rubik": "^4.5.0",
+    "@fontsource/urbanist": "^4.5.1",
     "@headlessui/vue": "^1.4.2",
     "mini-svg-data-uri": "^1.4.3",
     "prismjs": "^1.25.0",
