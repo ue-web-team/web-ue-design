@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
-import { onMounted, PropType, ref, watch } from "vue";
+import { PropType, ref, watch } from "vue";
 import { useId } from '../../logic/use-id';
 
 const inputId = ref(`u-form-select-${useId()}`);

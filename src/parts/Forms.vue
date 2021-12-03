@@ -81,7 +81,7 @@
               type="password"
             />
             <UFormText textarea label="Feedback" name="feedback" />
-            <UFormCheckbox label="I agree to the terms" name="agree" value="yes" />
+            <UFormCheckbox label="I agree to the terms" :hint="terms" name="agree" value="yes" />
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -176,6 +176,8 @@ const code =
   <UButton type="submit">Submit</UButton> 
 </UForm>
 `
+
+const terms ="Vi kommer att spara alla uppgifter du delger oss i enlighet med gällande regelverk och sånt"
 
 const onSubmit = (values: any) => {
   isLoading.value = true;
