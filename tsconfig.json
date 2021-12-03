@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declaration": true,                            /* Generates corresponding '.d.ts' file. */
+    "outDir": "dist",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",

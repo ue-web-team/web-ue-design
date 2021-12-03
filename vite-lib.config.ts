@@ -10,7 +10,7 @@ import fs from 'fs'
 export default defineConfig({
   plugins: [
     typescript({
-      tsconfig: './tsconfig.json'
+      tsconfig: './tsconfig.json',
     }),
     vue(),
     WindiCSS(),

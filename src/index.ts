@@ -13,6 +13,12 @@ export { default as UDialog } from '@/components/u-dialog/UDialog.vue'
 export { default as UAccordionPanel } from '@/components/u-accordion-panel/UAccordionPanel.vue'
 export { default as UPagination } from '@/components/u-pagination/Upagination.vue'
 
+export { default as UForm } from '@/components/u-forms/UForm.vue'
+export { default as UFormCheckbox } from '@/components/u-forms/UFormCheckbox.vue'
+export { default as UFormRadioGroup } from '@/components/u-forms/UFormRadioGroup.vue'
+export { default as UFormSelect } from '@/components/u-forms/UFormSelect.vue'
+export { default as UFormText } from '@/components/u-forms/UFormText.vue'
+
 export { colors } from '@/config/colors'
 export { theme } from '@/config/theme'
 export { default as forms } from '@/plugin'
