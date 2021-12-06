@@ -27,7 +27,13 @@
             <div
               :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
               class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
+              :class="isLoading ? 'overflow-hidden' : null"
             >
+
+              <div class="progress-wrapper" v-if="isLoading">
+                <UProgressBar :loading="isLoading" />
+              </div>
+
               <DialogTitle as="h2" class="pb-2 text-xl font-bold md:(pb-4 text-2xl)">{{ title }}</DialogTitle>
               <DialogDescription class="overflow-auto">
                 <slot name="default"></slot>
@@ -47,6 +53,7 @@
 <script setup lang="ts">
 import { PropType, watch, ref } from "vue"
 import { colors } from '../../config/colors';
+import UProgressBar from '../u-progress-bar/UProgressBar.vue';
 import {
   TransitionRoot,
   TransitionChild,
@@ -72,7 +79,11 @@ const props = defineProps({
   requireInteraction: {
     default: false,
     type: Boolean as PropType<boolean>
-  }
+  },
+  isLoading: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
 })
 const emit = defineEmits(["update:open"]);
 const isOpen = ref(props.open);
@@ -85,3 +96,8 @@ const closeModal = () => {
   }
 };
 </script>
+<style lang="postcss" scoped>
+.progress-wrapper {
+  @apply absolute w-full h-8 overflow-hidden left-0 top-0 pointer-events-none;
+}
+</style>
