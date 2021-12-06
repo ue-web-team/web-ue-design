@@ -27,7 +27,7 @@
             <div
               :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
               class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
-              :class="isLoading ? 'overflow-hidden' : null"
+              :class="{ 'overflow-hidden': isLoading }"
             >
 
               <div class="progress-wrapper" v-if="isLoading">
