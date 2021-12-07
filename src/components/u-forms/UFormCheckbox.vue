@@ -40,6 +40,9 @@ const inputId = ref(`u-form-checkbox-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
 
 const props = defineProps({
+  modelValue: {
+    type: [Boolean, String],
+  },
   value: {
     type: String,
   },
@@ -59,6 +62,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(["update:modelValue"]);
+
 const {
   checked,
   errorMessage,
@@ -68,6 +73,25 @@ const {
   type: 'checkbox',
   checkedValue: props.value,
 });
+
+watch((checked as Ref), (newValue) => {
+  if (newValue === props.modelValue) {
+    return;
+  }
+  emit("update:modelValue", newValue);
+});
+
+watch(
+  () => props.modelValue,
+  (newModel) => {
+    if (newModel === (checked as Ref).value) {
+      return;
+    }
+    (checked as Ref).value = newModel;
+  }
+);
+
+
 
 const fieldsetErrorId = inject<Ref>('fieldset-error-id');
 const fieldsetError = inject<Ref>('fieldset-error-message');

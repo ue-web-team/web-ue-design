@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { useForm } from "vee-validate";
-import { ref } from "vue";
+import { ref, toRef } from "vue";
 
 const props = defineProps({
   validationSchema: {
@@ -21,7 +21,7 @@ const emit = defineEmits(['submit', 'invalid-submit', 'submitting']);
 const formRef = ref();
 
 const { resetForm, handleSubmit } = useForm({
-  validationSchema: props.validationSchema as any,
+  validationSchema: (toRef(props, 'validationSchema') as any),
   initialValues: props.initialValues
 });
 

@@ -135,7 +135,7 @@
             <UFormText required label="Your billing address" name="address" type="text" />
             <UFormText label="C/o address" name="co" type="text" :hint="'C/o means Care of'" />
             <UFormFieldset legend="Biling options">
-              <UFormRadio name="billing" v-for="option in billingOptions" :value="option">{{option}}</UFormRadio>
+              <UFormRadio name="billing" v-for="option in billingOptions" :value="option">{{ option }}</UFormRadio>
             </UFormFieldset>
           </UForm>
         </UCardContent>
@@ -162,19 +162,47 @@
             @invalid-submit="onInvalidSubmit"
           >
             <UFormFieldset legend="Availible dates">
-              <UFormRadio name="booking" v-for="option in timeOptions" :value="option.value">{{option.label}}</UFormRadio>
+              <UFormRadio
+                name="booking"
+                v-for="option in timeOptions"
+                :value="option.value"
+              >{{ option.label }}</UFormRadio>
             </UFormFieldset>
             <UFormFieldset legend="Extra options">
-              <UFormCheckbox name="extra" v-for="option in extraOptions" :value="option.value">{{option.label}}</UFormCheckbox>
+              <UFormCheckbox
+                name="extra"
+                v-for="option in extraOptions"
+                :value="option.value"
+              >{{ option.label }}</UFormCheckbox>
             </UFormFieldset>
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton
-            form="fourth-form"
-            class="w-full"
-            type="submit"
-          >Change time</UButton>
+          <UButton form="fourth-form" class="w-full" type="submit">Change time</UButton>
+        </UCardActions>
+      </UCard>
+
+      <UCard :color="colors.red['100']">
+        <UCardHeader>
+          <UCardTitle>Form example 5</UCardTitle>
+        </UCardHeader>
+        <UCardContent>
+          Byte av validering
+          <UForm
+            class="flex flex-col flex-col gap-4"
+            id="fifth-form"
+            :validation-schema="computedSchema"
+            @submit="onSubmit"
+            @invalid-submit="onInvalidSubmit"
+          >
+            <UFormText required label="Address" name="address" type="text" />
+            <UFormText label="Name" name="name" type="text" />
+            <UFormCheckbox v-model="isStrict" label="Strict validation" name="strict" value="yes" />
+            {{isStrict}}
+          </UForm>
+        </UCardContent>
+        <UCardActions>
+          <UButton form="fifth-form" class="w-full" type="submit">Change validation</UButton>
         </UCardActions>
       </UCard>
     </div>
@@ -186,7 +214,7 @@
 <script setup lang="ts">
 import * as yup from 'yup';
 import { colors } from '@/config/colors'
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Prism from "@/lib/code-block"
 
 const code =
@@ -208,7 +236,7 @@ const code =
 </UForm>
 `
 
-const terms ="Vi kommer att spara alla uppgifter du delger oss i enlighet med gällande regelverk och sånt"
+const terms = "Vi kommer att spara alla uppgifter du delger oss i enlighet med gällande regelverk och sånt"
 
 const onSubmit = (values: any) => {
   isLoading.value = true;
@@ -291,9 +319,9 @@ const timeOptions = [
 ]
 
 const extraOptions = [
-  {label: 'Sugar', value: "SUGAR"},
-  {label: 'Milk', value: "MILK"},
-  {label: 'Honey?', value: "HONEY"},
+  { label: 'Sugar', value: "SUGAR" },
+  { label: 'Milk', value: "MILK" },
+  { label: 'Honey?', value: "HONEY" },
 ]
 
 const schema1 = yup.object().shape({
@@ -323,10 +351,27 @@ const schema3 = yup.object().shape({
 });
 
 const schema4 = yup.object().shape({
- booking: yup.string()
+  booking: yup.string()
     .required()
     .notOneOf(['2'], "Den tiden kan du ju inte välja 😘"),
   extra: yup.array().required().min(1, 'Du måste välja minst en extra')
+});
+
+
+const isStrict = ref(true);
+const computedSchema = computed(() => {
+  console.log('Strict:', isStrict.value)
+  return isStrict.value ? schema5 : schema6
+});
+
+const schema5 = yup.object().shape({
+  name: yup.string().required(),
+  address: yup.string().required(),
+});
+
+const schema6 = yup.object().shape({
+  name: yup.string().required(),
+  address: yup.string().min(10),
 });
 
 </script>
