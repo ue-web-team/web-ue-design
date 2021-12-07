@@ -72,12 +72,13 @@
         </UCardHeader>
         <UCardContent>
           Allvarlig dialog som kräver ett val. kan inte avslutas med klick utanför eller 'esc'
-          <UDialog require-interaction class="text-white" :color="colors.red['600']" v-model:open="isDialogOpen4" title="Hipp färg">
+          Dialog har även en laddningsidikator.
+          <UDialog require-interaction class="text-white" :color="colors.red['600']" v-model:open="isDialogOpen4" title="Hipp färg" :isLoading="isLoading">
             Allvarlig dialog som kräver ett val. kan inte avslutas med click utanför eller 'esc'
             <template
               #actions
             >
-              <UButton kind="white" outline @click="isDialogOpen4 = false">Ja</UButton>
+              <UButton kind="white" outline @click="mockSave">Ja</UButton>
               <UButton kind="white" @click="isDialogOpen4 = false">Nej</UButton>
             </template>
           </UDialog>
@@ -114,4 +115,9 @@ const isDialogOpen1 = ref(false);
 const isDialogOpen2 = ref(false);
 const isDialogOpen3 = ref(false);
 const isDialogOpen4 = ref(false);
+const mockSave = () => {
+  isLoading.value = true,
+  setTimeout(() => { isLoading.value = false, isDialogOpen4.value = false }, 3500)
+}
+const isLoading = ref(false);
 </script>
