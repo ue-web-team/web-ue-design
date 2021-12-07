@@ -96,7 +96,7 @@
         <UCardContent>
           <UForm
             class="flex flex-col flex-col gap-4"
-            id="third-form"
+            id="second-form"
             @submit="onSubmit"
             :initial-values="initialFormValues2"
             :validation-schema="schema2"
@@ -115,7 +115,7 @@
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton form="third-form" class="w-full" type="submit">Change identity</UButton>
+          <UButton form="second-form" class="w-full" type="submit">Change identity</UButton>
         </UCardActions>
       </UCard>
 
@@ -126,7 +126,7 @@
         <UCardContent>
           <UForm
             class="flex flex-col flex-col gap-4"
-            id="second-form"
+            id="third-form"
             @submit="onSubmit"
             :initial-values="initialFormValues3"
             :validation-schema="schema3"
@@ -134,16 +134,47 @@
           >
             <UFormText required label="Your billing address" name="address" type="text" />
             <UFormText label="C/o address" name="co" type="text" :hint="'C/o means Care of'" />
-            <UFormRadioGroup :options="billingOptions" legend="Billing options" name="billing" />
+            <UFormFieldset legend="Biling options">
+              <UFormRadio name="billing" v-for="option in billingOptions" :value="option">{{option}}</UFormRadio>
+            </UFormFieldset>
           </UForm>
         </UCardContent>
         <UCardActions>
           <UButton
             :loading="isLoading"
-            form="second-form"
+            form="third-form"
             class="w-full"
             type="submit"
           >Change Billing</UButton>
+        </UCardActions>
+      </UCard>
+
+      <UCard :color="colors.yellow['100']">
+        <UCardHeader>
+          <UCardTitle>Form example 4</UCardTitle>
+        </UCardHeader>
+        <UCardContent>
+          <UForm
+            class="flex flex-col flex-col gap-4"
+            id="fourth-form"
+            :validation-schema="schema4"
+            @submit="onSubmit"
+            @invalid-submit="onInvalidSubmit"
+          >
+            <UFormFieldset legend="Availible dates">
+              <UFormRadio name="booking" v-for="option in timeOptions" :value="option.value">{{option.label}}</UFormRadio>
+            </UFormFieldset>
+            <UFormFieldset legend="Extra options">
+              <UFormCheckbox name="extra" v-for="option in extraOptions" :value="option.value">{{option.label}}</UFormCheckbox>
+            </UFormFieldset>
+          </UForm>
+        </UCardContent>
+        <UCardActions>
+          <UButton
+            form="fourth-form"
+            class="w-full"
+            type="submit"
+          >Change time</UButton>
         </UCardActions>
       </UCard>
     </div>
@@ -201,13 +232,13 @@ const initialFormValues1 = {
 const initialFormValues2 = {
   name: 'Markus Marklund',
   email: 'marcus.marklund@aik.se',
-  gender: 'None'
+  gender: 'None',
+  habit: 1
 };
 
 const initialFormValues3 = {
   address: "Marklunds kurva 12",
   billing: 'Paper invoice',
-  habit: 1
 };
 
 const isLoading = ref(false);
@@ -231,6 +262,39 @@ const complex = [
   }
 ]
 const billingOptions = ['Paper invoice', 'E-mail', 'Kivra', 'Bank transfer']
+
+const timeOptions = [
+  {
+    label: '2012-11-21',
+    duration: {
+      hours: 2
+    },
+    value: 0,
+    disabled: false
+  },
+  {
+    label: '2012-11-22',
+    duration: {
+      hours: 1
+    },
+    value: 1,
+    disabled: false
+  },
+  {
+    label: '2012-11-23',
+    duration: {
+      hours: 3
+    },
+    value: 2,
+    disabled: true
+  }
+]
+
+const extraOptions = [
+  {label: 'Sugar', value: "SUGAR"},
+  {label: 'Milk', value: "MILK"},
+  {label: 'Honey?', value: "HONEY"},
+]
 
 const schema1 = yup.object().shape({
   name: yup.string().required(),
@@ -256,6 +320,13 @@ const schema3 = yup.object().shape({
   billing: yup.string()
     .required()
     .notOneOf(["Paper invoice"], "Vi är en papperslös organisation 😘"),
+});
+
+const schema4 = yup.object().shape({
+ booking: yup.string()
+    .required()
+    .notOneOf(['2'], "Den tiden kan du ju inte välja 😘"),
+  extra: yup.array().required().min(1, 'Du måste välja minst en extra')
 });
 
 </script>

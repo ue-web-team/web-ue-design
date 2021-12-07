@@ -11,11 +11,9 @@ import { ref } from "vue";
 const props = defineProps({
   validationSchema: {
     type: [Object, Array],
-    required: true,
   },
   initialValues: {
     type: [Object, Array],
-    required: true,
   }
 });
 const emit = defineEmits(['submit', 'invalid-submit', 'submitting']);

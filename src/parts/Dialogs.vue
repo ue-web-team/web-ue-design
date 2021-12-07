@@ -102,7 +102,8 @@ const code =
   `<!-- Trigger button -->
 <UButton @click="isDialogOpen = true">Open dialog</UButton>
 <!-- Actual modal (will not render here but as a child of <body>) -->
-<UDialog v-model:open="isDialogOpen" title="Change candy preference">
+<UDialog v-model:open="isDialogOpen" title="Title of dialog">
+  I'am the content of this dialog
   <template #actions >
     <UButton outline @click="isDialogOpen = false">Cancel</UButton>
     <UButton @click="isDialogOpen = false">Ok</UButton>
