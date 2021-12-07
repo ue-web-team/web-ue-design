@@ -15,7 +15,8 @@ export { default as UPagination } from '@/components/u-pagination/Upagination.vu
 
 export { default as UForm } from '@/components/u-forms/UForm.vue'
 export { default as UFormCheckbox } from '@/components/u-forms/UFormCheckbox.vue'
-export { default as UFormRadioGroup } from '@/components/u-forms/UFormRadioGroup.vue'
+export { default as UFormRadio } from '@/components/u-forms/UFormRadio.vue'
+export { default as UFormFieldset } from '@/components/u-forms/UFormFieldset.vue'
 export { default as UFormSelect } from '@/components/u-forms/UFormSelect.vue'
 export { default as UFormText } from '@/components/u-forms/UFormText.vue'
 
