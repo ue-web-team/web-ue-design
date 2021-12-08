@@ -116,10 +116,55 @@
         </label>
       </div>
     </div>
+    <h3 class="text-xl my-4">Multiselect</h3>
+    <p class="my-4">
+      Accessible multiselect dropdown. Implemented with a trigger element with role equal to combobox and a role listbox dropdown.
+      Handles all relevant aria attributes in accordance to WCAG roles. aria-haspopup, aria-expanded, aria-multiselectable, aria-selected, aria-activedescendant.
+      Manages focus states and handles most keybord shortcuts (up, down, space & enter toggles, end, home, esc to exit)
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <UMultiSelect v-model="selected" :options="options" label="What u like?"></UMultiSelect>
+    </div>
+    <pre>{{ JSON.stringify(selected, null, 2) }}</pre>
   </article>
 </template>
 
 <script setup lang="ts">import { ref } from 'vue';
 
 const radio = ref('kola')
+const selected = ref();
+const options = [
+  {
+    value: 0,
+    label: "Suris"
+  },
+  {
+    value: { label: "fish" },
+    label: "Fish"
+  },
+  {
+    value: false,
+    label: "Tapioka"
+  },
+  {
+    value: true,
+    label: "Kola"
+  },
+  {
+    value: "stuff",
+    label: "stuff"
+  },
+  {
+    value: 123,
+    label: "Number"
+  },
+  {
+    value: "###&%¤#&",
+    label: "Pattern"
+  },
+  {
+    value: [1, 2, 3, 4],
+    label: "Array"
+  }
+];
 </script>
