@@ -163,7 +163,7 @@ const options = [
     label: "Pattern"
   },
   {
-    value: [1, 2, 3, 4],
+    value: {a: 1, b: 2},
     label: "Array"
   }
 ];

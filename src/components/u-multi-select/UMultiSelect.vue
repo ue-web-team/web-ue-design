@@ -15,7 +15,7 @@
       @click="onToggle"
       @keydown.enter.prevent.="onToggle"
     >
-      <div :id="selectedValuesId">{{ selectedText }}</div>
+      <div :id="selectedValuesId">{{ display }}</div>
     </div>
     <ul
       v-if="open"
@@ -27,14 +27,12 @@
       :aria-labelledby="labelId"
       :aria-activedescendant="getOptionId(options[activeDescendantIndex])"
       tabindex="-1"
-     
       @keyup="keyUpHandler"
       @keydown.space.prevent="onSelect"
       @keydown.enter.prevent="onSelect"
       @keydown.prevent.up="directionHandler($event, 'up')"
       @keydown.prevent.down="directionHandler($event, 'down')"
       @keydown.esc="escapeHandler"
-      
       @keydown.home="homeAndEndHandler"
       @keydown.end="homeAndEndHandler"
       @blur="blurHandler"
@@ -48,7 +46,7 @@
         :aria-selected="isSelected(option) ? 'true' : 'false'"
         role="option"
         @click="input(option)"
-      >{{ option.value }}</li>
+      >{{ option.label }}</li>
     </ul>
   </div>
 </template>
@@ -88,7 +86,16 @@ const props = defineProps({
 const combobox = ref<HTMLElement>();
 const listbox = ref<HTMLElement>();
 
-const selectedText = computed(() => 'empty');
+const display = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    return props.modelValue
+      .map(value => {
+        const option = props.options.find(option => option.value === value)
+        return option?.label ? option.label : ''
+      })
+      .join(', ')
+  }
+});
 
 // ids for all fields
 const labelId = ref(`u-ms-label-${useId()}`);
