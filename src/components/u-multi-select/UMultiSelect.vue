@@ -5,57 +5,103 @@
       ref="combobox"
       :aria-labelledby="labelId + ' ' + selectedValuesId"
       :aria-expanded="open"
-      :aria-controles="listboxId"
-      aria-haspopup="listbox"
+      :aria-controles="open ? listboxId : undefined"
+      aria-haspopup="true"
       aria-autocomplete="none"
-      class="focus-style u-ms__input"
+      class="focus-style u-ms__input truncate"
       tabindex="0"
       role="combobox"
       :disabled="disabled"
       @click="onToggle"
-      @keydown.enter.prevent.="onToggle"
+      @keydown.enter="onToggle"
+      @keydown.space.prevent="onToggle"
     >
-      <div :id="selectedValuesId">{{ display }}</div>
+      <span :id="selectedValuesId">{{ display }}</span>
     </div>
     <ul
       v-if="open"
       ref="listbox"
       :id="listboxId"
       class="u-ms__list"
+      :class="{ 'u-ms__list--bottom': dropdownPosition === 'bottom' }"
       role="listbox"
       :aria-multiselectable="multiselect"
       :aria-labelledby="labelId"
       :aria-activedescendant="getOptionId(options[activeDescendantIndex])"
       tabindex="-1"
-      @keyup="keyUpHandler"
       @keydown.space.prevent="onSelect"
       @keydown.enter.prevent="onSelect"
-      @keydown.prevent.up="directionHandler($event, 'up')"
-      @keydown.prevent.down="directionHandler($event, 'down')"
-      @keydown.esc="escapeHandler"
-      @keydown.home="homeAndEndHandler"
-      @keydown.end="homeAndEndHandler"
-      @blur="blurHandler"
+      @keydown.prevent.up="onDirection($event, 'up')"
+      @keydown.prevent.down="onDirection($event, 'down')"
+      @keydown.esc="onEscape"
+      @keydown.prevent.home="onHome"
+      @keydown.prevent.end="onEnd"
+      @blur="onBlur"
     >
       <li
         v-for="(option, index) in options"
-        class="hover:bg-gray-200 cursor-pointer"
-        :class="{ 'text-red': isSelected(option), 'bg-gray-200': index === activeDescendantIndex }"
-        :key="option.key"
+        :ref="setOptionRef"
+        class="u-ms__option"
+        :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
+        :key="getOptionId(option)"
         :id="getOptionId(option)"
         :aria-selected="isSelected(option) ? 'true' : 'false'"
         role="option"
         @click="input(option)"
-      >{{ option.label }}</li>
+      >
+        <slot :option="option">
+          <div class="flex px-2 py-2 items-center">
+            <span aria-hidden="true" class="fake-checkbox"></span>
+            <span>{{ option.label }}</span>
+          </div>
+        </slot>
+      </li>
     </ul>
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed, PropType, ref, watch, nextTick } from 'vue';
-import { useId } from '../../logic/use-id';
+<style scoped lang="postcss">
+.u-ms__input {
+  @apply mt-1 pl-3 pr-10 py-2 rounded border-black border-2 min-h-11 bg-white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right .5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
 
-const ARROWS = ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
+.u-ms__list {
+  @apply z-50 max-h-[40vh] absolute overflow-y-auto top-[calc(100%+0.25rem)] min-h-11;
+  @apply rounded bg-white shadow-xl border border-black;
+  &.u-ms__list--bottom {
+    @apply bottom-[calc(100%-1.25rem)] top-auto;
+  }
+}
+
+.fake-checkbox {
+  @apply w-4 h-4 rounded border border-black bg-white mr-2;
+}
+
+.u-ms__option {
+  @apply cursor-pointer;
+  &:hover {
+    @apply bg-blue-300 text-white;
+  }
+}
+.u-ms__option--active {
+  @apply bg-blue-300 text-white;
+}
+
+.u-ms__option--checked {
+  .fake-checkbox {
+    @apply bg-primary;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+  }
+}
+</style>
+
+<script setup lang="ts">
+import { computed, PropType, ref, watch, nextTick, onMounted, onUnmounted, reactive, onBeforeUpdate, onUpdated } from 'vue';
+import { useId } from '../../logic/use-id';
 
 const emit = defineEmits(['update:modelValue', 'close'])
 const props = defineProps({
@@ -86,16 +132,36 @@ const props = defineProps({
 const combobox = ref<HTMLElement>();
 const listbox = ref<HTMLElement>();
 
+// reference to all options
+let optionRefs: HTMLBaseElement[] = []
+const setOptionRef = (el: HTMLBaseElement) => {
+  if (el) {
+    optionRefs.push(el);
+  }
+}
+onBeforeUpdate(() => {
+  optionRefs = []
+})
+
+// position of dropdown listbox (top)
+const dropdownPosition = ref('bottom');
+
 const display = computed(() => {
   if (Array.isArray(props.modelValue)) {
     return props.modelValue
       .map(value => {
-        const option = props.options.find(option => option.value === value)
-        return option?.label ? option.label : ''
+        // deep comparison
+        const option = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(value))
+        return option?.label ?? ''
       })
       .join(', ')
   }
 });
+
+const computeDropdownDirection = () => {
+  const listrect = combobox.value?.getBoundingClientRect() as DOMRect;
+  return window.innerHeight / 2 < listrect.top ? 'bottom' : 'top';
+};
 
 // ids for all fields
 const labelId = ref(`u-ms-label-${useId()}`);
@@ -106,64 +172,54 @@ const optionsBaseId = `u-ms-option-${useId()}`;
 const open = ref(false);
 const activeDescendantIndex = ref(-1);
 
-//watch open state of listbox
+// watch open state of listbox and act
 watch(open, (isOpen: boolean) => {
   if (isOpen) {
+    // compute position dropdown
+    dropdownPosition.value = computeDropdownDirection()
     nextTick(() => {
-      // register click to listen for clicks outside listbox
-      document.addEventListener('click', onClickOutside);
       // focus listbox
       listbox.value?.focus();
-      console.log('opened');
-      // set focus to first selected option
-      if (props.modelValue?.length == -3) {
-        // if there ar options provided
-        /*if (this.$refs.options) {
-          const firstSelectedOptionIndex = this.$refs.options.findIndex(
-            option =>
-              option.classList.contains('v-multiselect__option--selected')
-          )
-          this.activeDescendantIndex = firstSelectedOptionIndex
-        }*/
-      } else {
-        // if not select to the first option
-        activeDescendantIndex.value = 0;
-      }
+      // Do wee have any selected options?
+      if (props.modelValue?.length && optionRefs.length && listbox.value) {
+        // set focus to first selected option
+        activeDescendantIndex.value = getFirstSelectedOptionIndex(props.modelValue, optionRefs);
+      } 
     })
   } else {
-    document.removeEventListener('click', onClickOutside)
+    activeDescendantIndex.value =   0;
     emit('close')
   }
-
 });
 
-// logic 
-const onClickOutside = (e: MouseEvent) => {
-  if ((listbox.value?.contains(e.target)) || combobox.value?.contains(e.target)) {
-  } else {
-    console.log('closed');
-    open.value = false
+// watch active decendant for scroll into view
+watch(activeDescendantIndex, () => {
+  if (open && optionRefs.length && listbox.value) {
+    // scroll to first selected option
+    scrollToActiveDescendant(optionRefs, listbox.value, activeDescendantIndex.value);
   }
+})
+
+const getFirstSelectedOptionIndex = (modelValue: any, options: HTMLBaseElement[]) => {
+  return options.findIndex(option => option.classList.contains('u-ms__option--checked')) || 0;
 };
+
+const scrollToActiveDescendant = (options: HTMLBaseElement[], listbox: HTMLElement, activeDescendantIndex: number) => {
+  const selectedOption = options[activeDescendantIndex];
+  const { offsetTop, clientHeight } = selectedOption;
+  const currentVisibleArea = listbox.scrollTop + listbox.clientHeight
+  if (offsetTop < listbox.scrollTop) {
+    listbox.scrollTop = offsetTop
+  } else if (offsetTop + clientHeight > currentVisibleArea) {
+    listbox.scrollTop = offsetTop - listbox.clientHeight + clientHeight
+  }
+}
 
 const onToggle = () => {
   open.value = !open.value;
 };
 
-// prevent default scroll behavior for arrow keys
-const keyDownHandler = (e: KeyboardEvent) => {
-  if (ARROWS.includes(e.key)) {
-    console.log('prevented scroll');
-    e.preventDefault();
-  }
-};
-
-const keyUpHandler = (e: KeyboardEvent) => {
-  const keyCode = e.keyCode || e._keyCode;
-  console.log('keyup: ', e.code, keyCode);
-}
-
-const directionHandler = (e: KeyboardEvent, direction: string) => {
+const onDirection = (e: KeyboardEvent, direction: string) => {
   switch (direction) {
     case 'up':
       if (activeDescendantIndex.value !== 0) {
@@ -179,7 +235,7 @@ const directionHandler = (e: KeyboardEvent, direction: string) => {
 };
 
 // move focus to combobox on escape
-const escapeHandler = () => {
+const onEscape = () => {
   open.value = false;
   combobox.value?.focus();
 };
@@ -192,11 +248,10 @@ const onSelect = (e: KeyboardEvent) => {
   }
 };
 
-const homeAndEndHandler = () => {
+const onHome = () =>  activeDescendantIndex.value = 0;
+const onEnd = () =>  activeDescendantIndex.value = props.options.length - 1;
 
-};
-
-const blurHandler = (e: FocusEvent) => {
+const onBlur = (e: FocusEvent) => {
   // if next focus target is not the combobox element
   // then close the listbox
   if (e.relatedTarget !== combobox.value) {
@@ -230,14 +285,3 @@ const isSelected = (option: any) => {
 };
 
 </script>
-
-<style scoped lang="postcss">
-.u-ms__input {
-  @apply pl-3 pr-10 py-2 rounded border-black border-2 min-h-11 bg-primary-100;
-}
-
-.u-ms__list {
-  @apply z-50 min-w-full absolute top-[100%] min-h-11;
-  @apply rounded p-2 bg-white shadow-xl border;
-}
-</style>

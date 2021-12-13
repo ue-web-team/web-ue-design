@@ -23,11 +23,12 @@ const onPageClick = (page: any) => { console.log(page); currentPage.value = page
       <h1 class="text-2xl sm:text-4xl font-semibold mb-10">Umea Component Library (UCL)</h1>
     </header>
     <main class="grid grid-cols-1 gap-8 mb-26">
+      <FormElements></FormElements>
       <Colors></Colors>
       <Buttons></Buttons>
       <IconButtons></IconButtons>
       <Forms></Forms>
-      <FormElements></FormElements>
+      
       <Cards></Cards>
       <Dialogs></Dialogs>
       <Pagination></Pagination>

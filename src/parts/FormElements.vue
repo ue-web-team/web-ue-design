@@ -165,6 +165,18 @@ const options = [
   {
     value: {a: 1, b: 2},
     label: "Array"
+  },
+  {
+    value: 'b12',
+    label: "More"
+  },
+  {
+    value: 'b13',
+    label: "More1"
+  },
+  {
+    value: 'b14',
+    label: "More2"
   }
 ];
 </script>
