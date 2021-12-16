@@ -30,8 +30,8 @@ export const colors = {
   },
   yellow: {
     DEFAULT: "#FFB300",
-    "100": "#FFFBCB",
-    "200": "#FFEE7D",
+    "100": "#FFF7E6",
+    "200": "#FFE8B3",
     "300": "#FFCA25",
     "400": "#FFB300",
     "500": "#DEA50B",
