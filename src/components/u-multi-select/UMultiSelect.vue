@@ -21,6 +21,7 @@
         <span :class="{'sr-only': truncate}">{{ displayAll}}</span>
       </div>
     </div>
+    <transition name="rise">
     <ul
       v-if="open"
       ref="listbox"
@@ -53,19 +54,20 @@
         @click="input(option)"
       >
         <slot :option="option">
-          <div class="flex px-2 py-2 items-center truncate">
+          <div class="flex text-base px-2 py-2 items-center truncate">
             <span aria-hidden="true" class="fake-checkbox"></span>
             <span>{{ option.label }}</span>
           </div>
         </slot>
       </li>
     </ul>
+    </transition>
   </div>
 </template>
 
 <style scoped lang="postcss">
 .u-ms__input {
-  @apply mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-white;
+  @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-white;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;

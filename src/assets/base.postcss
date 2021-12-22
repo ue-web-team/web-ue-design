@@ -9,6 +9,48 @@ html {
          focus-visible:ring-blue;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.rise-enter-active,
+.rise-leave-active {
+  transition: all 0.3s ease;
+  
+}
+
+.rise-enter-from,
+.rise-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -10px, 0) scale(0.95);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.slide-leave-from,
+.slide-enter-to {
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-enter-from {
+  transform: translate3d(-20%, 0, 0) scale(0.95);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translate3d(20%, 0, 0) scale(0.95);
+  opacity: 0;
+}
+
 span.ripple {
   position: absolute;
   pointer-events: none;
@@ -37,3 +79,4 @@ span.ripple {
     @apply m-auto;
   }
  }
+
