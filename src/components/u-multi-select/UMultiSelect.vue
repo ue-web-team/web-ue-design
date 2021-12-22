@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative max-w-full">
     <label :id="labelId">{{ label }}</label>
     <div
       ref="combobox"
@@ -8,7 +8,7 @@
       :aria-controles="open ? listboxId : undefined"
       aria-haspopup="true"
       aria-autocomplete="none"
-      class="input-focus u-ms__input truncate"
+      class="input-focus u-ms__input"
       tabindex="0"
       role="combobox"
       :disabled="disabled"
@@ -16,7 +16,10 @@
       @keydown.enter="onToggle"
       @keydown.space.prevent="onToggle"
     >
-      <span :id="selectedValuesId">{{ display }}</span>
+      <div class="truncate" :id="selectedValuesId">
+        <span aria-hidden="true" v-if="truncate">{{displayTruncated}}</span>
+        <span :class="{'sr-only': truncate}">{{ displayAll}}</span>
+      </div>
     </div>
     <ul
       v-if="open"
@@ -50,7 +53,7 @@
         @click="input(option)"
       >
         <slot :option="option">
-          <div class="flex px-2 py-2 items-center">
+          <div class="flex px-2 py-2 items-center truncate">
             <span aria-hidden="true" class="fake-checkbox"></span>
             <span>{{ option.label }}</span>
           </div>
@@ -64,7 +67,7 @@
 .u-ms__input {
   @apply mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-white;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-  background-position: right .5rem center;
+  background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
 }
@@ -120,7 +123,7 @@ const props = defineProps({
   },
   truncate: {
     type: Boolean as PropType<boolean>,
-    default: true,
+    default: false,
   },
   placeholder: String,
   disabled: {
@@ -131,27 +134,44 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
-})
+});
 
 // template refs
 const combobox = ref<HTMLElement>();
 const listbox = ref<HTMLElement>();
 
 // reference to all options
-let optionRefs: HTMLBaseElement[] = []
+let optionRefs: HTMLBaseElement[] = [];
 const setOptionRef = (el: HTMLBaseElement) => {
   if (el) {
     optionRefs.push(el);
   }
-}
+};
 onBeforeUpdate(() => {
   optionRefs = []
-})
+});
 
 // position of dropdown listbox (top)
 const dropdownPosition = ref('bottom');
 
-const display = computed(() => {
+const displayTruncated = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    if(props.modelValue.length > 1) {
+      const first = props.modelValue[0];
+      const firstOption = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(first))
+      return (firstOption?.label ?? '') + ` (+${props.modelValue.length - 1})`
+    }
+    return props.modelValue
+      .map(value => {
+        // deep comparison
+        const option = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(value))
+        return option?.label ?? ''
+      })
+      .join(', ')
+  }
+});
+
+const displayAll = computed(() => {
   if (Array.isArray(props.modelValue)) {
     return props.modelValue
       .map(value => {
@@ -189,10 +209,10 @@ watch(open, (isOpen: boolean) => {
       if (props.modelValue?.length && optionRefs.length && listbox.value) {
         // set focus to first selected option
         activeDescendantIndex.value = getFirstSelectedOptionIndex(props.modelValue, optionRefs);
-      } 
+      }
     })
   } else {
-    activeDescendantIndex.value =   0;
+    activeDescendantIndex.value = 0;
     emit('close')
   }
 });
@@ -253,8 +273,8 @@ const onSelect = (e: KeyboardEvent) => {
   }
 };
 
-const onHome = () =>  activeDescendantIndex.value = 0;
-const onEnd = () =>  activeDescendantIndex.value = props.options.length - 1;
+const onHome = () => activeDescendantIndex.value = 0;
+const onEnd = () => activeDescendantIndex.value = props.options.length - 1;
 
 const onBlur = (e: FocusEvent) => {
   // if next focus target is not the combobox element
