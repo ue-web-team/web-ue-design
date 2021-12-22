@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <input
-      class="focus-style mr-2 u-form-control"
+      class="mr-2 u-form-control"
       type="radio"
       :id="inputId"
       :aria-describedby="fieldsetErrorId"

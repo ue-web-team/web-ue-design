@@ -136,7 +136,7 @@ const selected = ref();
 const options = [
   {
     value: 0,
-    label: "Suris"
+    label: "Suris med godis"
   },
   {
     value: { label: "fish" },

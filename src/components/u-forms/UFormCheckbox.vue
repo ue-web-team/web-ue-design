@@ -2,7 +2,7 @@
   <div>
     <div class="flex items-center">
       <input
-        class="focus-style mr-2 u-form-control"
+        class="mr-2 u-form-control"
         type="checkbox"
         :id="inputId"
         :aria-describedby="fieldsetErrorId || errorId"
@@ -90,8 +90,6 @@ watch(
     (checked as Ref).value = newModel;
   }
 );
-
-
 
 const fieldsetErrorId = inject<Ref>('fieldset-error-id');
 const fieldsetError = inject<Ref>('fieldset-error-message');

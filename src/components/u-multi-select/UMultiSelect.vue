@@ -8,7 +8,7 @@
       :aria-controles="open ? listboxId : undefined"
       aria-haspopup="true"
       aria-autocomplete="none"
-      class="focus-style u-ms__input truncate"
+      class="input-focus u-ms__input truncate"
       tabindex="0"
       role="combobox"
       :disabled="disabled"
@@ -62,7 +62,7 @@
 
 <style scoped lang="postcss">
 .u-ms__input {
-  @apply mt-1 pl-3 pr-10 py-2 rounded border-black border-2 min-h-11 bg-white;
+  @apply mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-white;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
   background-position: right .5rem center;
   background-repeat: no-repeat;
@@ -78,11 +78,11 @@
 }
 
 .fake-checkbox {
-  @apply w-4 h-4 rounded border border-black bg-white mr-2;
+  @apply flex-none w-4 h-4 rounded border border-black bg-white mr-2;
 }
 
 .u-ms__option {
-  @apply cursor-pointer;
+  @apply cursor-pointer whitespace-nowrap;
   &:hover {
     @apply bg-blue-300 text-white;
   }
@@ -101,6 +101,7 @@
 
 <script setup lang="ts">
 import { computed, PropType, ref, watch, nextTick, onMounted, onUnmounted, reactive, onBeforeUpdate, onUpdated } from 'vue';
+import { boolean } from 'yup/lib/locale';
 import { useId } from '../../logic/use-id';
 
 const emit = defineEmits(['update:modelValue', 'close'])
@@ -116,6 +117,10 @@ const props = defineProps({
   label: {
     type: String as PropType<string>,
     required: true,
+  },
+  truncate: {
+    type: Boolean as PropType<boolean>,
+    default: true,
   },
   placeholder: String,
   disabled: {

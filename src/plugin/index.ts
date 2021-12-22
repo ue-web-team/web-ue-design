@@ -9,6 +9,22 @@ import svgToDataUri from "mini-svg-data-uri";
 //const { borderWidth, borderRadius, outline } = defaultTheme;
 const spacing = (num: number) => `${num / 4}rem`;
 
+const inputFocus = (theme: any) => ({
+  outline: "none",
+  "outline-offset": "0",
+  "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+  "--tw-ring-offset-width": "1px",
+  "--tw-ring-offset-color": "#fff",
+  "--tw-ring-color": theme("colors.blue.DEFAULT") as string,
+  "--tw-ring-offset-shadow":
+    "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+  "--tw-ring-shadow":
+    "var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+  "box-shadow":
+    "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
+  "border-color": theme("colors.blue.DEFAULT") as string,
+});
+
 export default plugin(
   ({ addUtilities, addBase, theme, addComponents, config }) => {
     addBase({
@@ -43,26 +59,11 @@ export default plugin(
         "font-size": "initial",
         "line-height": "inherit",
         "min-height": "2.75rem",
-        "&:focus": {
-          outline: "none",
-          "outline-offset": "0",
-          "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
-          "--tw-ring-offset-width": "0px",
-          "--tw-ring-offset-color": "#fff",
-          "--tw-ring-color": theme("colors.blue.DEFAULT") as string,
-          "--tw-ring-offset-shadow":
-            "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-          "--tw-ring-shadow":
-            "var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
-          "box-shadow":
-            "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
-          "border-color": theme("colors.blue.DEFAULT") as string,
-        },
+        "&:focus": inputFocus(theme),
         "&:disabled": {
           "border-color": theme("colors.gray.200") as string,
-          "color": theme("colors.gray.200") as string,
-          
-        }
+          color: theme("colors.gray.200") as string,
+        },
       },
 
       "input::-moz-placeholder, textarea::-moz-placeholder": {
@@ -113,7 +114,6 @@ export default plugin(
         "padding-left": spacing(3),
         "-webkit-print-color-adjust": "exact",
         "color-adjust": "exact",
-
       },
 
       "[multiple]": {
@@ -150,7 +150,7 @@ export default plugin(
         "background-color": "#fff",
         "border-color": theme("colors.black.DEFAULT") as string,
         "border-width": "1px",
-        "border-radius": "3px"
+        "border-radius": "3px",
       },
       ["[type='radio']"]: {
         "border-radius": "100%",
@@ -158,9 +158,7 @@ export default plugin(
       [`
   [type='checkbox']:focus,
   [type='radio']:focus
-      `]: {
-        //outline: "none",
-      },
+      `]: inputFocus(theme),
 
       [`
   [type='checkbox']:checked,
@@ -231,7 +229,6 @@ export default plugin(
     });
     addComponents({
       ".light-check": {
-        
         "&:checked": {
           "border-color": "#fff",
         },
@@ -242,8 +239,11 @@ export default plugin(
         "text-decoration": "underline",
         "&:hover": {
           color: theme("colors.black.DEFAULT") as string,
-        }
-      }
+        },
+      },
+      ".input-focus": {
+        "&:focus": inputFocus(theme)
+      },
     });
   }
 );
