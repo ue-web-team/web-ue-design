@@ -12,7 +12,7 @@
 import { PropType, ref } from 'vue';
 import { provide } from 'vue'
 import { colors } from '../../config/colors';
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 import { CardContext } from './UCardContext';
 import UProgressBar from '../u-progress-bar/UProgressBar.vue';
 

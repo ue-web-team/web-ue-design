@@ -48,7 +48,7 @@
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { ref } from "vue";
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 
 const inputId = ref(`u-form-input-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);

@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { inject, Ref, ref, watch } from "vue";
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 
 const inputId = ref(`u-form-checkbox-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);

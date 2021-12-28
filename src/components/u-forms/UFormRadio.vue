@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { inject, Ref, ref, watch } from "vue";
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 
 const props = defineProps({
   value: {

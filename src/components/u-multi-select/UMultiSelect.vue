@@ -107,7 +107,7 @@
 <script setup lang="ts">
 import { computed, PropType, ref, watch, nextTick, onMounted, onUnmounted, reactive, onBeforeUpdate, onUpdated } from 'vue';
 import { boolean } from 'yup/lib/locale';
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 
 const emit = defineEmits(['update:modelValue', 'close'])
 const props = defineProps({

@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { provide, ref } from "vue";
-import { useId } from '../../logic/use-id';
+import { useId } from '../../logic';
 
 const errorId = ref(`u-form-error-${useId()}`);
 const errorMessage = ref();
