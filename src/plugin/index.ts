@@ -123,7 +123,9 @@ export default plugin(
         "-webkit-print-color-adjust": "exact",
         "color-adjust": "exact",
       },
-
+      ".dark option": {
+        color: theme("colors.black.DEFAULT") as string,
+      },
       "[multiple]": {
         "background-image": "initial",
         "background-position": "initial",
