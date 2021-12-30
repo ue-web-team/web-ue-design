@@ -17,8 +17,8 @@
       @keydown.space.prevent="onToggle"
     >
       <div class="truncate" :id="selectedValuesId">
-        <span aria-hidden="true" v-if="truncate">{{displayTruncated}}</span>
-        <span :class="{'sr-only': truncate}">{{ displayAll}}</span>
+        <span aria-hidden="true" v-if="truncate">{{ displayTruncated }}</span>
+        <span :class="{'sr-only': truncate}">{{ displayAll }}</span>
       </div>
     </div>
     <transition name="rise">
@@ -67,16 +67,19 @@
 
 <style scoped lang="postcss">
 .u-ms__input {
-  @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-white;
+  @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-transparent;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
 }
+.dark .u-ms__input{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+}
 
 .u-ms__list {
   @apply z-50 max-h-[40vh] absolute overflow-y-auto top-[calc(100%+0.25rem)] min-h-11;
-  @apply rounded bg-white shadow-xl border border-black;
+  @apply rounded text-black bg-white shadow-xl border border-black;
   &.u-ms__list--bottom {
     @apply bottom-[calc(100%-1.25rem)] top-auto;
   }
@@ -127,6 +130,10 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  allMessage: {
+    type: [Boolean, String],
+    default: false,
+  },
   placeholder: String,
   disabled: {
     type: Boolean as PropType<boolean>,
@@ -158,6 +165,10 @@ const dropdownPosition = ref('bottom');
 
 const displayTruncated = computed(() => {
   if (Array.isArray(props.modelValue)) {
+    // should we display a custom all options selected text?
+    if(props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+      return props.allMessage
+    }
     if(props.modelValue.length > 1) {
       const first = props.modelValue[0];
       const firstOption = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(first))
@@ -175,6 +186,10 @@ const displayTruncated = computed(() => {
 
 const displayAll = computed(() => {
   if (Array.isArray(props.modelValue)) {
+    // should we display a custom all options selected text?
+    if(props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+      return props.allMessage
+    }
     return props.modelValue
       .map(value => {
         // deep comparison

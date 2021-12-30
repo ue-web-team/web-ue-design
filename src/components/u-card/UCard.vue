@@ -26,11 +26,11 @@ provide(CardContext, api);
 const props = defineProps({
   color: {
     type: String as PropType<string>,
-    default: colors.gray['100']
+    default: colors.white.DEFAULT
   },
   isLoading: {
     type: Boolean as PropType<boolean>,
-    default: false,
+    default: false
   },
   focusable: {
     type: Boolean as PropType<boolean>,

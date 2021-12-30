@@ -48,7 +48,7 @@ export default plugin(
         "-webkit-appearance": "none",
         "-moz-appearance": "none",
         appearance: "none",
-        "background-color": "#fff",
+        "background-color": "transparent",
         "border-color": theme("colors.gray.500") as string,
         "border-width": "2px",
         "border-radius": "0.25rem",
@@ -91,6 +91,10 @@ export default plugin(
       "::-webkit-date-and-time-value": {
         "min-height": "1.5em",
       },
+      // hack for chromes date picker icon
+      '.dark ::-webkit-calendar-picker-indicator': {
+        filter: 'invert(1)'
+      },
 
       textarea: {
         "padding-top": spacing(2),
@@ -100,7 +104,11 @@ export default plugin(
         "font-size": "initial",
         "line-height": "inherit",
       },
-
+      ".dark select": {
+        "background-image": `url("${svgToDataUri(
+          `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 8l4 4 4-4"/></svg>`
+        )}")`
+      },
       select: {
         "background-image": `url("${svgToDataUri(
           `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 8l4 4 4-4"/></svg>`
@@ -147,13 +155,16 @@ export default plugin(
         height: spacing(4),
         width: spacing(4),
         color: theme("colors.primary.DEFAULT") as string,
-        "background-color": "#fff",
+        "background-color": "transparent",
         "border-color": theme("colors.black.DEFAULT") as string,
-        "border-width": "1px",
+        "border-width": "1.5px",
         "border-radius": "3px",
       },
-      ["[type='radio']"]: {
+      "[type='radio']": {
         "border-radius": "100%",
+      },
+      ".dark [type='radio'], .dark [type='checkbox']": {
+        "border-color": theme("colors.white.DEFAULT") as string,
       },
       [`
   [type='checkbox']:focus,
@@ -164,7 +175,6 @@ export default plugin(
   [type='checkbox']:checked,
   [type='radio']:checked
       `]: {
-        //"border-color": "transparent",
         "background-color": "currentColor",
         "background-size": "100% 100%",
         "background-position": "center",
@@ -179,7 +189,7 @@ export default plugin(
 
       ["[type='radio']:checked"]: {
         "background-image": `url("${svgToDataUri(
-          '<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3"/></svg>'
+          '<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="8.3" cy="8.3" r="3"/></svg>'
         )}")`,
       },
 

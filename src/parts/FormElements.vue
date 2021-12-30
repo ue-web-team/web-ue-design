@@ -123,7 +123,7 @@
       Manages focus states and handles most keybord shortcuts (up, down, space & enter toggles, end, home, esc to exit)
     </p>
     <div class="flex flex-wrap gap-4">
-      <UMultiSelect v-model="selected" :options="options" label="What u like?"></UMultiSelect>
+      <UMultiSelect v-model="selected" all-message="Alla" :options="options" label="What u like?"></UMultiSelect>
     </div>
     <pre>{{ JSON.stringify(selected, null, 2) }}</pre>
   </article>

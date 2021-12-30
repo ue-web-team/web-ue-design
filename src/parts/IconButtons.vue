@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import Prism from "@/lib/code-block"
+import Prism from "../lib/code-block"
 
 const code =
   `<!-- Variants. default(dark), ghost -->
