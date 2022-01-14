@@ -104,7 +104,7 @@ button {
   }
   &.ghost {
      &:hover, &.hover {
-       @apply bg-gray-300
+       @apply bg-gray-400/40
      }
       &:active, &.active {
       @apply bg-gray-500 text-white;
