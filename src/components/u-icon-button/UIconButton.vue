@@ -81,9 +81,9 @@ button {
 button.outline {
   @apply border-2;
   &.dark {
-    @apply border-primary bg-transparent text-black;
+    @apply border-primary bg-transparent text-black dark:text-white;
     &:hover, &.hover {
-      @apply bg-primary-100;
+      @apply bg-primary-100 dark:text-black;
     }
     &:active, &.active {
       @apply bg-primary text-white;

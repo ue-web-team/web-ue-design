@@ -5,7 +5,7 @@ export const theme: Theme = {
     colors,
     extend: {
       fontFamily: {
-        sans: ['UrbanistVariable', 'sans-serif'],
+        sans: ['RalewayVariable', 'sans-serif'],
       }
     }
 };

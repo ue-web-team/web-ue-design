@@ -8,7 +8,7 @@
         </UCardHeader>
         <UCardContent>
           Tillgänglig dialog baserad på headless/ui
-          <UDialog v-model:open="isDialogOpen1" title="Change candy preference">
+          <UDialog :color="isDark ? colors.gray['700'] : colors.white.DEFAULT" v-model:open="isDialogOpen1" title="Change candy preference">
             Det här är en tillgänglig dialog med fokus-fälla rätt role attribut och tillgänglig titel.
             stänger om man klickar utanför eller på esc
             <template
@@ -95,8 +95,9 @@
 </template>
 
 <script setup lang="ts">
-import { colors } from '@/config/colors'
-import Prism from "@/lib/code-block"
+import { colors } from '@/config/colors';
+import { isDark } from "../logic";
+import Prism from "@/lib/code-block";
 import { ref } from 'vue';
 
 const code =
