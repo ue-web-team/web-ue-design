@@ -26,8 +26,8 @@
           >
             <div
               :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
-              class="flex flex-col w-full max-w-md p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
-              :class="{ 'overflow-hidden': isLoading }"
+              class="flex flex-col w-full p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
+              :class="[ isLoading? 'overflow-hidden': '', big? 'max-w-5xl': 'max-w-lg' ]"
             >
 
               <div class="progress-wrapper" v-if="isLoading">
@@ -77,6 +77,10 @@ const props = defineProps({
     type: String as PropType<string>
   },
   requireInteraction: {
+    default: false,
+    type: Boolean as PropType<boolean>
+  },
+  big: {
     default: false,
     type: Boolean as PropType<boolean>
   },

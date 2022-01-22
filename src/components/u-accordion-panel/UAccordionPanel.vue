@@ -1,7 +1,7 @@
 <template>
-  <Disclosure v-slot="{ open }">
+  <Disclosure as="div" v-slot="{ open }">
     <DisclosureButton
-      class="focus-style flex justify-between bg-gray-200 items-center w-full px-4 py-2 font-semibold text-left rounded-lg transition-colors duration-300 hover:bg-gray-300"
+      class="focus-style flex justify-between items-center w-full px-4 py-2 font-semibold text-left rounded-lg transition-colors duration-300 hover:bg-gray-300/40"
     >
       <span>{{ title }}</span>
       <svg

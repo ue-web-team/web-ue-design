@@ -23,6 +23,7 @@
           <UButton class="w-full" @click="isDialogOpen1 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
+
       <UCard :color="colors.gray['100']">
         <UCardHeader>
           <UCardTitle>Dialog 2</UCardTitle>
@@ -46,6 +47,7 @@
           <UButton class="w-full" @click="isDialogOpen2 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
+
       <UCard :color="colors.green['200']">
         <UCardHeader>
           <UCardTitle>Dialog 3</UCardTitle>
@@ -66,6 +68,7 @@
           <UButton class="w-full" kind="white" outline @click="isDialogOpen3 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
+
       <UCard class="text-white" :color="colors.red['600']">
         <UCardHeader>
           <UCardTitle>Dialog 4</UCardTitle>
@@ -85,6 +88,27 @@
         </UCardContent>
         <UCardActions>
           <UButton class="w-full" kind="white" outline @click="isDialogOpen4 = true">Open dialog</UButton>
+        </UCardActions>
+      </UCard>
+
+      <UCard class="text-white" :color="colors.blue['600']">
+        <UCardHeader>
+          <UCardTitle>Dialog 5</UCardTitle>
+        </UCardHeader>
+        <UCardContent>
+          Dialog med stor ruta
+          <UDialog big class="text-white" :color="colors.red['600']" v-model:open="isDialogOpen5" title="Hipp färg" :isLoading="isLoading">
+            Bred dialog med mer plats. typ 2 kolumner om det finns plats
+            <template
+              #actions
+            >
+              <UButton kind="white" outline @click="mockSave">Ja</UButton>
+              <UButton kind="white" @click="isDialogOpen5 = false">Nej</UButton>
+            </template>
+          </UDialog>
+        </UCardContent>
+        <UCardActions>
+          <UButton class="w-full" kind="white" outline @click="isDialogOpen5 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
     </div>
@@ -116,6 +140,8 @@ const isDialogOpen1 = ref(false);
 const isDialogOpen2 = ref(false);
 const isDialogOpen3 = ref(false);
 const isDialogOpen4 = ref(false);
+const isDialogOpen5 = ref(false);
+
 const mockSave = () => {
   isLoading.value = true,
   setTimeout(() => { isLoading.value = false, isDialogOpen4.value = false }, 3500)

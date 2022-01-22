@@ -23,6 +23,7 @@ import { isDark } from "./logic";
       <Cards></Cards>
       <Dialogs></Dialogs>
       <Pagination></Pagination>
+      <Accordion></Accordion>
     </main>
   </div>
 </template>
