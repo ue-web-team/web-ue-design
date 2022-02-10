@@ -54,7 +54,7 @@ const { onDown } = useRippleEffect(props.disabled)
 
 </script>
 
-<style lang="postcss" scoped>
+<style lang="pcss" scoped>
 button {
   @apply w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden;
   @apply transition-all transform-gpu ease-out duration-200 active:scale-95;

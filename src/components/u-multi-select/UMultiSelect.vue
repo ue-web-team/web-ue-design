@@ -65,7 +65,7 @@
   </div>
 </template>
 
-<style scoped lang="postcss">
+<style scoped lang="pcss">
 .u-ms__input {
   @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-transparent;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");

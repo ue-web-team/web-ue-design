@@ -100,7 +100,7 @@ const closeModal = () => {
   }
 };
 </script>
-<style lang="postcss" scoped>
+<style lang="pcss" scoped>
 .progress-wrapper {
   @apply absolute w-full h-8 overflow-hidden left-0 top-0 pointer-events-none;
 }

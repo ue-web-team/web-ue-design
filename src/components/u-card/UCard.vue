@@ -39,7 +39,7 @@ const props = defineProps({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="pcss" scoped>
 .card {
   @apply relative flex flex-col rounded-lg;
   background-color: v-bind("props.color");

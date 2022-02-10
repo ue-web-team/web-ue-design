@@ -73,7 +73,7 @@ const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
 </script>
 
-<style lang="postcss" scoped>
+<style lang="pcss" scoped>
 button {
   @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold;
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;

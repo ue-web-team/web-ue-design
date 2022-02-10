@@ -28,7 +28,7 @@ import { isDark } from "./logic";
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="pcss">
 html {
   background: #f7f7f5;
 }

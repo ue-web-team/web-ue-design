@@ -220,7 +220,7 @@ onMounted(() => {
 
 </script>
 
-<style lang="postcss" scoped>
+<style lang="pcss" scoped>
 .peg {
   display: block;
   position: absolute;
