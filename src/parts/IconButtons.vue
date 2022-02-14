@@ -9,6 +9,7 @@
           <th>Hover</th>
           <th>Active</th>
           <th>Focused</th>
+          <th>Disabled</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,9 @@
           </td>
           <td>
             <UIconButton class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"><i-mdi-cog /></UIconButton>
+          </td>
+          <td>
+            <UIconButton disabled><i-mdi-cog /></UIconButton>
           </td>
         </tr>
         <tr>
@@ -44,6 +48,9 @@
               outline
             ><i-mdi-cog /></UIconButton>
           </td>
+          <td>
+            <UIconButton outline disabled><i-mdi-cog /></UIconButton>
+          </td>
         </tr>
         <tr>
           <th>Ghost</th>
@@ -61,6 +68,9 @@
               class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
               kind="ghost"
             ><i-mdi-cog /></UIconButton>
+          </td>
+          <td>
+            <UIconButton kind="ghost" disabled><i-mdi-cog /></UIconButton>
           </td>
         </tr>
       </tbody>

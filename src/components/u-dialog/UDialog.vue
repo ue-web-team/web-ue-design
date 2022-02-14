@@ -35,10 +35,12 @@
               </div>
 
               <DialogTitle as="h2" class="pb-2 text-xl font-bold md:(pb-4 text-2xl)">{{ title }}</DialogTitle>
-              <DialogDescription class="overflow-auto">
+              <DialogDescription class="overflow-y-auto">
                 <slot name="default"></slot>
               </DialogDescription>
+              <slot name="content">
 
+              </slot>
               <div class="mt-4 flex gap-4 justify-end">
                 <slot name="actions"></slot>
               </div>

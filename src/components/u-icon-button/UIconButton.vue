@@ -69,6 +69,7 @@ button {
     }
   }
   &.ghost {
+    @apply !disabled:(bg-transparent);
      &:hover, &.hover {
        @apply bg-gray-400/40
      }
