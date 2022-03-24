@@ -1,35 +1,86 @@
 <template>
   <transition
-    name="expand"
+    name="u-expand"
     @enter="enter"
     @after-enter="afterEnter"
     @leave="leave"
   >
-    <slot/>
+    <slot />
   </transition>
 </template>
 
-<script setup lang="ts">
-import { PropType, watch, ref } from "vue"
-import {
-  Disclosure,
-  DisclosurePanel,
-  DisclosureButton
-} from "@headlessui/vue"
+<script setup lang="ts">import { PropType } from 'vue';
+
 
 const props = defineProps({
-  multi: {
-    default: false,
-    type: Boolean as PropType<boolean>
+  duration: {
+    type: Number as PropType<Number>,
+    default: 300
   }
 })
-const emit = defineEmits(["update:open"]);
-const isOpen = ref(props.open);
-watch(() => props.open, (value: boolean) => {
-  isOpen.value = value;
-});
-const closeModal = () => {
-  //isOpen.value = false;
-  emit("update:open", false);
+
+const enter = (element: HTMLElement) => {
+  const width = getComputedStyle(element).width;
+
+  element.style.width = width;
+  element.style.position = "absolute";
+  element.style.visibility = "hidden";
+  element.style.height = "auto";
+
+  const height = getComputedStyle(element).height;
+
+  element.style.width = "";
+  element.style.position = "";
+  element.style.visibility = "";
+  element.style.height = "0";
+  element.style.transitionDuration = `${props.duration}ms`
+
+  // Force repaint to make sure the
+  // animation is triggered correctly.
+  getComputedStyle(element).height;
+
+  // Trigger the animation.
+  // We use `requestAnimationFrame` because we need
+  // to make sure the browser has finished
+  // painting after setting the `height`
+  // to `0` in the line above.
+  requestAnimationFrame(() => {
+    element.style.height = height;
+  });
+};
+
+const afterEnter = (element: HTMLElement) => {
+  element.style.height = "auto";
+};
+const leave = (element: HTMLElement) => {
+  const height = getComputedStyle(element).height;
+
+  element.style.height = height;
+  element.style.transitionDuration = `${props.duration}ms`
+
+  // Force repaint to make sure the
+  // animation is triggered correctly.
+  getComputedStyle(element).height;
+
+  requestAnimationFrame(() => {
+    element.style.height = "0";
+  });
 };
 </script>
+
+<style scoped>
+* {
+  will-change: height;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+</style>
+
+<style>
+.u-expand-enter-active,
+.u-expand-leave-active {
+  transition: height ease-in-out;
+  overflow: hidden;
+}
+</style>

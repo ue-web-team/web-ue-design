@@ -205,6 +205,29 @@
           <UButton form="fifth-form" class="w-full" type="submit">Change validation</UButton>
         </UCardActions>
       </UCard>
+
+      <!--UCard :color="colors.green['100']">
+        <UCardHeader>
+          <UCardTitle>Form example 7</UCardTitle>
+        </UCardHeader>
+        <UCardContent>
+          Combobox
+          <UForm
+            class="flex flex-col flex-col gap-4"
+            id="sixth-form"
+            :validation-schema="schema7"
+            @submit="onSubmit"
+            @invalid-submit="onInvalidSubmit"
+          >
+            <UFormText required label="Address" name="address" type="text" />
+            <UFormText label="Name" name="name" type="text" />
+            <UFormCombobox label="Name" name="food"></UFormCombobox>
+          </UForm>
+        </UCardContent>
+        <UCardActions>
+          <UButton form="sixth-form" class="w-full" type="submit">Change validation</UButton>
+        </UCardActions>
+      </UCard-->
     </div>
     <h3 class="text-xl my-4">Usage</h3>
     <Prism language="html" class="codesnippet">{{ code }}</Prism>
@@ -370,6 +393,11 @@ const schema5 = yup.object().shape({
 });
 
 const schema6 = yup.object().shape({
+  name: yup.string().required(),
+  address: yup.string().min(10),
+});
+
+const schema7 = yup.object().shape({
   name: yup.string().required(),
   address: yup.string().min(10),
 });

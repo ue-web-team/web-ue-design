@@ -15,15 +15,17 @@ import { isDark } from "./logic";
       </UIconButton>
     </header>
     <main class="grid grid-cols-1 gap-8 mb-26">
-      <FormElements></FormElements>
       <Colors></Colors>
       <Buttons></Buttons>
       <IconButtons></IconButtons>
+      <FormElements></FormElements>
       <Forms></Forms>
       <Cards></Cards>
       <Dialogs></Dialogs>
       <Pagination></Pagination>
       <Accordion></Accordion>
+      <Loaders></Loaders>
+      <Transitions></Transitions>
     </main>
   </div>
 </template>

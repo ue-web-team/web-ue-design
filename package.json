@@ -26,19 +26,26 @@
     "yalc": "yalc publish --no-scripts"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.4.2",
-    "@vueuse/core": "^7.1.2",
+    "@headlessui/vue": "^1.5.0",
+    "@vueuse/core": "^7.7.1",
     "mini-svg-data-uri": "^1.4.3",
     "prismjs": "^1.25.0",
     "vee-validate": "^4.5.6",
-    "vue": "^3.2.13",
+    "vue": "^3.2.31",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@fontsource/arimo": "^4.5.0",
+    "@fontsource/inter": "^4.5.1",
+    "@fontsource/jost": "^4.5.1",
+    "@fontsource/outfit": "^4.5.0",
+    "@fontsource/raleway": "^4.5.0",
+    "@fontsource/rubik": "^4.5.0",
+    "@fontsource/urbanist": "^4.5.1",
     "@iconify/json": "^1.1.432",
     "@rollup/plugin-typescript": "^8.2.5",
     "@types/node": "^16.9.6",
-    "@vitejs/plugin-vue": "^1.9.0",
+    "@vitejs/plugin-vue": "^1.10.2",
     "esbuild-register": "^3.0.0",
     "rollup-plugin-typescript2": "^0.31.1",
     "rollup-plugin-visualizer": "^5.5.2",
@@ -46,17 +53,10 @@
     "typescript": "^4.4.3",
     "unplugin-icons": "^0.12.9",
     "unplugin-vue-components": "^0.15.2",
-    "vite": "^2.5.10",
-    "vite-plugin-windicss": "^1.5.1",
-    "vitepress": "^0.19.1",
+    "vite": "^2.8.6",
+    "vite-plugin-windicss": "^1.8.3",
+    "vitepress": "^0.19.2",
     "vue-tsc": "^0.3.0",
-    "windicss": "^3.2.1",
-    "@fontsource/arimo": "^4.5.0",
-    "@fontsource/inter": "^4.5.1",
-    "@fontsource/jost": "^4.5.1",
-    "@fontsource/outfit": "^4.5.0",
-    "@fontsource/raleway": "^4.5.0",
-    "@fontsource/rubik": "^4.5.0",
-    "@fontsource/urbanist": "^4.5.1"
+    "windicss": "^3.5.1"
   }
 }
