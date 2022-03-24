@@ -35,7 +35,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')
-    }
+    },
+    dedupe: ['vue']
   },
   build: {
     lib: {
@@ -45,7 +46,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue', '@headlessui/vue'],
+      external: ['vue', '@headlessui/vue', '@vueuse/core'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
