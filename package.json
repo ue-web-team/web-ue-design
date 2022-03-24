@@ -1,6 +1,6 @@
 {
   "name": "@vejron/ue-design",
-  "version": "0.2.32",
+  "version": "0.2.33",
   "description": "UE Component library (Vue 3 + Windi CSS + Typescript)",
   "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
