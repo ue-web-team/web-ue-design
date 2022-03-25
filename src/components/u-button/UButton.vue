@@ -64,7 +64,7 @@ const buttonClasses = computed(() => {
  
   return [
     props.kind,
-    props.outline ? 'outline' : '',
+    props.outline ? 'outline-type' : '',
     props.hover ? 'hover': '',
     props.active ? 'active': '',
   ];
@@ -118,7 +118,7 @@ button {
   }
 }
 
-button.outline {
+button.outline-type {
   @apply border-2;
   &.dark {
     @apply border-primary bg-transparent text-black dark:text-white;
