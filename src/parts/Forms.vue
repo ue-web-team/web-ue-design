@@ -135,7 +135,7 @@
             <UFormText required label="Your billing address" name="address" type="text" />
             <UFormText label="C/o address" name="co" type="text" :hint="'C/o means Care of'" />
             <UFormFieldset legend="Biling options">
-              <UFormRadio name="billing" v-for="option in billingOptions" :value="option">{{ option }}</UFormRadio>
+              <UFormRadio v-model="selectedBilling" name="billing" v-for="option in billingOptions" :value="option">{{ option }}</UFormRadio>
             </UFormFieldset>
           </UForm>
         </UCardContent>
@@ -291,6 +291,7 @@ const initialFormValues3 = {
   address: "Marklunds kurva 12",
   billing: 'Paper invoice',
 };
+const selectedBilling = ref('Paper invoice')
 
 const isLoading = ref(false);
 

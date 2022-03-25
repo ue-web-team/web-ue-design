@@ -27,6 +27,9 @@ import { inject, Ref, ref, watch } from "vue";
 import { useId } from '../../logic';
 
 const props = defineProps({
+  modelValue: {
+    type: [Boolean, String],
+  },
   value: {
     type: [String, Number],
   },
@@ -43,6 +46,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(["update:modelValue"]);
+
 const inputId = ref(`u-form-radio-${useId()}`);
 
 const {
@@ -53,6 +58,13 @@ const {
 } = useField(props.name, undefined, {
   type: 'radio',
   checkedValue: props.value,
+});
+
+watch((checked as Ref), (newValue) => {
+  if (newValue === props.modelValue) {
+    return;
+  }
+  emit("update:modelValue", props.value);
 });
 
 const fieldsetErrorId = inject<Ref>('fieldset-error-id');
