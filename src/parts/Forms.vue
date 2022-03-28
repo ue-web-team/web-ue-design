@@ -112,6 +112,7 @@
             <UFormText required label="Enter your email" name="email" type="email" />
             <UFormSelect label="What gender?" name="gender" :options="genders" />
             <UFormSelect label="Drinking habits?" name="habit" :options="complex" />
+            <UFormText type="number" min="0" max="4" label="How many" name="many" />
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -137,6 +138,7 @@
             <UFormFieldset legend="Biling options">
               <UFormRadio v-model="selectedBilling" name="billing" v-for="option in billingOptions" :value="option">{{ option }}</UFormRadio>
             </UFormFieldset>
+            {{selectedBilling}}
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -284,12 +286,13 @@ const initialFormValues2 = {
   name: 'Markus Marklund',
   email: 'marcus.marklund@aik.se',
   gender: 'None',
-  habit: 1
+  habit: 1,
+  many: 0
 };
 
 const initialFormValues3 = {
   address: "Marklunds kurva 12",
-  billing: 'Paper invoice',
+  billing: 'E-mail',
 };
 const selectedBilling = ref('Paper invoice')
 

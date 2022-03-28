@@ -28,7 +28,7 @@ import { useId } from '../../logic';
 
 const props = defineProps({
   modelValue: {
-    type: [Boolean, String],
+    type: [String],
   },
   value: {
     type: [String, Number],
@@ -56,15 +56,12 @@ const {
   handleBlur,
   handleChange,
 } = useField(props.name, undefined, {
-  type: 'radio',
   checkedValue: props.value,
+  type: 'radio',
 });
 
-watch((checked as Ref), (newValue) => {
-  if (newValue === props.modelValue) {
-    return;
-  }
-  emit("update:modelValue", props.value);
+watch(checked as Ref, (newValue, oldValue) => {
+    newValue && emit("update:modelValue", props.value);
 });
 
 const fieldsetErrorId = inject<Ref>('fieldset-error-id');

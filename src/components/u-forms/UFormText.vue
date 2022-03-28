@@ -19,6 +19,7 @@
     ></textarea>
     <input
       v-else
+      v-bind="$attrs"
       class="mt-1 u-form-control"
       :class="{ 'border-red': !!errorMessage }"
       :type="type"
@@ -44,6 +45,13 @@
     <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
   </div>
 </template>
+
+<script lang="ts">
+// only possible this way
+export default {
+  inheritAttrs: false
+}
+</script>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
