@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center">
+    <div :class="[inline? 'block': 'flex items-center']">
       <input
         class="mr-2 u-form-control"
         type="checkbox"
@@ -34,6 +34,7 @@
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { inject, Ref, ref, watch } from "vue";
+import { bool, boolean } from "yup";
 import { useId } from '../../logic';
 
 const inputId = ref(`u-form-checkbox-${useId()}`);
@@ -59,6 +60,10 @@ const props = defineProps({
   },
   hint: {
     type: String,
+  },
+  inline: {
+    type: Boolean,
+    defalut: false
   }
 });
 

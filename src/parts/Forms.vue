@@ -199,7 +199,9 @@
           >
             <UFormText required label="Address" name="address" type="text" />
             <UFormText label="Name" name="name" type="text" />
-            <UFormCheckbox v-model="isStrict" label="Strict validation" name="strict" value="yes" />
+            <UFormCheckbox v-model="isStrict" name="strict" value="yes" inline >
+            Strict validation... and a long and awkward label that should display inline
+            </UFormCheckbox>
             {{isStrict}}
           </UForm>
         </UCardContent>
