@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="[inline? 'block': 'flex items-center']">
+    <div :class="[inline ? 'block' : 'flex items-center']">
       <input
         class="mr-2 u-form-control"
         type="checkbox"
@@ -15,27 +15,32 @@
         @change="handleChange"
       />
       <label :for="inputId">
-        <slot>
-          {{ label }} {{ required ? '*' : '' }}
-        </slot>
+        <slot> {{ label }} {{ required ? "*" : "" }} </slot>
       </label>
     </div>
-    <p
-      role="alert"
-      aria-atomic="true"
-      :id="errorId"
-      class="text-red-400 text-sm mt-1"
-      v-show="!!errorMessage && !fieldsetErrorId"
-    >{{ errorMessage }}</p>
-    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
+
+    <div :id="errorId">
+      <p v-if="$slots.hint || hint" class="text-sm mt-1">
+        <slot name="hint">
+          {{ hint }}
+        </slot>
+      </p>
+      <p
+        role="alert"
+        aria-atomic="true"
+        class="text-red-400 text-sm mt-1"
+        v-show="!!errorMessage && !fieldsetErrorId"
+      >
+        {{ errorMessage }}
+      </p>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { inject, Ref, ref, watch } from "vue";
-import { bool, boolean } from "yup";
-import { useId } from '../../logic';
+import { useId } from "../../logic";
 
 const inputId = ref(`u-form-checkbox-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
@@ -56,30 +61,29 @@ const props = defineProps({
   },
   required: {
     type: Boolean,
-    default: false
+    default: false,
   },
   hint: {
     type: String,
   },
   inline: {
     type: Boolean,
-    defalut: false
-  }
+    defalut: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
 
-const {
-  checked,
-  errorMessage,
-  handleBlur,
-  handleChange,
-} = useField(props.name, undefined, {
-  type: 'checkbox',
-  checkedValue: props.value,
-});
+const { checked, errorMessage, handleBlur, handleChange } = useField(
+  props.name,
+  undefined,
+  {
+    type: "checkbox",
+    checkedValue: props.value,
+  }
+);
 
-watch((checked as Ref), (newValue) => {
+watch(checked as Ref, (newValue) => {
   if (newValue === props.modelValue) {
     return;
   }
@@ -96,10 +100,10 @@ watch(
   }
 );
 
-const fieldsetErrorId = inject<Ref>('fieldset-error-id');
-const fieldsetError = inject<Ref>('fieldset-error-message');
-watch(errorMessage, message => {
-  if(fieldsetError) {
+const fieldsetErrorId = inject<Ref>("fieldset-error-id");
+const fieldsetError = inject<Ref>("fieldset-error-message");
+watch(errorMessage, (message) => {
+  if (fieldsetError) {
     fieldsetError.value = message;
   }
 });

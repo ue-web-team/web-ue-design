@@ -81,7 +81,9 @@
               type="password"
             />
             <UFormText textarea label="Feedback" name="feedback" />
-            <UFormCheckbox label="I agree to the terms" :hint="terms" name="agree" value="yes" />
+            <UFormCheckbox label="I agree to the terms"  name="agree" value="yes">
+            <template #hint>{{terms}}</template>
+            </UFormCheckbox>
           </UForm>
         </UCardContent>
         <UCardActions>
