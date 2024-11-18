@@ -73,9 +73,9 @@
       </fieldset>
       <UFormFieldset legend="Square radio buttons">
         <ul class="grid gap-6 mb-4 md:grid-cols-3">
-          <UFormSquareRadioButton label="Hello" name="accomodation" value="hello" />
-          <UFormSquareRadioButton label="World" name="accomodation" value="world" />
-          <UFormSquareRadioButton label="!" name="accomodation" value="excl" />
+          <UFormSquareRadioButton label="Hello" name="radio" value="hello" />
+          <UFormSquareRadioButton label="World" name="radio" value="world" />
+          <UFormSquareRadioButton label="!" name="radio" value="excl" />
         </ul>
       </UFormFieldset>
     </div>
@@ -133,11 +133,14 @@
       <UMultiSelect v-model="selected" all-message="Alla" :options="options" label="What u like?"></UMultiSelect>
     </div>
     <pre>{{ JSON.stringify(selected, null, 2) }}</pre>
+    <h3 class="text-xl my-4">Fancy slider</h3>
+    <UFormFancySlider label="Hello" unit="Hz" name="fancy" :min="0" :max="3000" :step="10" :value="1500" />
   </article>
 </template>
 
 <script setup lang="ts">import { ref } from 'vue';
 import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
+import UFormFancySlider from '../components/u-forms/UFormFancySlider.vue';
 
 const radio = ref('kola')
 const selected = ref();

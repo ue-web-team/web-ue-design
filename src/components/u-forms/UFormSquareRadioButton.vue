@@ -37,7 +37,7 @@ const props = defineProps({
   }
 });
 
-const inputId = ref(`u-form-input-${useId()}`);
+const inputId = ref(`u-form-square-${useId()}`);
 
 const emit = defineEmits(["update:modelValue"]);
 
