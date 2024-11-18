@@ -1,12 +1,6 @@
-import plugin from "windicss/plugin";
-//import { colors, baseConfig } from "windicss/types/config";
-//import { DefaultTheme } from "windicss/types/interfaces";
+import plugin from "tailwindcss/plugin";
 import svgToDataUri from "mini-svg-data-uri";
 
-//const defaultTheme = baseConfig.theme as unknown as DefaultTheme;
-//const [baseFontSize, { lineHeight: baseLineHeight }] =
-//  defaultTheme.fontSize.base;
-//const { borderWidth, borderRadius, outline } = defaultTheme;
 const spacing = (num: number) => `${num / 4}rem`;
 
 const inputFocus = (theme: any) => ({

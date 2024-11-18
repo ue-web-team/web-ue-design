@@ -25,7 +25,7 @@
             <UIconButton active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring ring-offset-1 ring-blue-600 ring-opacity-90"><i-mdi-cog /></UIconButton>
           </td>
           <td>
             <UIconButton disabled><i-mdi-cog /></UIconButton>
@@ -44,7 +44,7 @@
           </td>
           <td>
             <UIconButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
               outline
             ><i-mdi-cog /></UIconButton>
           </td>
@@ -65,7 +65,7 @@
           </td>
           <td>
             <UIconButton
-              class="ring-3 ring-offset-1 ring-blue-600 ring-opacity-90"
+              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
               kind="ghost"
             ><i-mdi-cog /></UIconButton>
           </td>

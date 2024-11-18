@@ -245,6 +245,7 @@ import * as yup from 'yup';
 import { colors } from '@/config/colors'
 import { computed, ref } from 'vue';
 import Prism from "@/lib/code-block"
+import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 
 const code =
   `<UForm

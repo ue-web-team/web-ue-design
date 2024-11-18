@@ -71,6 +71,13 @@
           <label for="id-checkbox-3">I want disabled suris</label>
         </div>
       </fieldset>
+      <UFormFieldset legend="Square radio buttons">
+        <ul class="grid gap-6 mb-4 md:grid-cols-3">
+          <UFormSquareRadioButton label="Hello" name="accomodation" value="hello" />
+          <UFormSquareRadioButton label="World" name="accomodation" value="world" />
+          <UFormSquareRadioButton label="!" name="accomodation" value="excl" />
+        </ul>
+      </UFormFieldset>
     </div>
     <h3 class="text-xl my-4">Other inputs</h3>
     <div class="flex flex-wrap gap-4">
@@ -130,6 +137,7 @@
 </template>
 
 <script setup lang="ts">import { ref } from 'vue';
+import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 
 const radio = ref('kola')
 const selected = ref();

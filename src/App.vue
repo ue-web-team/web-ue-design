@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { isDark } from "./logic";
 </script>
 
@@ -14,7 +13,7 @@ import { isDark } from "./logic";
         <i-carbon-sun class="text-2xl" v-else />
       </UIconButton>
     </header>
-    <main class="grid grid-cols-1 gap-8 mb-26">
+    <main class="grid grid-cols-1 gap-8 mb-28">
       <Colors></Colors>
       <Buttons></Buttons>
       <IconButtons></IconButtons>
