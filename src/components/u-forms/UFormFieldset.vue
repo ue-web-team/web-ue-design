@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col">
     <fieldset
-      class="border-gray-600 border-2 px-3 pt-2 pb-4 rounded-md"
-      :class="{ 'border-red': !!errorMessage }"
+      class="border-gray-600 pt-2 pb-4 rounded-md"
+      :class="{ 'border-red': !!errorMessage, 'border-2 px-3 ' : (!!errorMessage || showBorder) }"
     >
-      <legend class="px-2">{{ legend }}</legend>
+      <legend class="px-2" :class="legendClasses">{{ legend }}</legend>
       <slot></slot>
     </fieldset>
     <p
@@ -39,5 +39,13 @@ const props = defineProps({
   hint: {
     type: String,
   },
+  showBorder: {
+    type: Boolean,
+    default: true
+  },
+  legendClasses: {
+    type: String,
+    default: ""
+  }
 });
 </script>

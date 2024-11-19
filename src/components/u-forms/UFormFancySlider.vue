@@ -1,6 +1,6 @@
 <template>
   <div class=" mb-6 relative my-4">
-    <label :for="inputId">{{ label }}</label><br/>
+    <label :for="inputId" :class="labelClasses">{{ label }}</label><br/>
     <span ref="bubble" class="bubble">90</span>
     <span v-if="unit" class="absolute text-green font-semibold text-xs mt-8">{{ unit }}</span>
     <input
@@ -60,6 +60,10 @@ const props = defineProps({
   },
   unit: {
     type: String
+  },
+  labelClasses: {
+    type: String,
+    default: ""
   }
 });
 
@@ -105,7 +109,7 @@ const {
 </script>
 <style lang="pcss" scoped>
 .bubble {
-  @apply absolute rounded-full bg-green-100 font-semibold py-2 px-4 w-16 text-center -translate-x-1/2
+  @apply absolute rounded-full bg-green-100 font-semibold py-2 px-4 w-16 text-center -translate-x-1/2 dark:text-black
 }
 
 .bubble:after {
@@ -119,7 +123,7 @@ const {
 	border-bottom: 0;
 	margin-bottom: -5px;
   margin-left: -5px;
-  @apply border-t-green-100
+  @apply border-t-green-100 
 }
 
 </style>

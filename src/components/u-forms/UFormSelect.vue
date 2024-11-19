@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label :for="inputId">{{ label }} {{ required ? '*' : '' }}</label>
+    <label :for="inputId" :class="labelClasses">{{ label }} {{ required ? '*' : '' }}</label>
     <select
       class="mt-1 u-form-control"
       :class="{ 'border-red': !!errorMessage }"
@@ -67,6 +67,10 @@ const props = defineProps({
   },
   hint: {
     type: String,
+  },
+  labelClasses: {
+    type: String,
+    default: ""
   }
 });
 
