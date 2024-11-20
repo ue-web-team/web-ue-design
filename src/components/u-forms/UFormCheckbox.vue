@@ -14,7 +14,7 @@
         @blur="handleBlur"
         @change="handleChange"
       />
-      <label :for="inputId">
+      <label :for="inputId" :class="labelClasses">
         <slot> {{ label }} {{ required ? "*" : "" }} </slot>
       </label>
     </div>
@@ -70,6 +70,10 @@ const props = defineProps({
     type: Boolean,
     defalut: false,
   },
+  labelClasses: {
+    type: String,
+    default: ""
+  }
 });
 
 const emit = defineEmits(["update:modelValue"]);

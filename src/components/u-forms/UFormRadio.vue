@@ -13,7 +13,7 @@
       @blur="handleBlur"
       @change="handleChange"
     />
-    <label :for="inputId">
+    <label :for="inputId" :class="labelClasses">
       <slot>
         {{ label }} {{ required ? '*' : '' }}
       </slot>
@@ -43,6 +43,10 @@ const props = defineProps({
   required: {
     type: Boolean,
     default: false
+  },
+  labelClasses: {
+    type: String,
+    default: ""
   }
 });
 

@@ -21,7 +21,7 @@ const model: WritableComputedRef<boolean> = computed({
 <style scoped lang="pcss">
 input[type="checkbox"] {
   @apply relative w-9 h-5 rounded-xl border-2 border-primary-500 cursor-pointer
-  block appearance-none origin-center disabled:(opacity-60 filter grayscale);
+  block appearance-none origin-center disabled:opacity-60 disabled:filter disabled:grayscale;
 
   &::before {
     @apply w-5 h-5 rounded-full absolute bg-gray-400;

@@ -77,7 +77,7 @@ const onDown = () => {};
 button {
   @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold;
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
-  @apply !disabled:(bg-gray-200 border-gray-400 text-gray-500);
+  @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
   &.dark {
     @apply bg-primary text-white;
     &:hover, &.hover, &:active, &.active {

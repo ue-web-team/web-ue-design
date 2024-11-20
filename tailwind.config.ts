@@ -1,14 +1,19 @@
-import { defineConfig } from "windicss/helpers";
-import prose from 'windicss/plugin/typography'
+/** @type {import('tailwindcss').Config} */
+
 import ustyle from "./src/plugin"
 import theme from "./src/config/theme";
+import typography from '@tailwindcss/typography'
 
-export default defineConfig({
-  darkMode: "class",
-  prefixer: false,
-  preflight: {
-    safelist: 'h1 h2 h3 p img',
-  },
+module.exports = {
+  content: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],  
+  darkMode: 'class',
+  safelist: [
+    'h1',
+    'h2',
+    'h3',
+    'p',
+    'img'
+  ],
   theme,
-  plugins: [ustyle, prose],
-});
+  plugins: [ustyle, typography],
+}

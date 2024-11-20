@@ -1,7 +1,7 @@
 <template>
   <nav
     aria-label="pagination"
-    class="text-sm sm:(text-base justify-between) flex w-full justify-end"
+    class="text-sm sm:text-base sm:justify-between flex w-full justify-end"
   >
     <span class="hidden sm:block">
       {{ t('pagination.page') }}

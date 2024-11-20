@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import typescript from '@rollup/plugin-typescript'
-import WindiCSS from 'vite-plugin-windicss'
 import fs from 'fs'
 
 // https://vitejs.dev/config/
@@ -13,7 +12,6 @@ export default defineConfig({
       tsconfig: './tsconfig.json',
     }),
     vue(),
-    WindiCSS(),
     visualizer({
       open: false,
       title: 'UCL Bundle Visualizer',

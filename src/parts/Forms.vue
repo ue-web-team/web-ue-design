@@ -58,7 +58,7 @@
         </UCardHeader>
         <UCardContent>
           <UForm
-            class="flex flex-col flex-col gap-4"
+            class="flex flex-col gap-4"
             id="first-form"
             @submit="onSubmit"
             :initial-values="initialFormValues1"
@@ -97,7 +97,7 @@
         </UCardHeader>
         <UCardContent>
           <UForm
-            class="flex flex-col flex-col gap-4"
+            class="flex flex-col gap-4"
             id="second-form"
             @submit="onSubmit"
             :initial-values="initialFormValues2"
@@ -128,7 +128,7 @@
         </UCardHeader>
         <UCardContent>
           <UForm
-            class="flex flex-col flex-col gap-4"
+            class="flex flex-col gap-4"
             id="third-form"
             @submit="onSubmit"
             :initial-values="initialFormValues3"
@@ -137,7 +137,7 @@
           >
             <UFormText required label="Your billing address" name="address" type="text" />
             <UFormText label="C/o address" name="co" type="text" :hint="'C/o means Care of'" />
-            <UFormFieldset legend="Biling options">
+            <UFormFieldset legend="Biling options" legend-classes="text-sm font-bold mb-4">
               <UFormRadio v-model="selectedBilling" name="billing" v-for="option in billingOptions" :value="option">{{ option }}</UFormRadio>
             </UFormFieldset>
             {{selectedBilling}}
@@ -159,13 +159,13 @@
         </UCardHeader>
         <UCardContent>
           <UForm
-            class="flex flex-col flex-col gap-4"
+            class="flex flex-col gap-4"
             id="fourth-form"
             :validation-schema="schema4"
             @submit="onSubmit"
             @invalid-submit="onInvalidSubmit"
           >
-            <UFormFieldset legend="Availible dates">
+            <UFormFieldset legend="Available dates">
               <UFormRadio
                 name="booking"
                 v-for="option in timeOptions"
@@ -193,7 +193,7 @@
         <UCardContent>
           Byte av validering
           <UForm
-            class="flex flex-col flex-col gap-4"
+            class="flex flex-col gap-4"
             id="fifth-form"
             :validation-schema="computedSchema"
             @submit="onSubmit"
@@ -245,6 +245,7 @@ import * as yup from 'yup';
 import { colors } from '@/config/colors'
 import { computed, ref } from 'vue';
 import Prism from "@/lib/code-block"
+import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 
 const code =
   `<UForm

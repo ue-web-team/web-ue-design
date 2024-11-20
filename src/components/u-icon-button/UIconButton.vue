@@ -58,7 +58,7 @@ const { onDown } = useRippleEffect(props.disabled)
 button {
   @apply w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden;
   @apply transition-all transform-gpu ease-out duration-200 active:scale-95;
-  @apply !disabled:(bg-gray-200 border-gray-400 text-gray-500);
+  @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
   &.dark {
     @apply bg-primary text-white;
     &:hover, &.hover {
@@ -69,7 +69,7 @@ button {
     }
   }
   &.ghost {
-    @apply !disabled:(bg-transparent);
+    @apply disabled:bg-transparent;
      &:hover, &.hover {
        @apply bg-gray-400/40
      }

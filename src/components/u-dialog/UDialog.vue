@@ -26,7 +26,7 @@
           >
             <div
               :style="{'max-height': 'min(85vh, 1200px)', 'background-color': color}"
-              class="flex flex-col w-full p-4 md:(px-8 py-6) mx-auto transition-all relative transform shadow-xl rounded-lg"
+              class="flex flex-col w-full p-4 md:px-8 md:py-6 mx-auto transition-all relative transform shadow-xl rounded-lg"
               :class="[ isLoading? 'overflow-hidden': '', big? 'max-w-3xl': 'max-w-lg' ]"
             >
 
@@ -107,6 +107,6 @@ const closeModal = () => {
   @apply absolute w-full h-8 overflow-hidden left-0 top-0 pointer-events-none;
 }
 .title {
-  @apply pb-2 md:(pb-4 text-4xl) text-2xl font-bold;
+  @apply pb-2 md:pb-4 md:text-4xl text-2xl font-bold;
 }
 </style>

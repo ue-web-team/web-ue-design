@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label :for="inputId">{{ label }} {{ required ? '*' : '' }}</label>
+    <label :for="inputId" :class="labelClasses">{{ label }} {{ required ? '*' : '' }}</label>
     <textarea
       v-if="textarea"
       class="mt-1 u-form-control"
@@ -99,6 +99,10 @@ const props = defineProps({
   },
   hint: {
     type: String,
+  },
+  labelClasses: {
+    type: String,
+    default: ""
   }
 });
 
