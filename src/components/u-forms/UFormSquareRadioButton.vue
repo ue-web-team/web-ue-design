@@ -19,7 +19,6 @@
 </template>
 <script setup lang="ts">
 import { ref, Ref, watch } from "vue";
-import { useField } from "vee-validate";
 import { useId } from "../../logic";
 
 const props = defineProps({
@@ -44,8 +43,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-console.log(props.checked)
 
 const inputId = ref(`u-form-square-${useId()}`);
 
