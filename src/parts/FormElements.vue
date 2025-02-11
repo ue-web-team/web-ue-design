@@ -73,7 +73,7 @@
       </fieldset>
       <UFormFieldset legend="Square radio buttons">
         <ul class="grid gap-6 mb-4 md:grid-cols-3">
-          <UFormSquareRadioButton label="Hello" name="radio" value="hello" />
+          <UFormSquareRadioButton label="Hello" name="radio" value="hello" :checked="true" />
           <UFormSquareRadioButton label="World" name="radio" value="world" />
           <UFormSquareRadioButton label="!" name="radio" value="excl" />
         </ul>
