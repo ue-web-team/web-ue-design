@@ -1,13 +1,17 @@
 <template>
   <div class="w-full flex">
     <input
+      class="sr-only peer"
       type="radio"
       :id="inputId"
       :name="name"
       :value="value"
-      class="sr-only peer"
-      :checked="checkedValue"
+      :aria-describedby="fieldsetErrorId"
+      :aria-invalid="!!errorMessage"
       :aria-required="required"
+      :checked="checked"
+      @blur="handleBlur"
+      @change="handleChange"
     />
     <label
       :for="inputId"
@@ -18,8 +22,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, Ref, watch } from "vue";
+import { inject, ref, Ref, watch } from "vue";
 import { useId } from "../../logic";
+import { useField } from "vee-validate";
 
 const props = defineProps({
   name: {
@@ -38,19 +43,30 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  checked: {
-    type: Boolean,
-    default: false,
-  },
 });
-
-const inputId = ref(`u-form-square-${useId()}`);
 
 const emit = defineEmits(["update:modelValue"]);
 
-const checkedValue = ref(props.checked);
+const inputId = ref(`u-form-square-${useId()}`);
 
-watch(checkedValue as Ref, (newValue, oldValue) => {
+const { checked, errorMessage, handleBlur, handleChange } = useField(
+  props.name,
+  undefined,
+  {
+    checkedValue: props.value,
+    type: "radio",
+  }
+);
+
+watch(checked as Ref, (newValue, oldValue) => {
   newValue && emit("update:modelValue", props.value);
+});
+
+const fieldsetErrorId = inject<Ref>("fieldset-error-id");
+const fieldsetError = inject<Ref>("fieldset-error-message");
+watch(errorMessage, (message) => {
+  if (fieldsetError) {
+    fieldsetError.value = message;
+  }
 });
 </script>
