@@ -3,7 +3,7 @@
     <h2 class="text-3xl border-b pb-4 mb-4 font-medium">Color palette</h2>
 
     <div v-for="palette in items" :key="palette.name">
-      <p class="font-bold mb-2 mt4">{{ palette.name }}</p>
+      <p class="font-bold mb-2 mt4">{{ getPaletteName(palette.name) }}</p>
       <div class="flex gap-2 p-1 overflow-y-auto">
         <div
           class="block w-26"
@@ -66,6 +66,16 @@ const all = Object.keys(colors)
   }))
   .filter((item) => !["transparent", "white"].includes(item.name));
 const items = ref(all);
+const getPaletteName = (name: string) => {
+  if (name == "primary" || name == "green") return name + " (Gran)";
+  if (name == "leaf") return name + " (Björk)";
+  if (name == "evergreen") return name + " (Tall)";
+  if (name == "typegreen") return name + " (Typografi)";
+  if (name == "darkgreen") return name + " (Vår svart)";
+  if (name == "smoke") return name + " (Dimma)";
+  if (name == "warm") return name + " (Värme)";
+  return name;
+};
 
 const onColorSelect = ({ name, value }: { name: string; value: string }) => {
   navigator.clipboard.writeText(value);
