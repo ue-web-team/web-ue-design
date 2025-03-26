@@ -10,14 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { useRippleEffect } from '../../logic/use-ripple'
+import { computed, PropType } from "vue";
+import { useRippleEffect } from "../../logic/use-ripple";
 
 const props = defineProps({
   kind: {
     type: String as PropType<string>,
-    default: 'dark',
-    validator: (value: string) => ['dark', 'ghost'].indexOf(value) !== -1
+    default: "dark",
+    validator: (value: string) => ["dark", "ghost"].indexOf(value) !== -1,
   },
 
   outline: {
@@ -39,19 +39,18 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
-})
+});
 
 const buttonClasses = computed(() => {
   return [
     props.kind,
-    props.outline ? 'outline-type' : '',
-    props.hover ? 'hover': '',
-    props.active ? 'active': '',
+    props.outline ? "outline-type" : "",
+    props.hover ? "hover" : "",
+    props.active ? "active" : "",
   ];
-})
+});
 
-const { onDown } = useRippleEffect(props.disabled)
-
+const { onDown } = useRippleEffect(props.disabled);
 </script>
 
 <style lang="pcss" scoped>
@@ -84,7 +83,7 @@ button.outline-type {
   &.dark {
     @apply border-primary bg-transparent text-black dark:text-white;
     &:hover, &.hover {
-      @apply bg-primary-100 dark:text-black;
+      @apply bg-lightgreen-100 dark:text-black;
     }
     &:active, &.active {
       @apply bg-primary text-white;

@@ -1,5 +1,10 @@
 <template>
-  <button class="focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled">
+  <button
+    class="focus-style"
+    @pointerdown="onDown"
+    :class="buttonClasses"
+    :disabled="isDisabled"
+  >
     <span v-if="loading" class="mr-2 animate-spin">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +16,10 @@
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 24 24"
       >
-        <path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z" fill="currentColor" />
+        <path
+          d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z"
+          fill="currentColor"
+        />
       </svg>
     </span>
     <span class="mr-2" v-if="$slots.before && !loading">
@@ -25,14 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { useRippleEffect } from '../../logic/use-ripple'
+import { computed, PropType } from "vue";
 
 const props = defineProps({
   kind: {
     type: String as PropType<string>,
-    default: 'dark',
-    validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1
+    default: "dark",
+    validator: (value: string) =>
+      ["dark", "light", "white", "ghost", "warn"].indexOf(value) !== -1,
   },
 
   outline: {
@@ -41,7 +49,7 @@ const props = defineProps({
   },
 
   loading: {
-    type: Boolean as PropType<boolean>
+    type: Boolean as PropType<boolean>,
   },
 
   disabled: {
@@ -58,17 +66,16 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
-})
-const isDisabled = computed(() => props.disabled || props.loading)
+});
+const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
- 
   return [
     props.kind,
-    props.outline ? 'outline-type' : '',
-    props.hover ? 'hover': '',
-    props.active ? 'active': '',
+    props.outline ? "outline-type" : "",
+    props.hover ? "hover" : "",
+    props.active ? "active" : "",
   ];
-})
+});
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
 </script>
@@ -85,7 +92,7 @@ button {
     }
   }
   &.light {
-    @apply bg-primary-100 text-black;
+    @apply bg-lightgreen-100 text-black;
     &:hover, &.hover {
       @apply bg-white;
     }
@@ -123,7 +130,7 @@ button.outline-type {
   &.dark {
     @apply border-primary bg-transparent text-black dark:text-white;
     &:hover, &.hover {
-      @apply bg-primary-100 dark:text-black;
+      @apply bg-lightgreen text-white dark:text-black;
     }
     &:active, &.active {
       @apply bg-primary text-white;

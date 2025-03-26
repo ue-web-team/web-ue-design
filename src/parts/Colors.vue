@@ -73,7 +73,8 @@ const getPaletteName = (name: string) => {
   if (name == "typegreen") return name + " (Typografi)";
   if (name == "darkgreen") return name + " (Vår svart)";
   if (name == "smoke") return name + " (Dimma)";
-  if (name == "warm") return name + " (Värme)";
+  if (name == "warm") return name + " (UE Värme)";
+  if (name == "lightyellow") return name + " (UE Sol)";
   return name;
 };
 
