@@ -180,7 +180,11 @@
         </UCardActions>
       </UCard>
 
-      <UCard class="text-white" :color="colors.blue['600']">
+      <UCard
+        class="text-white"
+        :color="colors.blue['600']"
+        :forceColor="colors.lightgreen.DEFAULT"
+      >
         <UCardHeader>
           <UCardTitle>Dialog 6</UCardTitle>
         </UCardHeader>
@@ -190,7 +194,7 @@
             big
             class="text-white"
             :color="colors.red['600']"
-            :forceColor="colors.red['600']"
+            :forceColor="colors.lightgreen.DEFAULT"
             v-model:open="isDialogOpen6"
             title="Hipp färg"
             :isLoading="isLoading"
@@ -220,9 +224,9 @@
 </template>
 
 <script setup lang="ts">
-import { colors } from "@/config/colors";
 import Prism from "@/lib/code-block";
 import { ref } from "vue";
+import { colors } from "../config/colors";
 import { isDark } from "../logic";
 
 const code = `<!-- Trigger button -->

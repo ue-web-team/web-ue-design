@@ -103,7 +103,7 @@
       <UCard
         focusable
         :color="colors.blue['200']"
-        :forceColor="colors.evergreen.DEFAULT"
+        :forceColor="colors.lightgreen.DEFAULT"
       >
         <UCardHeader>
           <UCardTitle>Forced color for dark mode</UCardTitle>
@@ -113,15 +113,19 @@
           fallet</UCardContent
         >
         <UCardActions>
-          <UButton class="w-full" @click="isDialogOpen = true"
+          <UButton class="w-full" @click="isDialog2Open = true"
             >Open dialog</UButton
           >
-          <UDialog v-model:open="isDialogOpen" title="Change candy preference">
+          <UDialog
+            v-model:open="isDialog2Open"
+            title="Change candy preference"
+            :forceColor="colors.lightgreen.DEFAULT"
+          >
             Det här är en tillgänglig dialog med fokus-fälla rätt role attribut
             osv. stänger om man klickar utanför eller på esc
             <template #actions>
-              <UButton outline @click="isDialogOpen = false">Cancel</UButton>
-              <UButton @click="isDialogOpen = false">Ok</UButton>
+              <UButton outline @click="isDialog2Open = false">Cancel</UButton>
+              <UButton @click="isDialog2Open = false">Ok</UButton>
             </template>
           </UDialog>
         </UCardActions>
@@ -166,6 +170,7 @@ import Prism from "@/lib/code-block";
 import { ref } from "vue";
 import { colors } from "../config/colors";
 const isDialogOpen = ref(false);
+const isDialog2Open = ref(false);
 const isLoading = ref(false);
 
 const code = `
