@@ -64,17 +64,17 @@ const all = Object.keys(colors)
       value: colors[name][grade],
     })),
   }))
-  .filter((item) => !["transparent", "white"].includes(item.name));
+  .filter((item) => !["transparent"].includes(item.name));
 const items = ref(all);
 const getPaletteName = (name: string) => {
   if (name == "primary" || name == "green") return name + " (Gran)";
-  if (name == "leaf") return name + " (Björk)";
+  if (name == "lightgreen") return name + " (Björk)";
   if (name == "evergreen") return name + " (Tall)";
   if (name == "typegreen") return name + " (Typografi)";
   if (name == "darkgreen") return name + " (Vår svart)";
-  if (name == "smoke") return name + " (Dimma)";
+  if (name == "fog") return name + " (Dimma)";
   if (name == "warm") return name + " (UE Värme)";
-  if (name == "lightyellow") return name + " (UE Sol)";
+  if (name == "sun") return name + " (UE Sol)";
   return name;
 };
 

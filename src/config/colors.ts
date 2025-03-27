@@ -99,7 +99,7 @@ export const colors = {
     "600": "#f8ce24",
     "700": "#f8ce24",
   },
-  lightyellow: {
+  sun: {
     DEFAULT: "#f6e054",
     "100": "#f6e054",
     "200": "#f6e054",
@@ -109,7 +109,7 @@ export const colors = {
     "600": "#f6e054",
     "700": "#f6e054",
   },
-  smoke: {
+  fog: {
     DEFAULT: "#f5f5f7",
     "100": "#f5f5f7",
     "200": "#f5f5f7",
