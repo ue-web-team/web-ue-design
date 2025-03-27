@@ -49,7 +49,7 @@ const props = defineProps({
 <style lang="pcss" scoped>
 .card {
   @apply relative flex flex-col rounded-lg;
-  background-color: v-bind("props.forceColor ? props.forceColor : isDark ? colors.darkgreen.DEFAULT : props.color");
+  background-color: v-bind("props.forceColor ? props.forceColor : isDark ? colors.evergreen.DEFAULT : props.color");
 }
 .progress-wrapper {
   @apply absolute rounded-t-lg h-8 w-full overflow-hidden pointer-events-none;
