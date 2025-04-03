@@ -1,66 +1,48 @@
 <template>
   <div class="relative max-w-full">
     <label :id="labelId">{{ label }}</label>
-    <div
-      ref="combobox"
-      :aria-labelledby="labelId + ' ' + selectedValuesId"
-      :aria-expanded="open"
-      :aria-controles="open ? listboxId : undefined"
-      aria-haspopup="true"
-      aria-autocomplete="none"
-      class="input-focus u-ms__input"
-      tabindex="0"
-      role="combobox"
-      :disabled="disabled"
-      @click="onToggle"
-      @keydown.enter="onToggle"
-      @keydown.space.prevent="onToggle"
-    >
+    <div ref="combobox" :aria-labelledby="labelId + ' ' + selectedValuesId" :aria-expanded="open"
+      :aria-controles="open ? listboxId : undefined" aria-haspopup="true" aria-autocomplete="none"
+      class="input-focus u-ms__input" tabindex="0" role="combobox" :disabled="disabled" @click="onToggle"
+      @keydown.enter="onToggle" @keydown.space.prevent="onToggle">
       <div class="truncate" :id="selectedValuesId">
         <span aria-hidden="true" v-if="truncate">{{ displayTruncated }}</span>
-        <span :class="{'sr-only': truncate}">{{ displayAll }}</span>
+        <span :class="{ 'sr-only': truncate }">{{ displayAll }}</span>
       </div>
     </div>
     <transition name="rise">
-    <ul
-      v-if="open"
-      ref="listbox"
-      :id="listboxId"
-      class="u-ms__list"
-      :class="{ 'u-ms__list--bottom': dropdownPosition === 'bottom' }"
-      role="listbox"
-      :aria-multiselectable="multiselect"
-      :aria-labelledby="labelId"
-      :aria-activedescendant="getOptionId(options[activeDescendantIndex])"
-      tabindex="-1"
-      @keydown.space.prevent="onSelect"
-      @keydown.enter.prevent="onSelect"
-      @keydown.prevent.up="onDirection($event, 'up')"
-      @keydown.prevent.down="onDirection($event, 'down')"
-      @keydown.esc="onEscape"
-      @keydown.prevent.home="onHome"
-      @keydown.prevent.end="onEnd"
-      @blur="onBlur"
-    >
-      <li
-        v-for="(option, index) in options"
-        :ref="setOptionRef"
-        class="u-ms__option"
-        :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
-        :key="getOptionId(option)"
-        :id="getOptionId(option)"
-        :aria-selected="isSelected(option) ? 'true' : 'false'"
-        role="option"
-        @click="input(option)"
-      >
-        <slot :option="option">
-          <div class="flex text-base px-2 py-2 items-center truncate">
-            <span aria-hidden="true" class="fake-checkbox"></span>
-            <span>{{ option.label }}</span>
-          </div>
-        </slot>
-      </li>
-    </ul>
+      <ul v-if="open" ref="listbox" :id="listboxId" class="u-ms__list"
+        :class="{ 'u-ms__list--bottom': dropdownPosition === 'bottom' }" role="listbox"
+        :aria-multiselectable="multiselect" :aria-labelledby="labelId"
+        :aria-activedescendant="getOptionId(options[activeDescendantIndex])" tabindex="-1"
+        @keydown.space.prevent="onSelect" @keydown.enter.prevent="onSelect"
+        @keydown.prevent.up="onDirection($event, 'up')" @keydown.prevent.down="onDirection($event, 'down')"
+        @keydown.esc="onEscape" @keydown.prevent.home="onHome" @keydown.prevent.end="onEnd" @blur="onBlur">
+        <li v-for="(option, index) in options" :ref="setOptionRef" class="u-ms__option"
+          :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
+          :key="getOptionId(option)" :id="getOptionId(option)" :aria-selected="isSelected(option) ? 'true' : 'false'"
+          role="option" @click="input(option)">
+          <slot :option="option">
+            <div class="flex text-base px-2 py-2 items-center truncate">
+              <span aria-hidden="true" class="fake-checkbox"></span>
+              <span>{{ option.label }}</span>
+            </div>
+          </slot>
+        </li>
+        <!-- Option to select all options -->
+        <li v-if="props.selectAll && options.length > 3" class="u-ms__option"
+          :class="{ 'u-ms__option--checked': isSelected(selectAllOption), 'u-ms__option--active': options.length === activeDescendantIndex }"
+          :aria-selected="isSelected(selectAllOption) ? 'true' : 'false'" role="option" :key="options.length"
+          @click="selectAll(selectAllOption)">
+          <slot :option="selectAllOption">
+            <div class="flex text-base px-2 py-2 items-center truncate">
+              <span aria-hidden="true" class="fake-checkbox"></span>
+              <span>{{ props.selectAll }}</span>
+            </div>
+          </slot>
+        </li>
+
+      </ul>
     </transition>
   </div>
 </template>
@@ -143,11 +125,17 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
+  selectAll: String
 });
 
 // template refs
 const combobox = ref<HTMLElement>();
 const listbox = ref<HTMLElement>();
+
+const selectAllOption = {
+  label: props.selectAll,
+  value: 'selectAll'
+}
 
 // reference to all options
 let optionRefs: HTMLBaseElement[] = [];
@@ -166,10 +154,10 @@ const dropdownPosition = ref('bottom');
 const displayTruncated = computed(() => {
   if (Array.isArray(props.modelValue)) {
     // should we display a custom all options selected text?
-    if(props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+    if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
       return props.allMessage
     }
-    if(props.modelValue.length > 1) {
+    if (props.modelValue.length > 1) {
       const first = props.modelValue[0];
       const firstOption = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(first))
       return (firstOption?.label ?? '') + ` (+${props.modelValue.length - 1})`
@@ -187,7 +175,7 @@ const displayTruncated = computed(() => {
 const displayAll = computed(() => {
   if (Array.isArray(props.modelValue)) {
     // should we display a custom all options selected text?
-    if(props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+    if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
       return props.allMessage
     }
     return props.modelValue
@@ -314,6 +302,25 @@ const input = (option: any) => {
     value.splice(value.indexOf(optionValue), 1)
   } else {
     value.push(optionValue)
+  }
+  emit('update:modelValue', value)
+};
+
+const selectAll = (option: any) => {
+  let value = props.modelValue as any;
+  value = [];
+  if (isSelected(option)) {
+    value = [];
+  } else {
+    const { value: optionValue } = option
+    props.options.forEach(option => {
+      value.push(option.value)
+    })
+    if (value.includes(optionValue)) {
+      value.splice(value.indexOf(optionValue), 1)
+    } else {
+      value.push(optionValue)
+    }
   }
   emit('update:modelValue', value)
 };

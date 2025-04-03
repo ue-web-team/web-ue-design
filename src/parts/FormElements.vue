@@ -5,29 +5,12 @@
     <div class="flex flex-wrap gap-4">
       <UForm :initial-values="{ radio: 'kola' }">
         <UFormFieldset legend="Radio fieldset">
-          <UFormRadio
-            class="px-2"
-            label="I want kola"
-            value="kola"
-            name="radio"
-          />
-          <UFormRadio
-            class="px-2"
-            label="I want dumle"
-            value="dumle"
-            name="radio"
-          />
-          <UFormRadio
-            class="px-2"
-            label="I want suris"
-            value="suris"
-            name="radio"
-          />
+          <UFormRadio class="px-2" label="I want kola" value="kola" name="radio" />
+          <UFormRadio class="px-2" label="I want dumle" value="dumle" name="radio" />
+          <UFormRadio class="px-2" label="I want suris" value="suris" name="radio" />
         </UFormFieldset>
       </UForm>
-      <fieldset
-        class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
+      <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2">
         <legend class="px-2">Candy checkbox</legend>
         <div class="pl-2 flex items-center gap-2">
           <input type="checkbox" checked id="id-checkbox-1" />
@@ -43,52 +26,26 @@
         </div>
       </fieldset>
       <fieldset
-        class="border-gray-600 bg-gray text-white border-2 px-3 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
+        class="border-gray-600 bg-gray text-white border-2 px-3 pt-2 pb-4 rounded-md inline-flex flex-col gap-2">
         <legend class="px-2 bg-gray rounded">Radio fieldset</legend>
         <div class="pl-2 flex items-center gap-2">
-          <input
-            class="light-check"
-            type="radio"
-            value="kola"
-            v-model="radio"
-            id="id11"
-          />
+          <input class="light-check" type="radio" value="kola" v-model="radio" id="id11" />
           <label for="id11">I want kola</label>
         </div>
         <div class="pl-2 flex items-center gap-2">
-          <input
-            class="light-check"
-            type="radio"
-            value="dumle"
-            v-model="radio"
-            id="id22"
-          />
+          <input class="light-check" type="radio" value="dumle" v-model="radio" id="id22" />
           <label for="id22">I want dumle</label>
         </div>
         <div class="pl-2 flex items-center gap-2">
-          <input
-            class="light-check"
-            type="radio"
-            disabled
-            value="suris"
-            v-model="radio"
-            id="id32"
-          />
+          <input class="light-check" type="radio" disabled value="suris" v-model="radio" id="id32" />
           <label for="id32">I want disabled suris</label>
         </div>
       </fieldset>
       <fieldset
-        class="border-gray-600 text-white bg-gray border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
+        class="border-gray-600 text-white bg-gray border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2">
         <legend class="px-2 bg-gray rounded">Candy checkbox</legend>
         <div class="pl-2 flex items-center gap-2">
-          <input
-            class="light-check"
-            type="checkbox"
-            checked
-            id="id-checkbox-1"
-          />
+          <input class="light-check" type="checkbox" checked id="id-checkbox-1" />
           <label for="id-checkbox-1">I want kola</label>
         </div>
         <div class="pl-2 flex items-center gap-2">
@@ -96,12 +53,7 @@
           <label for="id-checkbox-2">I want dumle</label>
         </div>
         <div class="pl-2 flex items-center gap-2">
-          <input
-            class="light-check"
-            type="checkbox"
-            disabled
-            id="id-checkbox-3"
-          />
+          <input class="light-check" type="checkbox" disabled id="id-checkbox-3" />
           <label for="id-checkbox-3">I want disabled suris</label>
         </div>
       </fieldset>
@@ -169,24 +121,12 @@
       toggles, end, home, esc to exit)
     </p>
     <div class="flex flex-wrap gap-4">
-      <UMultiSelect
-        v-model="selected"
-        all-message="Alla"
-        :options="options"
-        label="What u like?"
-      ></UMultiSelect>
+      <UMultiSelect v-model="selected" all-message="Alla" :options="options" label="What u like?" selectAll="Välj alla">
+      </UMultiSelect>
     </div>
     <pre>{{ JSON.stringify(selected, null, 2) }}</pre>
     <h3 class="text-xl my-4">Fancy slider</h3>
-    <UFormFancySlider
-      label="Hello"
-      unit="Hz"
-      name="fancy"
-      :min="0"
-      :max="3000"
-      :step="10"
-      :value="1500"
-    />
+    <UFormFancySlider label="Hello" unit="Hz" name="fancy" :min="0" :max="3000" :step="10" :value="1500" />
   </article>
 </template>
 
