@@ -31,9 +31,8 @@
         </li>
         <!-- Option to select all options -->
         <li v-if="props.selectAll && options.length > 3" class="u-ms__option"
-          :class="{ 'u-ms__option--checked': isSelected(selectAllOption), 'u-ms__option--active': options.length === activeDescendantIndex }"
-          :aria-selected="isSelected(selectAllOption) ? 'true' : 'false'" role="option" :key="options.length"
-          @click="selectAll(selectAllOption)">
+          :class="{ 'u-ms__option--checked': isAllSelected, 'u-ms__option--active': options.length === activeDescendantIndex }"
+          :aria-selected="isAllSelected ? 'true' : 'false'" role="option" :key="options.length" @click="selectAll()">
           <slot :option="selectAllOption">
             <div class="flex text-base px-2 py-2 items-center truncate">
               <span aria-hidden="true" class="fake-checkbox"></span>
@@ -137,6 +136,8 @@ const selectAllOption = {
   value: 'selectAll'
 }
 
+const isAllSelected = ref(false);
+
 // reference to all options
 let optionRefs: HTMLBaseElement[] = [];
 const setOptionRef = (el: HTMLBaseElement) => {
@@ -155,8 +156,10 @@ const displayTruncated = computed(() => {
   if (Array.isArray(props.modelValue)) {
     // should we display a custom all options selected text?
     if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+      isAllSelected.value = true;
       return props.allMessage
     }
+    isAllSelected.value = false;
     if (props.modelValue.length > 1) {
       const first = props.modelValue[0];
       const firstOption = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(first))
@@ -176,8 +179,10 @@ const displayAll = computed(() => {
   if (Array.isArray(props.modelValue)) {
     // should we display a custom all options selected text?
     if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
+      isAllSelected.value = true;
       return props.allMessage
     }
+    isAllSelected.value = false;
     return props.modelValue
       .map(value => {
         // deep comparison
@@ -306,21 +311,17 @@ const input = (option: any) => {
   emit('update:modelValue', value)
 };
 
-const selectAll = (option: any) => {
+const selectAll = () => {
   let value = props.modelValue as any;
   value = [];
-  if (isSelected(option)) {
+  if (isAllSelected.value) {
     value = [];
+    isAllSelected.value = false;
   } else {
-    const { value: optionValue } = option
+    isAllSelected.value = true;
     props.options.forEach(option => {
       value.push(option.value)
     })
-    if (value.includes(optionValue)) {
-      value.splice(value.indexOf(optionValue), 1)
-    } else {
-      value.push(optionValue)
-    }
   }
   emit('update:modelValue', value)
 };
@@ -332,5 +333,4 @@ const isSelected = (option: any) => {
     return false
   }
 };
-
 </script>
