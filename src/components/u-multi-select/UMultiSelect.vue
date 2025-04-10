@@ -18,17 +18,6 @@
         @keydown.space.prevent="onSelect" @keydown.enter.prevent="onSelect"
         @keydown.prevent.up="onDirection($event, 'up')" @keydown.prevent.down="onDirection($event, 'down')"
         @keydown.esc="onEscape" @keydown.prevent.home="onHome" @keydown.prevent.end="onEnd" @blur="onBlur">
-        <li v-for="(option, index) in options" :ref="setOptionRef" class="u-ms__option"
-          :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
-          :key="getOptionId(option)" :id="getOptionId(option)" :aria-selected="isSelected(option) ? 'true' : 'false'"
-          role="option" @click="input(option)">
-          <slot :option="option">
-            <div class="flex text-base px-2 py-2 items-center truncate">
-              <span aria-hidden="true" class="fake-checkbox"></span>
-              <span>{{ option.label }}</span>
-            </div>
-          </slot>
-        </li>
         <!-- Option to select all options -->
         <li v-if="props.selectAll && options.length > 3" class="u-ms__option"
           :class="{ 'u-ms__option--checked': isAllSelected, 'u-ms__option--active': options.length === activeDescendantIndex }"
@@ -40,6 +29,18 @@
             </div>
           </slot>
         </li>
+        <li v-for="(option, index) in options" :ref="setOptionRef" class="u-ms__option"
+          :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
+          :key="getOptionId(option)" :id="getOptionId(option)" :aria-selected="isSelected(option) ? 'true' : 'false'"
+          role="option" @click="input(option)">
+          <slot :option="option">
+            <div class="flex text-base px-2 py-2 items-center truncate">
+              <span aria-hidden="true" class="fake-checkbox"></span>
+              <span>{{ option.label }}</span>
+            </div>
+          </slot>
+        </li>
+
 
       </ul>
     </transition>
