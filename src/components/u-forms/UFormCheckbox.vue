@@ -28,7 +28,7 @@
       <p
         role="alert"
         aria-atomic="true"
-        class="text-red-400 text-sm mt-1"
+        class="text-red-400 text-sm mt-1 dark:text-sun"
         v-show="!!errorMessage && !fieldsetErrorId"
       >
         {{ errorMessage }}
@@ -72,8 +72,8 @@ const props = defineProps({
   },
   labelClasses: {
     type: String,
-    default: ""
-  }
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);

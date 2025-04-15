@@ -15,16 +15,16 @@
     />
     <label
       :for="inputId"
-      class="w-full py-5 px-3 bg-white border border-gray-300 rounded cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 hover:bg-primary-100 font-semibold text-black text-center"
+      class="w-full py-5 px-3 bg-white border border-gray-300 rounded cursor-pointer peer-checked:border-darkgreen peer-checked:bg-lightgreen-100 hover:bg-lightgreen-100 font-semibold text-black text-center"
     >
       {{ label }}
     </label>
   </div>
 </template>
 <script setup lang="ts">
+import { useField } from "vee-validate";
 import { inject, ref, Ref, watch } from "vue";
 import { useId } from "../../logic";
-import { useField } from "vee-validate";
 
 const props = defineProps({
   name: {

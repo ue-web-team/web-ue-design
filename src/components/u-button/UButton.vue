@@ -86,35 +86,36 @@ button {
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
   @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
   &.dark {
-    @apply bg-primary text-white;
+    @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &:hover, &.hover, &:active, &.active {
-      @apply bg-primary-600;
+      @apply bg-evergreen text-white dark:bg-sun/85 dark:text-typegreen;
     }
   }
   &.light {
-    @apply bg-lightgreen-100 text-black;
+    @apply bg-white text-typegreen dark:bg-sun dark:text-typegreen;
     &:hover, &.hover {
-      @apply bg-white;
+      @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
     }
     &:active, &.active {
-      @apply bg-primary-600 text-white;
+      @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
     }
   }
   &.white {
-    @apply bg-white text-black;
+    @apply bg-white text-darkgreen dark:text-typegreen;
      &:hover, &.hover {
-      @apply bg-primary-100;
+      @apply bg-typegreen text-white dark:bg-typegreen dark:text-white;
     }
     &:active, &.active {
-      @apply bg-primary-600 text-white;
+      @apply bg-typegreen text-white;
     }
   }
   &.ghost {
+    @apply text-typegreen dark:text-sun;
      &:hover, &.hover {
-       @apply bg-gray-400/40
+       @apply bg-typegreen/10 dark:bg-sun/20
      }
       &:active, &.active {
-      @apply bg-gray-500 text-white;
+      @apply bg-typegreen/10 text-typegreen dark:bg-sun/20 dark:text-sun;
     }
   }
   &.warn {
@@ -128,36 +129,36 @@ button {
 button.outline-type {
   @apply border-2;
   &.dark {
-    @apply border-primary bg-transparent text-black dark:text-white;
+    @apply border-darkgreen bg-transparent text-typegreen dark:text-white dark:border-sun;
     &:hover, &.hover {
-      @apply bg-lightgreen text-white dark:text-black;
+      @apply bg-typegreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:active, &.active {
-      @apply bg-primary text-white;
+      @apply bg-typegreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
   }
   &.light {
-    @apply border-primary-100 bg-transparent text-primary-100;
+    @apply border-white bg-transparent text-white dark:border-white dark:text-sun;
      &:hover, &.hover {
-      @apply bg-white text-primary border-primary;
+      @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
     }
     &:active, &.active {
-      @apply bg-primary-600 border-primary-100 text-white;
+      @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
     }
   }
   &.white {
     @apply border-white bg-transparent text-white;
      &:hover, &.hover {
-      @apply bg-primary-100 text-black;
+      @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
     }
     &:active, &.active {
-      @apply bg-primary-600 text-white;
+      @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
     }
   }
   &.warn {
     @apply border-red bg-transparent text-black dark:text-white;
      &:hover, &.hover {
-      @apply bg-red-100 text-black;
+      @apply bg-red-100 text-black dark:bg-red dark:text-white;
     }
     &:active, &.active {
       @apply bg-red text-white;

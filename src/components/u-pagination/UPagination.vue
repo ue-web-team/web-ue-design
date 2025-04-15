@@ -4,13 +4,11 @@
     class="text-sm sm:text-base sm:justify-between flex w-full justify-end"
   >
     <span class="hidden sm:block">
-      {{ t('pagination.page') }}
+      {{ t("pagination.page") }}
       <span class="font-semibold">{{ current }}</span>
-      {{ t('pagination.of') }}
+      {{ t("pagination.of") }}
       <span>
-        {{
-          Math.ceil(total / perPage)
-        }}
+        {{ Math.ceil(total / perPage) }}
       </span>
     </span>
     <ul class="flex items-center">
@@ -20,10 +18,10 @@
           @click="changePage(prevPage)"
           :disabled="!hasPrev()"
           :aria-disabled="!hasPrev()"
-          class="focus-style flex items-center justify-center hover:bg-gray-200 rounded-md h-6 w-6"
+          class="focus-style flex items-center justify-center hover:bg-gray-200 rounded-md h-6 w-6 dark:hover:text-typegreen"
           :class="{ 'opacity-50': !hasPrev() }"
         >
-          <span class="sr-only">{{ t('pagination.previus') }}</span>
+          <span class="sr-only">{{ t("pagination.previus") }}</span>
           <svg
             class="h-4 w-4"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +42,9 @@
         <a
           href="javascript:;"
           @click="changePage(1)"
-          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center"
-        >1</a>
+          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center dark:hover:text-typegreen"
+          >1</a
+        >
       </li>
       <li class="pr-3" v-if="hasFirst()">...</li>
       <li class="pr-3" v-for="page in pages" :key="page">
@@ -54,19 +53,21 @@
           href="javascript:;"
           @click="changePage(page)"
           :class="{
-            'bg-gradient-to-br from-primary-300 to-primary-400 font-medium text-white':
+            'bg-green font-medium text-white dark:bg-lightgreen':
               current === page,
           }"
-          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center"
-        >{{ page }}</a>
+          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center dark:hover:text-typegreen"
+          >{{ page }}</a
+        >
       </li>
       <li class="pr-3" v-if="hasLast()">...</li>
       <li class="pr-3" v-if="hasLast()">
         <a
           href="javascript:;"
           @click="changePage(totalPages)"
-          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center"
-        >{{ totalPages }}</a>
+          class="focus-style flex hover:bg-gray-200 rounded-md transition-colors duration-300 h-6 w-6 items-center justify-center dark:hover:text-typegreen"
+          >{{ totalPages }}</a
+        >
       </li>
       <li>
         <a
@@ -74,10 +75,10 @@
           @click="changePage(nextPage)"
           :disabled="!hasNext()"
           :aria-disabled="!hasNext()"
-          class="focus-style flex items-center justify-center hover:bg-gray-200 rounded-md h-6 w-6"
+          class="focus-style flex items-center justify-center hover:bg-gray-200 rounded-md h-6 w-6 dark:hover:text-typegreen"
           :class="{ 'opacity-50': !hasNext() }"
         >
-          <span class="sr-only">{{ t('pagination.next') }}</span>
+          <span class="sr-only">{{ t("pagination.next") }}</span>
           <svg
             class="h-4 w-4"
             xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +86,12 @@
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </a>
       </li>
@@ -117,13 +123,17 @@ const props = defineProps({
     type: Function,
     default: (message: string) => {
       switch (message) {
-        case 'pagination.previus': return 'föregående'
-        case 'pagination.next': return 'nästa'
-        case 'pagination.of': return 'av'
-        case 'pagination.page': return 'sida'
+        case "pagination.previus":
+          return "föregående";
+        case "pagination.next":
+          return "nästa";
+        case "pagination.of":
+          return "av";
+        case "pagination.page":
+          return "sida";
       }
-    }
-  }
+    },
+  },
 });
 
 const emit = defineEmits(["page-changed"]);
@@ -160,5 +170,4 @@ const changePage = (page: number) => {
     emit("page-changed", page);
   }
 };
-
 </script>
