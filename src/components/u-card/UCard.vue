@@ -3,6 +3,7 @@
     :aria-labelledby="titleId"
     :tabindex="focusable ? 0 : -1"
     class="focus-style card"
+    :class="[colorClasses ? colorClasses : 'bg-white dark:bg-evergreen']"
   >
     <div class="progress-wrapper">
       <UProgressBar :loading="isLoading" />
@@ -13,8 +14,7 @@
 
 <script setup lang="ts">
 import { PropType, provide, ref } from "vue";
-import { colors } from "../../config/colors";
-import { isDark, useId } from "../../logic";
+import { useId } from "../../logic";
 import UProgressBar from "../u-progress-bar/UProgressBar.vue";
 import { CardContext } from "./UCardContext";
 
@@ -26,11 +26,7 @@ const api = {
 provide(CardContext, api);
 
 const props = defineProps({
-  color: {
-    type: String as PropType<string>,
-    default: colors.white.DEFAULT,
-  },
-  forceColor: {
+  colorClasses: {
     type: String as PropType<string>,
     required: false,
   },
@@ -49,7 +45,7 @@ const props = defineProps({
 <style lang="pcss" scoped>
 .card {
   @apply relative flex flex-col rounded-lg;
-  background-color: v-bind("props.forceColor ? props.forceColor : isDark ? colors.evergreen.DEFAULT : props.color");
+
 }
 .progress-wrapper {
   @apply absolute rounded-t-lg h-8 w-full overflow-hidden pointer-events-none;

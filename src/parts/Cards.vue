@@ -31,7 +31,10 @@
         </UCardActions>
       </UCard>
 
-      <UCard :color="colors.blue['200']" focusable>
+      <UCard
+        focusable
+        colorClasses="bg-lightgreen dark:bg-warm dark:text-typegreen"
+      >
         <UCardHeader>
           <UCardTitle>Rubrik som är ganska lång</UCardTitle>
         </UCardHeader>
@@ -42,9 +45,9 @@
         >
       </UCard>
 
-      <UCard :color="colors.lime['200']" focusable>
+      <UCard focusable colorClasses="bg-warm dark:bg-evergreen">
         <UCardHeader>
-          <UCardTitle>Kortare rubrik</UCardTitle>
+          <UCardTitle class="text-red">Kortare rubrik</UCardTitle>
         </UCardHeader>
         <UCardContent
           >Vi hjälper dig med några enkla tips på hur du kan sänka din
@@ -53,9 +56,9 @@
         >
       </UCard>
 
-      <UCard class="text-white" :color="colors.primary['400']" focusable>
+      <UCard focusable colorClasses="text-green bg-gray-200 dark:bg-evergreen">
         <UCardHeader>
-          <UCardTitle>Ljus text på mörkare</UCardTitle>
+          <UCardTitle class="text-red">Ljus text på mörkare</UCardTitle>
         </UCardHeader>
         <UCardContent
           >Vi hjälper dig med några enkla tips på hur du kan sänka din
@@ -64,9 +67,11 @@
         >
       </UCard>
 
-      <UCard class="text-white" :color="colors.red['400']" focusable>
+      <UCard focusable colorClasses="bg-evergreen dark:darkgreen text-white">
         <UCardHeader>
-          <UCardTitle>Du har fakturor som snart ska betalas</UCardTitle>
+          <UCardTitle class="text-warm"
+            >Du har fakturor som snart ska betalas</UCardTitle
+          >
         </UCardHeader>
         <UCardContent
           >Vi hjälper inte dig om du inte har råd men du kan vända dig till
@@ -83,7 +88,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard :color="colors.blue['100']" focusable>
+      <UCard focusable>
         <UCardHeader>
           <UCardTitle>Din årsförbrukning 1898:</UCardTitle>
         </UCardHeader>
@@ -100,45 +105,17 @@
           </div>
         </UCardContent>
       </UCard>
-      <UCard
-        focusable
-        :color="colors.blue['200']"
-        :forceColor="colors.lightgreen.DEFAULT"
-      >
-        <UCardHeader>
-          <UCardTitle>Forced color for dark mode</UCardTitle>
-        </UCardHeader>
-        <UCardContent
-          >"Vanligt" kort med header och action bar. En dialog i det här
-          fallet</UCardContent
-        >
-        <UCardActions>
-          <UButton class="w-full" @click="isDialog2Open = true"
-            >Open dialog</UButton
-          >
-          <UDialog
-            v-model:open="isDialog2Open"
-            title="Change candy preference"
-            :forceColor="colors.lightgreen.DEFAULT"
-          >
-            Det här är en tillgänglig dialog med fokus-fälla rätt role attribut
-            osv. stänger om man klickar utanför eller på esc
-            <template #actions>
-              <UButton outline @click="isDialog2Open = false">Cancel</UButton>
-              <UButton @click="isDialog2Open = false">Ok</UButton>
-            </template>
-          </UDialog>
-        </UCardActions>
-      </UCard>
     </div>
     <UCard
       class="mt-4 max-w-prose"
+      colorClasses="bg-sun dark:bg-darkgreen"
       :isLoading="isLoading"
-      :color="colors.red['100']"
       focusable
     >
       <UCardHeader>
-        <UCardTitle>Bigger card with loading progress</UCardTitle>
+        <UCardTitle class="text-green dark:text-sun"
+          >Bigger card with loading progress</UCardTitle
+        >
       </UCardHeader>
       <UCardContent class="prose dark:prose-invert">
         <b>Chocolate</b> gummies jelly pie tart. I love gummies chocolate tart
@@ -159,6 +136,17 @@
         }}</UButton>
       </UCardActions>
     </UCard>
+    <div>
+      <h3 class="text-xl my-4 font-bold">Props</h3>
+      <ul>
+        <li>isLoading: boolean // default: false</li>
+        <li>focusable: boolean // default: false</li>
+        <li>
+          colorClasses?: string // tailwind classes to use for background and
+          text color
+        </li>
+      </ul>
+    </div>
 
     <h3 class="text-xl my-4">Usage</h3>
     <Prism language="html" class="codesnippet">{{ code }}</Prism>
@@ -168,14 +156,13 @@
 <script setup lang="ts">
 import Prism from "@/lib/code-block";
 import { ref } from "vue";
-import { colors } from "../config/colors";
 const isDialogOpen = ref(false);
 const isDialog2Open = ref(false);
 const isLoading = ref(false);
 
 const code = `
 <!-- Wrapper with responsive padding and loading indicator -->
-<UCard :isLoading="isLoading" :color="colors.red['100']" focusable>
+<UCard :isLoading="isLoading" colorClasses="text-green bg-gray-200 dark:bg-evergreen" focusable>
    <UCardHeader>
      <UCardTitle>This is the accesible card title</UCardTitle>
    </UCardHeader>

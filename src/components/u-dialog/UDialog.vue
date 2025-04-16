@@ -27,23 +27,24 @@
             <div
               :style="{
                 'max-height': 'min(85vh, 1200px)',
-                'background-color': forceColor
-                  ? forceColor
-                  : isDark
-                  ? colors.evergreen.DEFAULT
-                  : color,
               }"
               class="flex flex-col w-full p-4 md:px-8 md:py-6 mx-auto transition-all relative transform shadow-xl rounded-lg"
               :class="[
                 isLoading ? 'overflow-hidden' : '',
                 big ? 'max-w-3xl' : 'max-w-lg',
+                colorClasses ? colorClasses : 'bg-white dark:bg-black',
               ]"
             >
               <div class="progress-wrapper" v-if="isLoading">
                 <UProgressBar :loading="isLoading" />
               </div>
 
-              <DialogTitle as="h2" class="title">{{ title }}</DialogTitle>
+              <DialogTitle
+                as="h2"
+                class="title"
+                :class="headingClasses ? headingClasses : 'text dark:text-sun'"
+                >{{ title }}</DialogTitle
+              >
               <DialogDescription class="overflow-y-auto">
                 <slot name="default"></slot>
               </DialogDescription>
@@ -69,19 +70,19 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { PropType, ref, watch } from "vue";
-import { colors } from "../../config/colors";
-import { isDark } from "../../logic";
+
 import UProgressBar from "../u-progress-bar/UProgressBar.vue";
 
 const props = defineProps({
-  color: {
-    type: String as PropType<string>,
-    default: colors.white.DEFAULT,
-  },
-  forceColor: {
+  colorClasses: {
     type: String as PropType<string>,
     required: false,
   },
+  headingClasses: {
+    type: String as PropType<string>,
+    required: false,
+  },
+
   open: {
     required: true,
     type: Boolean as PropType<boolean>,

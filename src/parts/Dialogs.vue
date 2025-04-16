@@ -8,17 +8,13 @@
     <br />
     <br />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <UCard :color="colors.gray['100']">
+      <UCard>
         <UCardHeader>
           <UCardTitle>Dialog 1</UCardTitle>
         </UCardHeader>
         <UCardContent>
           Tillgänglig dialog baserad på headless/ui
-          <UDialog
-            :color="isDark ? colors.gray['700'] : colors.white.DEFAULT"
-            v-model:open="isDialogOpen1"
-            title="Change candy preference"
-          >
+          <UDialog v-model:open="isDialogOpen1" title="Change candy preference">
             Det här är en tillgänglig dialog med fokus-fälla rätt role attribut
             och tillgänglig titel. stänger om man klickar utanför eller på esc
             <template #actions>
@@ -34,7 +30,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard :color="colors.gray['100']">
+      <UCard>
         <UCardHeader>
           <UCardTitle>Dialog 2</UCardTitle>
         </UCardHeader>
@@ -83,23 +79,19 @@
         </UCardActions>
       </UCard>
 
-      <UCard :color="colors.green['200']">
+      <UCard colorClasses="bg-lightgreen">
         <UCardHeader>
           <UCardTitle>Dialog 3</UCardTitle>
         </UCardHeader>
         <UCardContent>
           Dialog med hipp färg :)
-          <UDialog
-            :color="colors.green['200']"
-            v-model:open="isDialogOpen3"
-            title="Hipp färg"
-          >
+          <UDialog v-model:open="isDialogOpen3" title="Hipp färg">
             Hippare färg. kanske för att göra ett glatt val?
             <template #actions>
-              <UButton kind="white" outline @click="isDialogOpen3 = false"
-                >Ja</UButton
+              <UButton kind="dark" @click="isDialogOpen3 = false">Ja</UButton>
+              <UButton kind="dark" outline @click="isDialogOpen3 = false"
+                >Nej</UButton
               >
-              <UButton kind="white" @click="isDialogOpen3 = false">Nej</UButton>
             </template>
           </UDialog>
         </UCardContent>
@@ -114,7 +106,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard class="text-white" :color="colors.red['600']">
+      <UCard colorClasses="bg-warm dark:bg-evergreen">
         <UCardHeader>
           <UCardTitle>Dialog 4</UCardTitle>
         </UCardHeader>
@@ -123,24 +115,23 @@
           utanför eller 'esc' Dialog har även en laddningsidikator.
           <UDialog
             require-interaction
-            class="text-white"
-            :color="colors.red['600']"
             v-model:open="isDialogOpen4"
             title="Hipp färg"
             :isLoading="isLoading"
+            colorClasses="bg-red dark:bg-green text-white"
           >
             Allvarlig dialog som kräver ett val. kan inte avslutas med click
             utanför eller 'esc'
             <template #actions>
-              <UButton kind="white" outline @click="mockSave">Ja</UButton>
-              <UButton kind="white" @click="isDialogOpen4 = false">Nej</UButton>
+              <UButton kind="dark" outline @click="mockSave">Ja</UButton>
+              <UButton kind="dark" @click="isDialogOpen4 = false">Nej</UButton>
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
           <UButton
             class="w-full"
-            kind="white"
+            kind="dark"
             outline
             @click="isDialogOpen4 = true"
             >Open dialog</UButton
@@ -148,7 +139,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard class="text-white" :color="colors.blue['600']">
+      <UCard colorClasses="bg-evergreen text-white">
         <UCardHeader>
           <UCardTitle>Dialog 5</UCardTitle>
         </UCardHeader>
@@ -156,16 +147,25 @@
           Dialog med stor ruta
           <UDialog
             big
-            class="text-white"
-            :color="colors.red['600']"
+            colorClasses="bg-green dark:bg-evergreen text-white"
+            headingClasses="text-white dark:text-lightgreen"
             v-model:open="isDialogOpen5"
             title="Hipp färg"
             :isLoading="isLoading"
           >
             Bred dialog med mer plats. typ 2 kolumner om det finns plats
             <template #actions>
-              <UButton kind="white" outline @click="mockSave">Ja</UButton>
-              <UButton kind="white" @click="isDialogOpen5 = false">Nej</UButton>
+              <UButton
+                :kind="isDark ? 'dark' : 'white'"
+                outline
+                @click="mockSave"
+                >Ja</UButton
+              >
+              <UButton
+                :kind="isDark ? 'dark' : 'white'"
+                @click="isDialogOpen5 = false"
+                >Nej</UButton
+              >
             </template>
           </UDialog>
         </UCardContent>
@@ -179,43 +179,21 @@
           >
         </UCardActions>
       </UCard>
-
-      <UCard
-        class="text-white"
-        :color="colors.blue['600']"
-        :forceColor="colors.lightgreen.DEFAULT"
-      >
-        <UCardHeader>
-          <UCardTitle>Dialog 6</UCardTitle>
-        </UCardHeader>
-        <UCardContent>
-          Dialog with force color on dark mode
-          <UDialog
-            big
-            class="text-white"
-            :color="colors.red['600']"
-            :forceColor="colors.lightgreen.DEFAULT"
-            v-model:open="isDialogOpen6"
-            title="Hipp färg"
-            :isLoading="isLoading"
-          >
-            Bred dialog med mer plats. typ 2 kolumner om det finns plats
-            <template #actions>
-              <UButton kind="white" outline @click="mockSave">Ja</UButton>
-              <UButton kind="white" @click="isDialogOpen6 = false">Nej</UButton>
-            </template>
-          </UDialog>
-        </UCardContent>
-        <UCardActions>
-          <UButton
-            class="w-full"
-            kind="white"
-            outline
-            @click="isDialogOpen6 = true"
-            >Open dialog</UButton
-          >
-        </UCardActions>
-      </UCard>
+    </div>
+    <div>
+      <h3 class="text-xl my-4 font-bold">Props</h3>
+      <ul>
+        <li>title: string // default: "Ingen titel"</li>
+        <li>open: boolean // required</li>
+        <li>requireInteraction: boolean // default: false</li>
+        <li>big: boolean // default: false >>> used to show big dialog</li>
+        <li>isLoading: boolean // default: false</li>
+        <li>
+          colorClasses?: string // tailwind classes to use for background and
+          text color
+        </li>
+        <li>headingClasses?: string // tailwind classes for heading color</li>
+      </ul>
     </div>
 
     <h3 class="text-xl my-4">Usage</h3>
@@ -226,13 +204,15 @@
 <script setup lang="ts">
 import Prism from "@/lib/code-block";
 import { ref } from "vue";
-import { colors } from "../config/colors";
 import { isDark } from "../logic";
 
 const code = `<!-- Trigger button -->
 <UButton @click="isDialogOpen = true">Open dialog</UButton>
 <!-- Actual modal (will not render here but as a child of <body>) -->
-<UDialog v-model:open="isDialogOpen" title="Title of dialog">
+<UDialog v-model:open="isDialogOpen" title="Title of dialog"
+  colorClasses="bg-green dark:bg-evergreen text-white"
+  headingClasses="text-white dark:text-lightgreen"
+>
   I'am the content of this dialog
   <template #actions >
     <UButton outline @click="isDialogOpen = false">Cancel</UButton>
