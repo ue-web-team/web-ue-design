@@ -59,12 +59,12 @@ button {
   @apply transition-all transform-gpu ease-out duration-200 active:scale-95;
   @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
   &.dark {
-    @apply bg-green text-white dark:bg-sun dark:text-typegreen;
+    @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &:hover, &.hover {
-      @apply bg-typegreen dark:bg-sun/85 dark:text-typegreen;
+      @apply bg-evergreen dark:bg-sun/85 dark:text-typegreen;
     }
     &:active, &.active {
-      @apply bg-typegreen dark:bg-sun/85 dark:text-typegreen;
+      @apply bg-evergreen dark:bg-sun/85 dark:text-typegreen;
     }
   }
   &.ghost {
@@ -81,12 +81,12 @@ button {
 button.outline-type {
   @apply border-2;
   &.dark {
-    @apply border-green bg-transparent text-black dark:text-white dark:border-sun;
+    @apply border-darkgreen bg-transparent text-black dark:text-white dark:border-sun;
     &:hover, &.hover {
-      @apply bg-green text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:active, &.active {
-      @apply bg-primary text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
   }
 }

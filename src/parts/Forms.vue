@@ -217,7 +217,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard :color="colors.yellow['100']">
+      <UCard>
         <UCardHeader>
           <UCardTitle>Form example 4</UCardTitle>
         </UCardHeader>

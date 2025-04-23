@@ -56,11 +56,11 @@
         >
       </UCard>
 
-      <UCard focusable colorClasses="text-green bg-gray-200 dark:bg-evergreen">
+      <UCard focusable colorClasses="bg-gray-200 dark:bg-evergreen">
         <UCardHeader>
           <UCardTitle class="text-red">Ljus text på mörkare</UCardTitle>
         </UCardHeader>
-        <UCardContent
+        <UCardContent class="text-green dark:text-white"
           >Vi hjälper dig med några enkla tips på hur du kan sänka din
           förbrukning. Genom att sänka din energi-förbrukning sparar du både
           pengar och gör gott för miljön.</UCardContent
