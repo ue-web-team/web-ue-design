@@ -1,8 +1,11 @@
 <template>
   <div class="flex flex-col">
     <fieldset
-      class="border-gray-600 pt-2 pb-4 rounded-md"
-      :class="{ 'border-red': !!errorMessage, 'border-2 px-3 ' : (!!errorMessage || showBorder) }"
+      class="border-gray-600 pt-2 pb-4 rounded-md dark:border-white dark:text-white"
+      :class="{
+        'border-red': !!errorMessage,
+        'border-2 px-3 ': !!errorMessage || showBorder,
+      }"
     >
       <legend class="px-2" :class="legendClasses">{{ legend }}</legend>
       <slot></slot>
@@ -11,7 +14,7 @@
       role="alert"
       aria-atomic="true"
       :id="errorId"
-      class="text-red-400 text-sm mt-1"
+      class="text-red-400 text-sm mt-1 dark:text-sun"
       v-show="errorMessage"
     >
       {{ errorMessage }}
@@ -41,11 +44,11 @@ const props = defineProps({
   },
   showBorder: {
     type: Boolean,
-    default: true
+    default: true,
   },
   legendClasses: {
     type: String,
-    default: ""
-  }
+    default: "",
+  },
 });
 </script>

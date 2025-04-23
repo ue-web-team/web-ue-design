@@ -1,6 +1,6 @@
 {
   "name": "@umeaenergi/ue-design",
-  "version": "0.2.47",
+  "version": "0.2.49",
   "description": "UE Component library (Vue 3 + Tailwind CSS + Typescript)",
   "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.5.0",
+    "@types/prismjs": "^1.26.5",
     "@vueuse/core": "^8.1.2",
     "mini-svg-data-uri": "^1.4.3",
     "prismjs": "^1.25.0",
