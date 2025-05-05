@@ -3,7 +3,9 @@
     <label :for="inputId" :class="labelClasses">{{ label }}</label
     ><br />
     <span ref="bubble" class="bubble">90</span>
-    <span v-if="unit" class="absolute text-green font-semibold text-xs mt-8">{{ unit }}</span>
+    <span v-if="unit" class="absolute text-green font-semibold text-xs mt-8">{{
+      unit
+    }}</span>
     <input
       ref="slider"
       type="range"

@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col">
-    <label :for="inputId" :class="labelClasses">{{ label }} {{ required ? '*' : '' }}</label>
+    <label :for="inputId" :class="labelClasses"
+      >{{ label }} {{ required ? "*" : "" }}</label
+    >
     <select
-      class="mt-1 u-form-control"
+      class="mt-1 u-form-control dark:border-white"
       :class="{ 'border-red': !!errorMessage }"
       :id="inputId"
       :aria-describedby="errorId"
@@ -19,23 +21,29 @@
         :key="`${name}-option-${index}`"
         :disabled="optionDisabled(option)"
         :value="optionValue(option)"
-      >{{ optionLabel(option) }}</option>
+      >
+        {{ optionLabel(option) }}
+      </option>
     </select>
     <p
       role="alert"
       aria-atomic="true"
       :id="errorId"
-      class="text-red-400 text-sm mt-1"
+      class="text-red-400 text-sm mt-1 dark:text-sun"
       v-show="errorMessage"
-    >{{ errorMessage }}</p>
-    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
+    >
+      {{ errorMessage }}
+    </p>
+    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">
+      {{ hint }}
+    </p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { PropType, ref, watch } from "vue";
-import { useId } from '../../logic';
+import { useId } from "../../logic";
 
 const inputId = ref(`u-form-select-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
@@ -47,7 +55,7 @@ const props = defineProps({
   },
   options: {
     type: Array as PropType<any[]>,
-    default: () => ([])
+    default: () => [],
   },
   name: {
     type: String,
@@ -59,19 +67,19 @@ const props = defineProps({
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   required: {
     type: Boolean,
-    default: false
+    default: false,
   },
   hint: {
     type: String,
   },
   labelClasses: {
     type: String,
-    default: ""
-  }
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -104,23 +112,23 @@ watch(
 );
 
 const optionValue = (option: string | number | any) => {
-  if (typeof option === 'object') {
+  if (typeof option === "object") {
     return option?.value;
   }
   return option;
-}
+};
 
 const optionDisabled = (option: string | number | any) => {
-  if (typeof option === 'object') {
+  if (typeof option === "object") {
     return option?.disabled;
   }
   return false;
-}
+};
 
 const optionLabel = (option: string | number | any) => {
-  if (typeof option === 'object') {
+  if (typeof option === "object") {
     return option?.label;
   }
   return option;
-}
+};
 </script>

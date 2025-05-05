@@ -1,9 +1,11 @@
 <template>
   <div class="flex flex-col">
-    <label :for="inputId" :class="labelClasses">{{ label }} {{ required ? '*' : '' }}</label>
+    <label :for="inputId" :class="labelClasses"
+      >{{ label }} {{ required ? "*" : "" }}</label
+    >
     <textarea
       v-if="textarea"
-      class="mt-1 u-form-control"
+      class="mt-1 u-form-control dark:border-white dark:text-white"
       :class="{ 'border-red': !!errorMessage }"
       :id="inputId"
       :aria-describedby="errorId"
@@ -20,7 +22,7 @@
     <input
       v-else
       v-bind="$attrs"
-      class="mt-1 u-form-control"
+      class="mt-1 u-form-control dark:border-white dark:text-white"
       :class="{ 'border-red': !!errorMessage }"
       :type="type"
       :id="inputId"
@@ -39,24 +41,28 @@
       role="alert"
       aria-atomic="true"
       :id="errorId"
-      class="text-red-400 text-sm mt-1"
+      class="text-red-400 text-sm mt-1 dark:text-sun"
       v-show="errorMessage"
-    >{{ errorMessage }}</p>
-    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">{{ hint }}</p>
+    >
+      {{ errorMessage }}
+    </p>
+    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">
+      {{ hint }}
+    </p>
   </div>
 </template>
 
 <script lang="ts">
 // only possible this way
 export default {
-  inheritAttrs: false
-}
+  inheritAttrs: false,
+};
 </script>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate";
 import { ref } from "vue";
-import { useId } from '../../logic';
+import { useId } from "../../logic";
 
 const inputId = ref(`u-form-input-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
@@ -79,7 +85,7 @@ const props = defineProps({
     required: true,
   },
   placeholder: {
-    type: String
+    type: String,
   },
   label: {
     type: String,
@@ -91,19 +97,19 @@ const props = defineProps({
   },
   required: {
     type: Boolean,
-    default: false
+    default: false,
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   hint: {
     type: String,
   },
   labelClasses: {
     type: String,
-    default: ""
-  }
+    default: "",
+  },
 });
 
 const {

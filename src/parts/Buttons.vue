@@ -24,7 +24,9 @@
             <UButton active>Simple states</UButton>
           </td>
           <td>
-            <UButton class="ring ring-offset-1 ring-blue">Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue"
+              >Simple states</UButton
+            >
           </td>
         </tr>
         <tr>
@@ -39,10 +41,9 @@
             <UButton outline active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              outline
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" outline
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
@@ -58,10 +59,9 @@
             <UButton kind="ghost" active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="ghost"
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="ghost"
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
@@ -77,10 +77,9 @@
             <UButton kind="warn" active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="warn"
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="warn"
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
@@ -96,14 +95,13 @@
             <UButton kind="warn" outline active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="warn"
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="warn"
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
-        <tr class="bg-gray-500">
+        <tr class="bg-evergreen">
           <th class="text-white">Light</th>
           <td>
             <UButton kind="light">Simple states</UButton>
@@ -115,13 +113,12 @@
             <UButton kind="light" active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="light"
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="light"
+              >Simple states</UButton
+            >
           </td>
         </tr>
-        <tr class="bg-gray-500">
+        <tr class="bg-evergreen">
           <th class="text-white">Light outline</th>
           <td>
             <UButton kind="light" outline>Simple states</UButton>
@@ -133,15 +130,13 @@
             <UButton kind="light" outline active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="light"
-              outline
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="light" outline
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
-        <tr class="bg-gray-500">
+        <tr class="bg-evergreen">
           <th class="text-white">White</th>
           <td>
             <UButton kind="white">Simple states</UButton>
@@ -153,13 +148,12 @@
             <UButton kind="white" active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="white"
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="white"
+              >Simple states</UButton
+            >
           </td>
         </tr>
-        <tr class="bg-gray-500">
+        <tr class="bg-evergreen">
           <th class="text-white">White outline</th>
           <td>
             <UButton kind="white" outline>Simple states</UButton>
@@ -171,11 +165,9 @@
             <UButton kind="white" outline active>Simple states</UButton>
           </td>
           <td>
-            <UButton
-              class="ring ring-offset-1 ring-blue"
-              kind="white"
-              outline
-            >Simple states</UButton>
+            <UButton class="ring ring-offset-1 ring-blue" kind="white" outline
+              >Simple states</UButton
+            >
           </td>
         </tr>
       </tbody>
@@ -183,24 +175,16 @@
 
     <div class="grid my-8 grid-cols-2 md:grid-cols-4 place-items-start gap-4">
       <UButton kind="ghost">
-        <template #after>
-          <i-mdi-chevron-down />
-        </template>Ghost with icon
+        <template #after> <i-mdi-chevron-down /> </template>Ghost with icon
       </UButton>
       <UButton>
-        <template #before>
-          <i-mdi-cog />
-        </template>With icon before
+        <template #before> <i-mdi-cog /> </template>With icon before
       </UButton>
       <UButton loading>
-        <template #before>
-          <i-mdi-cog />
-        </template>Loading
+        <template #before> <i-mdi-cog /> </template>Loading
       </UButton>
       <UButton outline>
-        <template #after>
-          <i-mdi-account />
-        </template>And after
+        <template #after> <i-mdi-account /> </template>And after
       </UButton>
 
       <UButton disabled outline>Button</UButton>
@@ -212,10 +196,9 @@
 </template>
 
 <script setup lang="ts">
-import Prism from "@/lib/code-block"
+import Prism from "@/lib/code-block";
 
-const code =
-  `<!-- Variants. default(dark), ghost, warn, light, white -->
+const code = `<!-- Variants. default(dark), ghost, warn, light, white -->
 <UButton> Button text </UButton>
 <UButton kind="ghost"> Button text </UButton>
 <UButton kind="warn"> Button text </UButton>
@@ -244,5 +227,5 @@ const code =
   </template>
   Button text
 </UButton>
-`
+`;
 </script>
