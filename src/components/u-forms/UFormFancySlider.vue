@@ -19,33 +19,27 @@
       @change="handleChange"
       class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-12 accent-primary"
     />
+    <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">{{ min }}</span>
     <span
-      class="text-sm text-gray-500 dark:text-gray-200 absolute start-0 -bottom-6"
-      >{{ min }}</span
+      class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
+      >{{ (max - min) / 4 + min }}</span
     >
     <span
-      class="text-sm text-gray-500 dark:text-gray-200 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
-      >{{ (max - min) / 4 }}</span
+      class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
+      >{{ (max - min) / 2 + min }}</span
     >
     <span
-      class="text-sm text-gray-500 dark:text-gray-200 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
-      >{{ (max - min) / 2 }}</span
+      class="text-sm text-gray-500 dark:text-gray-400 absolute start-3/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
+      >{{ (3 * (max - min)) / 4 + min }}</span
     >
-    <span
-      class="text-sm text-gray-500 dark:text-gray-200 absolute start-3/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
-      >{{ (3 * (max - min)) / 4 }}</span
-    >
-    <span
-      class="text-sm text-gray-500 dark:text-gray-200 absolute end-0 -bottom-6"
-      >{{ max }}</span
-    >
+    <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">{{ max }}</span>
   </div>
 </template>
 <script setup lang="ts">
-import { useField } from "vee-validate";
-import { onMounted, ref } from "vue";
-import { colors } from "../../config/colors";
-import { useId } from "../../logic";
+import { colors } from '../../config/colors';
+import { ref, onMounted } from 'vue';
+import { useField } from 'vee-validate';
+import { useId } from '../../logic';
 
 const inputId = ref(`u-form-slider-${useId()}`);
 
@@ -82,7 +76,7 @@ const props = defineProps({
   },
   labelClasses: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
@@ -103,10 +97,8 @@ onMounted(() => {
 
     slider.value.oninput = function () {
       if (bubble.value && slider.value) {
-        const sliderRangeLength =
-          Number(slider.value.max) - Number(slider.value.min);
-        const sliderCurrentOffset =
-          Number(slider.value.value) - Number(slider.value.min);
+        const sliderRangeLength = Number(slider.value.max) - Number(slider.value.min);
+        const sliderCurrentOffset = Number(slider.value.value) - Number(slider.value.min);
         const percent = (sliderCurrentOffset / sliderRangeLength) * 100;
         const adjust = 10 - percent * 0.2;
 

@@ -1,27 +1,60 @@
 <template>
   <div class="relative max-w-full">
     <label :id="labelId">{{ label }}</label>
-    <div ref="combobox" :aria-labelledby="labelId + ' ' + selectedValuesId" :aria-expanded="open"
-      :aria-controles="open ? listboxId : undefined" aria-haspopup="true" aria-autocomplete="none"
-      class="input-focus u-ms__input" tabindex="0" role="combobox" :disabled="disabled" @click="onToggle"
-      @keydown.enter="onToggle" @keydown.space.prevent="onToggle">
+    <div
+      ref="combobox"
+      :aria-labelledby="labelId + ' ' + selectedValuesId"
+      :aria-expanded="open"
+      :aria-controles="open ? listboxId : undefined"
+      aria-haspopup="true"
+      aria-autocomplete="none"
+      class="input-focus u-ms__input"
+      tabindex="0"
+      role="combobox"
+      :disabled="disabled"
+      @click="onToggle"
+      @keydown.enter="onToggle"
+      @keydown.space.prevent="onToggle"
+    >
       <div class="truncate" :id="selectedValuesId">
         <span aria-hidden="true" v-if="truncate">{{ displayTruncated }}</span>
         <span :class="{ 'sr-only': truncate }">{{ displayAll }}</span>
       </div>
     </div>
     <transition name="rise">
-      <ul v-if="open" ref="listbox" :id="listboxId" class="u-ms__list"
-        :class="{ 'u-ms__list--bottom': dropdownPosition === 'bottom' }" role="listbox"
-        :aria-multiselectable="multiselect" :aria-labelledby="labelId"
-        :aria-activedescendant="getOptionId(options[activeDescendantIndex])" tabindex="-1"
-        @keydown.space.prevent="onSelect" @keydown.enter.prevent="onSelect"
-        @keydown.prevent.up="onDirection($event, 'up')" @keydown.prevent.down="onDirection($event, 'down')"
-        @keydown.esc="onEscape" @keydown.prevent.home="onHome" @keydown.prevent.end="onEnd" @blur="onBlur">
+      <ul
+        v-if="open"
+        ref="listbox"
+        :id="listboxId"
+        class="u-ms__list"
+        :class="{ 'u-ms__list--bottom': dropdownPosition === 'bottom' }"
+        role="listbox"
+        :aria-multiselectable="multiselect"
+        :aria-labelledby="labelId"
+        :aria-activedescendant="getOptionId(options[activeDescendantIndex])"
+        tabindex="-1"
+        @keydown.space.prevent="onSelect"
+        @keydown.enter.prevent="onSelect"
+        @keydown.prevent.up="onDirection($event, 'up')"
+        @keydown.prevent.down="onDirection($event, 'down')"
+        @keydown.esc="onEscape"
+        @keydown.prevent.home="onHome"
+        @keydown.prevent.end="onEnd"
+        @blur="onBlur"
+      >
         <!-- Option to select all options -->
-        <li v-if="props.selectAll && options.length > 3" class="u-ms__option"
-          :class="{ 'u-ms__option--checked': isAllSelected, 'u-ms__option--active': options.length === activeDescendantIndex }"
-          :aria-selected="isAllSelected ? 'true' : 'false'" role="option" :key="options.length" @click="selectAll()">
+        <li
+          v-if="props.selectAll && multiselect && options.length > 3"
+          class="u-ms__option"
+          :class="{
+            'u-ms__option--checked': isAllSelected,
+            'u-ms__option--active': options.length === activeDescendantIndex,
+          }"
+          :aria-selected="isAllSelected ? 'true' : 'false'"
+          role="option"
+          :key="options.length"
+          @click="selectAll()"
+        >
           <slot :option="selectAllOption">
             <div class="flex text-base px-2 py-2 items-center truncate">
               <span aria-hidden="true" class="fake-checkbox"></span>
@@ -29,10 +62,20 @@
             </div>
           </slot>
         </li>
-        <li v-for="(option, index) in options" :ref="setOptionRef" class="u-ms__option"
-          :class="{ 'u-ms__option--checked': isSelected(option), 'u-ms__option--active': index === activeDescendantIndex }"
-          :key="getOptionId(option)" :id="getOptionId(option)" :aria-selected="isSelected(option) ? 'true' : 'false'"
-          role="option" @click="input(option)">
+        <li
+          v-for="(option, index) in options"
+          :ref="setOptionRef"
+          class="u-ms__option"
+          :class="{
+            'u-ms__option--checked': isSelected(option),
+            'u-ms__option--active': index === activeDescendantIndex,
+          }"
+          :key="getOptionId(option)"
+          :id="getOptionId(option)"
+          :aria-selected="isSelected(option) ? 'true' : 'false'"
+          role="option"
+          @click="input(option)"
+        >
           <slot :option="option">
             <div class="flex text-base px-2 py-2 items-center truncate">
               <span aria-hidden="true" class="fake-checkbox"></span>
@@ -40,8 +83,6 @@
             </div>
           </slot>
         </li>
-
-
       </ul>
     </transition>
   </div>
@@ -90,18 +131,17 @@
 </style>
 
 <script setup lang="ts">
-import { computed, PropType, ref, watch, nextTick, onMounted, onUnmounted, reactive, onBeforeUpdate, onUpdated } from 'vue';
-import { boolean } from 'yup/lib/locale';
+import { computed, PropType, ref, watch, nextTick, onBeforeUpdate } from 'vue';
 import { useId } from '../../logic';
 
-const emit = defineEmits(['update:modelValue', 'close'])
+const emit = defineEmits(['update:modelValue', 'close']);
 const props = defineProps({
   modelValue: {
-    type: [String, Object, Array]
+    type: [String, Object, Array],
   },
   options: {
     type: Array as PropType<any[]>,
-    default: () => ([]),
+    default: () => [],
     required: true,
   },
   label: {
@@ -122,11 +162,20 @@ const props = defineProps({
     default: false,
   },
   multiselect: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: true,
   },
-  selectAll: String
+  selectAll: String,
 });
+
+watch(
+  () => props.multiselect,
+  () => {
+    if (!props.multiselect && Array.isArray(props.modelValue) && props.modelValue.length > 1)
+      emit('update:modelValue', [props.modelValue[0]]);
+  },
+  { immediate: true }
+);
 
 // template refs
 const combobox = ref<HTMLElement>();
@@ -134,8 +183,8 @@ const listbox = ref<HTMLElement>();
 
 const selectAllOption = {
   label: props.selectAll,
-  value: 'selectAll'
-}
+  value: 'selectAll',
+};
 
 const isAllSelected = ref(false);
 
@@ -147,7 +196,7 @@ const setOptionRef = (el: HTMLBaseElement) => {
   }
 };
 onBeforeUpdate(() => {
-  optionRefs = []
+  optionRefs = [];
 });
 
 // position of dropdown listbox (top)
@@ -158,21 +207,21 @@ const displayTruncated = computed(() => {
     // should we display a custom all options selected text?
     if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
       isAllSelected.value = true;
-      return props.allMessage
+      return props.allMessage;
     }
     isAllSelected.value = false;
     if (props.modelValue.length > 1) {
       const first = props.modelValue[0];
-      const firstOption = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(first))
-      return (firstOption?.label ?? '') + ` (+${props.modelValue.length - 1})`
+      const firstOption = props.options.find((option) => JSON.stringify(option.value) === JSON.stringify(first));
+      return (firstOption?.label ?? '') + ` (+${props.modelValue.length - 1})`;
     }
     return props.modelValue
-      .map(value => {
+      .map((value) => {
         // deep comparison
-        const option = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(value))
-        return option?.label ?? ''
+        const option = props.options.find((option) => JSON.stringify(option.value) === JSON.stringify(value));
+        return option?.label ?? '';
       })
-      .join(', ')
+      .join(', ');
   }
 });
 
@@ -181,16 +230,16 @@ const displayAll = computed(() => {
     // should we display a custom all options selected text?
     if (props.allMessage && props.options.length > 1 && props.modelValue.length === props.options.length) {
       isAllSelected.value = true;
-      return props.allMessage
+      return props.allMessage;
     }
     isAllSelected.value = false;
     return props.modelValue
-      .map(value => {
+      .map((value) => {
         // deep comparison
-        const option = props.options.find(option => JSON.stringify(option.value) === JSON.stringify(value))
-        return option?.label ?? ''
+        const option = props.options.find((option) => JSON.stringify(option.value) === JSON.stringify(value));
+        return option?.label ?? '';
       })
-      .join(', ')
+      .join(', ');
   }
 });
 
@@ -212,7 +261,7 @@ const activeDescendantIndex = ref(-1);
 watch(open, (isOpen: boolean) => {
   if (isOpen) {
     // compute position dropdown
-    dropdownPosition.value = computeDropdownDirection()
+    dropdownPosition.value = computeDropdownDirection();
     nextTick(() => {
       // focus listbox
       listbox.value?.focus();
@@ -221,10 +270,10 @@ watch(open, (isOpen: boolean) => {
         // set focus to first selected option
         activeDescendantIndex.value = getFirstSelectedOptionIndex(props.modelValue, optionRefs);
       }
-    })
+    });
   } else {
     activeDescendantIndex.value = 0;
-    emit('close')
+    emit('close');
   }
 });
 
@@ -234,22 +283,22 @@ watch(activeDescendantIndex, () => {
     // scroll to first selected option
     scrollToActiveDescendant(optionRefs, listbox.value, activeDescendantIndex.value);
   }
-})
+});
 
 const getFirstSelectedOptionIndex = (modelValue: any, options: HTMLBaseElement[]) => {
-  return options.findIndex(option => option.classList.contains('u-ms__option--checked')) || 0;
+  return options.findIndex((option) => option.classList.contains('u-ms__option--checked')) || 0;
 };
 
 const scrollToActiveDescendant = (options: HTMLBaseElement[], listbox: HTMLElement, activeDescendantIndex: number) => {
   const selectedOption = options[activeDescendantIndex];
   const { offsetTop, clientHeight } = selectedOption;
-  const currentVisibleArea = listbox.scrollTop + listbox.clientHeight
+  const currentVisibleArea = listbox.scrollTop + listbox.clientHeight;
   if (offsetTop < listbox.scrollTop) {
-    listbox.scrollTop = offsetTop
+    listbox.scrollTop = offsetTop;
   } else if (offsetTop + clientHeight > currentVisibleArea) {
-    listbox.scrollTop = offsetTop - listbox.clientHeight + clientHeight
+    listbox.scrollTop = offsetTop - listbox.clientHeight + clientHeight;
   }
-}
+};
 
 const onToggle = () => {
   open.value = !open.value;
@@ -284,8 +333,8 @@ const onSelect = (e: KeyboardEvent) => {
   }
 };
 
-const onHome = () => activeDescendantIndex.value = 0;
-const onEnd = () => activeDescendantIndex.value = props.options.length - 1;
+const onHome = () => (activeDescendantIndex.value = 0);
+const onEnd = () => (activeDescendantIndex.value = props.options.length - 1);
 
 const onBlur = (e: FocusEvent) => {
   // if next focus target is not the combobox element
@@ -303,13 +352,15 @@ const input = (option: any) => {
   if (!Array.isArray(value)) {
     value = [];
   }
-  const { value: optionValue } = option
-  if (value.includes(optionValue)) {
-    value.splice(value.indexOf(optionValue), 1)
-  } else {
-    value.push(optionValue)
-  }
-  emit('update:modelValue', value)
+  const { value: optionValue } = option;
+  if (props.multiselect) {
+    if (value.includes(optionValue)) {
+      value.splice(value.indexOf(optionValue), 1);
+    } else {
+      value.push(optionValue);
+    }
+  } else value = [optionValue];
+  emit('update:modelValue', value);
 };
 
 const selectAll = () => {
@@ -320,18 +371,14 @@ const selectAll = () => {
     isAllSelected.value = false;
   } else {
     isAllSelected.value = true;
-    props.options.forEach(option => {
-      value.push(option.value)
-    })
+    props.options.forEach((option) => {
+      value.push(option.value);
+    });
   }
-  emit('update:modelValue', value)
+  emit('update:modelValue', value);
 };
 
 const isSelected = (option: any) => {
-  if (Array.isArray(props.modelValue)) {
-    return props.modelValue.includes(option.value)
-  } else {
-    return false
-  }
+  return Array.isArray(props.modelValue) && props.modelValue.includes(option.value);
 };
 </script>

@@ -2,10 +2,9 @@
   <article>
     <h2 class="text-3xl border-b pb-4 mb-4 font-medium">Forms & validation</h2>
     <p class="mb-4">
-      Form an form controls (inputs, textarea, select etc..) components with
-      validation and built in accesability. Automatic handling of id:s,
-      aria-describedby, aria-invalid and aria-required. Validates on submit and
-      blur (if dirty). Focuses the first invalid form control on submit.
+      Form an form controls (inputs, textarea, select etc..) components with validation and built in accesability.
+      Automatic handling of id:s, aria-describedby, aria-invalid and aria-required. Validates on submit and blur (if
+      dirty). Focuses the first invalid form control on submit.
     </p>
     <ul class="mb-4 list-disc list-inside">
       <li>
@@ -14,8 +13,7 @@
           href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1"
           target="_blank"
           rel="noopener noreferrer"
-          >Using the aria-describedby property to provide a descriptive label
-          for user interface controls</a
+          >Using the aria-describedby property to provide a descriptive label for user interface controls</a
         >
       </li>
       <li>
@@ -56,9 +54,7 @@
       </li>
     </ul>
 
-    <div
-      class="grid grid-cols-1 items-start justify-items-stretch sm:grid-cols-2 md:grid-cols-3 gap-4"
-    >
+    <div class="grid grid-cols-1 items-start justify-items-stretch sm:grid-cols-2 md:grid-cols-3 gap-4">
       <UCard>
         <UCardHeader>
           <UCardTitle>Form example 1</UCardTitle>
@@ -72,37 +68,12 @@
             :validation-schema="schema1"
             @invalid-submit="onInvalidSubmit"
           >
-            <UFormText
-              placeholder="name placheholder"
-              required
-              label="Enter your name"
-              name="name"
-              type="text"
-            />
-            <UFormText
-              required
-              label="Enter your email"
-              name="email"
-              type="email"
-            />
-            <UFormText
-              required
-              label="Enter your password"
-              name="password"
-              type="password"
-            />
-            <UFormText
-              required
-              label="Confirm your password"
-              name="confirm_password"
-              type="password"
-            />
+            <UFormText placeholder="name placheholder" required label="Enter your name" name="name" type="text" />
+            <UFormText required label="Enter your email" name="email" type="email" />
+            <UFormText required label="Enter your password" name="password" type="password" />
+            <UFormText required label="Confirm your password" name="confirm_password" type="password" />
             <UFormText textarea label="Feedback" name="feedback" />
-            <UFormCheckbox
-              label="I agree to the terms"
-              name="agree"
-              value="yes"
-            >
+            <UFormCheckbox label="I agree to the terms" name="agree" value="yes">
               <template #hint>{{ terms }}</template>
             </UFormCheckbox>
           </UForm>
@@ -127,36 +98,11 @@
             :validation-schema="schema2"
             @invalid-submit="onInvalidSubmit"
           >
-            <UFormText
-              placeholder="name placheholder"
-              required
-              label="Enter your name"
-              name="name"
-              type="text"
-            />
-            <UFormText
-              required
-              label="Enter your email"
-              name="email"
-              type="email"
-            />
-            <UFormSelect
-              label="What gender?"
-              name="gender"
-              :options="genders"
-            />
-            <UFormSelect
-              label="Drinking habits?"
-              name="habit"
-              :options="complex"
-            />
-            <UFormText
-              type="number"
-              min="0"
-              max="4"
-              label="How many"
-              name="many"
-            />
+            <UFormText placeholder="name placheholder" required label="Enter your name" name="name" type="text" />
+            <UFormText required label="Enter your email" name="email" type="email" />
+            <UFormSelect label="What gender?" name="gender" :options="genders" />
+            <UFormSelect label="Drinking habits?" name="habit" :options="complex" />
+            <UFormText type="number" min="0" max="4" label="How many" name="many" />
           </UForm>
         </UCardContent>
         <UCardActions>
@@ -179,41 +125,18 @@
             :validation-schema="schema3"
             @invalid-submit="onInvalidSubmit"
           >
-            <UFormText
-              required
-              label="Your billing address"
-              name="address"
-              type="text"
-            />
-            <UFormText
-              label="C/o address"
-              name="co"
-              type="text"
-              :hint="'C/o means Care of'"
-            />
-            <UFormFieldset
-              legend="Biling options"
-              legend-classes="text-sm font-bold mb-4"
-            >
-              <UFormRadio
-                v-model="selectedBilling"
-                name="billing"
-                v-for="option in billingOptions"
-                :value="option"
-                >{{ option }}</UFormRadio
-              >
+            <UFormText required label="Your billing address" name="address" type="text" />
+            <UFormText label="C/o address" name="co" type="text" :hint="'C/o means Care of'" />
+            <UFormFieldset legend="Biling options" legend-classes="text-sm font-bold mb-4">
+              <UFormRadio v-model="selectedBilling" name="billing" v-for="option in billingOptions" :value="option">{{
+                option
+              }}</UFormRadio>
             </UFormFieldset>
             {{ selectedBilling }}
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton
-            :loading="isLoading"
-            form="third-form"
-            class="w-full"
-            type="submit"
-            >Change Billing</UButton
-          >
+          <UButton :loading="isLoading" form="third-form" class="w-full" type="submit">Change Billing</UButton>
         </UCardActions>
       </UCard>
 
@@ -230,20 +153,14 @@
             @invalid-submit="onInvalidSubmit"
           >
             <UFormFieldset legend="Available dates">
-              <UFormRadio
-                name="booking"
-                v-for="option in timeOptions"
-                :value="option.value"
-                >{{ option.label }}</UFormRadio
-              >
+              <UFormRadio name="booking" v-for="option in timeOptions" :value="option.value">{{
+                option.label
+              }}</UFormRadio>
             </UFormFieldset>
             <UFormFieldset legend="Extra options">
-              <UFormCheckbox
-                name="extra"
-                v-for="option in extraOptions"
-                :value="option.value"
-                >{{ option.label }}</UFormCheckbox
-              >
+              <UFormCheckbox name="extra" v-for="option in extraOptions" :value="option.value">{{
+                option.label
+              }}</UFormCheckbox>
             </UFormFieldset>
           </UForm>
         </UCardContent>
@@ -270,8 +187,7 @@
             <UFormText required label="Address" name="address" type="text" />
             <UFormText label="Name" name="name" type="text" />
             <UFormCheckbox v-model="isStrict" name="strict" value="yes" inline>
-              Strict validation... and a long and awkward label that should
-              display inline
+              Strict validation... and a long and awkward label that should display inline
             </UFormCheckbox>
             {{ isStrict }}
           </UForm>
@@ -312,11 +228,11 @@
 </template>
 
 <script setup lang="ts">
-import { colors } from "@/config/colors";
-import Prism from "@/lib/code-block";
-import { computed, ref } from "vue";
-import * as yup from "yup";
-import UFormFieldset from "../components/u-forms/UFormFieldset.vue";
+import { colors } from '@/config/colors';
+import Prism from '@/lib/code-block';
+import { computed, ref } from 'vue';
+import * as yup from 'yup';
+import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 
 const code = `<UForm
   @submit="onSubmit"
@@ -336,8 +252,7 @@ const code = `<UForm
 </UForm>
 `;
 
-const terms =
-  "Vi kommer att spara alla uppgifter du delger oss i enlighet med gällande regelverk och sånt";
+const terms = 'Vi kommer att spara alla uppgifter du delger oss i enlighet med gällande regelverk och sånt';
 
 const onSubmit = (values: any) => {
   isLoading.value = true;
@@ -348,7 +263,7 @@ const onSubmit = (values: any) => {
 };
 
 const onInvalidSubmit = ({ errors }: { errors: any }) => {
-  console.log("invalid");
+  console.log('invalid');
   //console.log(values); // current form values
   console.log(errors); // a map of field names and their first error message
   //console.log(results); // a detailed map of field names and their validation results
@@ -367,10 +282,10 @@ const initialFormValues2 = {
 };
 
 const initialFormValues3 = {
-  address: "Marklunds kurva 12",
-  billing: "E-mail",
+  address: 'Marklunds kurva 12',
+  billing: 'E-mail',
 };
-const selectedBilling = ref("Paper invoice");
+const selectedBilling = ref('E-mail');
 
 const isLoading = ref(false);
 
@@ -399,7 +314,7 @@ const complex = [
     disabled: true,
   },
 ];
-const billingOptions = ["Paper invoice", "E-mail", "Kivra", "Bank transfer"];
+const billingOptions = ['Paper invoice', 'E-mail', 'Kivra', 'Bank transfer'];
 
 const timeOptions = [
   {
@@ -429,9 +344,9 @@ const timeOptions = [
 ];
 
 const extraOptions = [
-  { label: "Sugar", value: "SUGAR" },
-  { label: "Milk", value: "MILK" },
-  { label: "Honey?", value: "HONEY" },
+  { label: 'Sugar', value: 'SUGAR' },
+  { label: 'Milk', value: 'MILK' },
+  { label: 'Honey?', value: 'HONEY' },
 ];
 
 const schema1 = yup.object().shape({
@@ -441,8 +356,8 @@ const schema1 = yup.object().shape({
   confirm_password: yup
     .string()
     .required()
-    .oneOf([yup.ref("password")], "Passwords do not match"),
-  agree: yup.string().required("Du måste gå med på våra villkor"),
+    .oneOf([yup.ref('password')], 'Passwords do not match'),
+  agree: yup.string().required('Du måste gå med på våra villkor'),
 });
 
 const schema2 = yup.object().shape({
@@ -451,32 +366,23 @@ const schema2 = yup.object().shape({
   gender: yup
     .string()
     .required()
-    .notOneOf(
-      ["None", "Undetermined"],
-      "En könstillhörighet är viktigt! Även om den är normbrytande"
-    ),
+    .notOneOf(['None', 'Undetermined'], 'En könstillhörighet är viktigt! Även om den är normbrytande'),
 });
 
 const schema3 = yup.object().shape({
   address: yup.string().required(),
   co: yup.string().max(10),
-  billing: yup
-    .string()
-    .required()
-    .notOneOf(["Paper invoice"], "Vi är en papperslös organisation 😘"),
+  billing: yup.string().required().notOneOf(['Paper invoice'], 'Vi är en papperslös organisation 😘'),
 });
 
 const schema4 = yup.object().shape({
-  booking: yup
-    .string()
-    .required()
-    .notOneOf(["2"], "Den tiden kan du ju inte välja 😘"),
-  extra: yup.array().required().min(1, "Du måste välja minst en extra"),
+  booking: yup.string().required().notOneOf(['2'], 'Den tiden kan du ju inte välja 😘'),
+  extra: yup.array().required().min(1, 'Du måste välja minst en extra'),
 });
 
 const isStrict = ref(true);
 const computedSchema = computed(() => {
-  console.log("Strict:", isStrict.value);
+  console.log('Strict:', isStrict.value);
   return isStrict.value ? schema5 : schema6;
 });
 
