@@ -1,11 +1,9 @@
 <template>
   <div class="flex flex-col">
-    <label :for="inputId" :class="labelClasses"
-      >{{ label }} {{ required ? "*" : "" }}</label
-    >
+    <label :for="inputId" :class="labelClasses">{{ label }} {{ required ? '*' : '' }}</label>
     <textarea
       v-if="textarea"
-      class="mt-1 u-form-control dark:border-white dark:text-white"
+      class="mt-1 u-form-control placeholder:text-gray-300 dark:border-white dark:text-white dark:placeholder:text-gray-300"
       :class="{ 'border-red': !!errorMessage }"
       :id="inputId"
       :aria-describedby="errorId"
@@ -22,7 +20,7 @@
     <input
       v-else
       v-bind="$attrs"
-      class="mt-1 u-form-control dark:border-white dark:text-white"
+      class="mt-1 u-form-control placeholder:text-gray-300 dark:border-white dark:text-white dark:placeholder:text-gray-300"
       :class="{ 'border-red': !!errorMessage }"
       :type="type"
       :id="inputId"
@@ -46,7 +44,7 @@
     >
       {{ errorMessage }}
     </p>
-    <p :id="errorId" class="self-end text-sm mt-1" v-if="hint && !errorMessage">
+    <p :id="errorId" class="self-start text-sm mt-1" v-if="hint && !errorMessage">
       {{ hint }}
     </p>
   </div>
@@ -60,9 +58,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { useField } from "vee-validate";
-import { ref } from "vue";
-import { useId } from "../../logic";
+import { useField } from 'vee-validate';
+import { ref } from 'vue';
+import { useId } from '../../logic';
 
 const inputId = ref(`u-form-input-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
@@ -74,11 +72,11 @@ const props = defineProps({
   },
   type: {
     type: String,
-    default: "text",
+    default: 'text',
   },
   value: {
     type: String,
-    default: "",
+    default: '',
   },
   name: {
     type: String,
@@ -93,7 +91,7 @@ const props = defineProps({
   },
   autocomplete: {
     type: String,
-    default: "",
+    default: '',
   },
   required: {
     type: Boolean,
@@ -108,7 +106,7 @@ const props = defineProps({
   },
   labelClasses: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
