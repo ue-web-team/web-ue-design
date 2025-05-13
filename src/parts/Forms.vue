@@ -9,7 +9,7 @@
     <ul class="mb-4 list-disc list-inside">
       <li>
         <a
-          class="link"
+          class="link dark:text-lightgreen"
           href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1"
           target="_blank"
           rel="noopener noreferrer"
@@ -18,7 +18,7 @@
       </li>
       <li>
         <a
-          class="link"
+          class="link dark:text-lightgreen"
           href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA21"
           target="_blank"
           rel="noopener noreferrer"
@@ -27,7 +27,7 @@
       </li>
       <li>
         <a
-          class="link"
+          class="link dark:text-lightgreen"
           href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA2"
           target="_blank"
           rel="noopener noreferrer"
@@ -36,7 +36,7 @@
       </li>
       <li>
         <a
-          class="link"
+          class="link dark:text-lightgreen"
           href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19"
           target="_blank"
           rel="noopener noreferrer"
@@ -45,7 +45,7 @@
       </li>
       <li>
         <a
-          class="link"
+          class="link dark:text-lightgreen"
           href="https://www.digitala11y.com/anatomy-of-accessible-forms-errors-of-the-ways/"
           target="_blank"
           rel="noopener noreferrer"
@@ -79,9 +79,7 @@
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton form="first-form" class="w-full" type="submit"
-            >Submit</UButton
-          >
+          <UButton form="first-form" class="w-full" type="submit">Submit</UButton>
         </UCardActions>
       </UCard>
 
@@ -106,9 +104,7 @@
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton form="second-form" class="w-full" type="submit"
-            >Change identity</UButton
-          >
+          <UButton form="second-form" class="w-full" type="submit">Change identity</UButton>
         </UCardActions>
       </UCard>
 
@@ -165,9 +161,7 @@
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton form="fourth-form" class="w-full" type="submit"
-            >Change time</UButton
-          >
+          <UButton form="fourth-form" class="w-full" type="submit">Change time</UButton>
         </UCardActions>
       </UCard>
 
@@ -193,9 +187,7 @@
           </UForm>
         </UCardContent>
         <UCardActions>
-          <UButton form="fifth-form" class="w-full" type="submit"
-            >Change validation</UButton
-          >
+          <UButton form="fifth-form" class="w-full" type="submit">Change validation</UButton>
         </UCardActions>
       </UCard>
 
@@ -270,13 +262,13 @@ const onInvalidSubmit = ({ errors }: { errors: any }) => {
 };
 
 const initialFormValues1 = {
-  feedback: "initial feddback set before",
+  feedback: 'initial feddback set before',
 };
 
 const initialFormValues2 = {
-  name: "Markus Marklund",
-  email: "marcus.marklund@aik.se",
-  gender: "None",
+  name: 'Markus Marklund',
+  email: 'marcus.marklund@aik.se',
+  gender: 'None',
   habit: 1,
   many: 0,
 };
@@ -289,27 +281,20 @@ const selectedBilling = ref('E-mail');
 
 const isLoading = ref(false);
 
-const genders = [
-  "None",
-  "Male",
-  "Female",
-  "Transgender",
-  "Non binary",
-  "Undetermined",
-];
+const genders = ['None', 'Male', 'Female', 'Transgender', 'Non binary', 'Undetermined'];
 const complex = [
   {
-    label: "None at all",
+    label: 'None at all',
     value: 0,
     disabled: false,
   },
   {
-    label: "More than average",
+    label: 'More than average',
     value: 1,
     disabled: false,
   },
   {
-    label: "You dont want to know",
+    label: 'You dont want to know',
     value: 2,
     disabled: true,
   },
@@ -318,7 +303,7 @@ const billingOptions = ['Paper invoice', 'E-mail', 'Kivra', 'Bank transfer'];
 
 const timeOptions = [
   {
-    label: "2012-11-21",
+    label: '2012-11-21',
     duration: {
       hours: 2,
     },
@@ -326,7 +311,7 @@ const timeOptions = [
     disabled: false,
   },
   {
-    label: "2012-11-22",
+    label: '2012-11-22',
     duration: {
       hours: 1,
     },
@@ -334,7 +319,7 @@ const timeOptions = [
     disabled: false,
   },
   {
-    label: "2012-11-23",
+    label: '2012-11-23',
     duration: {
       hours: 3,
     },

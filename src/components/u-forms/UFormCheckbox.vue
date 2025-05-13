@@ -2,7 +2,7 @@
   <div>
     <div :class="[inline ? 'block' : 'flex items-center']">
       <input
-        class="mr-2 u-form-control"
+        class="mr-2 u-form-control dark:checked:bg-lightgreen"
         type="checkbox"
         :id="inputId"
         :aria-describedby="fieldsetErrorId || errorId"
@@ -15,7 +15,7 @@
         @change="handleChange"
       />
       <label :for="inputId" :class="labelClasses">
-        <slot> {{ label }} {{ required ? "*" : "" }} </slot>
+        <slot> {{ label }} {{ required ? '*' : '' }} </slot>
       </label>
     </div>
 
@@ -38,9 +38,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useField } from "vee-validate";
-import { inject, Ref, ref, watch } from "vue";
-import { useId } from "../../logic";
+import { useField } from 'vee-validate';
+import { inject, Ref, ref, watch } from 'vue';
+import { useId } from '../../logic';
 
 const inputId = ref(`u-form-checkbox-${useId()}`);
 const errorId = ref(`u-form-error-${useId()}`);
@@ -72,26 +72,22 @@ const props = defineProps({
   },
   labelClasses: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
-const { checked, errorMessage, handleBlur, handleChange } = useField(
-  props.name,
-  undefined,
-  {
-    type: "checkbox",
-    checkedValue: props.value,
-  }
-);
+const { checked, errorMessage, handleBlur, handleChange } = useField(props.name, undefined, {
+  type: 'checkbox',
+  checkedValue: props.value,
+});
 
 watch(checked as Ref, (newValue) => {
   if (newValue === props.modelValue) {
     return;
   }
-  emit("update:modelValue", newValue);
+  emit('update:modelValue', newValue);
 });
 
 watch(
@@ -104,8 +100,8 @@ watch(
   }
 );
 
-const fieldsetErrorId = inject<Ref>("fieldset-error-id");
-const fieldsetError = inject<Ref>("fieldset-error-message");
+const fieldsetErrorId = inject<Ref>('fieldset-error-id');
+const fieldsetError = inject<Ref>('fieldset-error-message');
 watch(errorMessage, (message) => {
   if (fieldsetError) {
     fieldsetError.value = message;

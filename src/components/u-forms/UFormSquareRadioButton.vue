@@ -15,16 +15,16 @@
     />
     <label
       :for="inputId"
-      class="w-full py-5 px-3 bg-white border border-gray-300 rounded cursor-pointer peer-checked:border-darkgreen peer-checked:bg-lightgreen-100 hover:bg-lightgreen-100 font-semibold text-black text-center"
+      class="w-full py-5 px-3 bg-white border border-gray-300 rounded cursor-pointer peer-checked:border-darkgreen peer-checked:bg-evergreen peer-checked:text-white hover:bg-evergreen hover:text-white font-semibold text-black text-center dark:bg-darkgreen dark:text-white dark:border-darkgreen dark:peer-checked:bg-lightgreen dark:peer-checked:text-typegreen dark:hover:bg-lightgreen dark:hover:text-typegreen"
     >
       {{ label }}
     </label>
   </div>
 </template>
 <script setup lang="ts">
-import { useField } from "vee-validate";
-import { inject, ref, Ref, watch } from "vue";
-import { useId } from "../../logic";
+import { useField } from 'vee-validate';
+import { inject, ref, Ref, watch } from 'vue';
+import { useId } from '../../logic';
 
 const props = defineProps({
   name: {
@@ -45,25 +45,21 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const inputId = ref(`u-form-square-${useId()}`);
 
-const { checked, errorMessage, handleBlur, handleChange } = useField(
-  props.name,
-  undefined,
-  {
-    checkedValue: props.value,
-    type: "radio",
-  }
-);
-
-watch(checked as Ref, (newValue, oldValue) => {
-  newValue && emit("update:modelValue", props.value);
+const { checked, errorMessage, handleBlur, handleChange } = useField(props.name, undefined, {
+  checkedValue: props.value,
+  type: 'radio',
 });
 
-const fieldsetErrorId = inject<Ref>("fieldset-error-id");
-const fieldsetError = inject<Ref>("fieldset-error-message");
+watch(checked as Ref, (newValue, oldValue) => {
+  newValue && emit('update:modelValue', props.value);
+});
+
+const fieldsetErrorId = inject<Ref>('fieldset-error-id');
+const fieldsetError = inject<Ref>('fieldset-error-message');
 watch(errorMessage, (message) => {
   if (fieldsetError) {
     fieldsetError.value = message;

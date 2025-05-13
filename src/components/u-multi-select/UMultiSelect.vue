@@ -90,7 +90,7 @@
 
 <style scoped lang="pcss">
 .u-ms__input {
-  @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-transparent;
+  @apply flex items-center mt-1 pl-3 pr-10 py-2 rounded border-gray-500 border-2 min-h-11 bg-transparent dark:border-white ;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
@@ -102,7 +102,7 @@
 
 .u-ms__list {
   @apply z-50 max-h-[40vh] absolute overflow-y-auto top-[calc(100%+0.25rem)] min-h-11;
-  @apply rounded text-black bg-white shadow-xl border border-black;
+  @apply rounded text-black bg-white shadow-xl border border-black dark:bg-evergreen dark:text-white;
   &.u-ms__list--bottom {
     @apply bottom-[calc(100%-1.25rem)] top-auto;
   }
@@ -115,23 +115,23 @@
 .u-ms__option {
   @apply cursor-pointer whitespace-nowrap;
   &:hover {
-    @apply bg-blue-300 text-white;
+    @apply bg-gray-200 text-black dark:text-white dark:bg-darkgreen;
   }
 }
 .u-ms__option--active {
-  @apply bg-blue-300 text-white;
+  @apply text-black dark:text-white;
 }
 
 .u-ms__option--checked {
   .fake-checkbox {
-    @apply bg-primary;
+    @apply bg-primary dark:bg-lightgreen;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
   }
 }
 </style>
 
 <script setup lang="ts">
-import { computed, PropType, ref, watch, nextTick, onBeforeUpdate } from 'vue';
+import { computed, nextTick, onBeforeUpdate, PropType, ref, watch } from 'vue';
 import { useId } from '../../logic';
 
 const emit = defineEmits(['update:modelValue', 'close']);

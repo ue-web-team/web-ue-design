@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <input
-      class="mr-2 u-form-control"
+      class="mr-2 u-form-control dark:checked:bg-lightgreen"
       type="radio"
       :id="inputId"
       :aria-describedby="fieldsetErrorId"
@@ -14,16 +14,14 @@
       @change="handleChange"
     />
     <label :for="inputId" :class="labelClasses">
-      <slot>
-        {{ label }} {{ required ? '*' : '' }}
-      </slot>
+      <slot> {{ label }} {{ required ? '*' : '' }} </slot>
     </label>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useField } from "vee-validate";
-import { inject, Ref, ref, watch } from "vue";
+import { useField } from 'vee-validate';
+import { inject, Ref, ref, watch } from 'vue';
 import { useId } from '../../logic';
 
 const props = defineProps({
@@ -42,38 +40,32 @@ const props = defineProps({
   },
   required: {
     type: Boolean,
-    default: false
+    default: false,
   },
   labelClasses: {
     type: String,
-    default: ""
-  }
+    default: '',
+  },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const inputId = ref(`u-form-radio-${useId()}`);
 
-const {
-  checked,
-  errorMessage,
-  handleBlur,
-  handleChange,
-} = useField(props.name, undefined, {
+const { checked, errorMessage, handleBlur, handleChange } = useField(props.name, undefined, {
   checkedValue: props.value,
   type: 'radio',
 });
 
 watch(checked as Ref, (newValue, oldValue) => {
-    newValue && emit("update:modelValue", props.value);
+  newValue && emit('update:modelValue', props.value);
 });
 
 const fieldsetErrorId = inject<Ref>('fieldset-error-id');
 const fieldsetError = inject<Ref>('fieldset-error-message');
-watch(errorMessage, message => {
-  if(fieldsetError) {
+watch(errorMessage, (message) => {
+  if (fieldsetError) {
     fieldsetError.value = message;
   }
 });
-
 </script>

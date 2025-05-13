@@ -10,55 +10,13 @@
           <UFormRadio class="px-2" label="I want suris" value="suris" name="radio" />
         </UFormFieldset>
       </UForm>
-      <fieldset class="border-gray-600 border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2">
-        <legend class="px-2">Candy checkbox</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" checked id="id-checkbox-1" />
-          <label for="id-checkbox-1">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" id="id-checkbox-2" />
-          <label for="id-checkbox-2">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" disabled id="id-checkbox-3" />
-          <label for="id-checkbox-3">I want disabled suris</label>
-        </div>
-      </fieldset>
-      <fieldset
-        class="border-gray-600 bg-gray text-white border-2 px-3 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
-        <legend class="px-2 bg-gray rounded">Radio fieldset</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="radio" value="kola" v-model="radio" id="id11" />
-          <label for="id11">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="radio" value="dumle" v-model="radio" id="id22" />
-          <label for="id22">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="radio" disabled value="suris" v-model="radio" id="id32" />
-          <label for="id32">I want disabled suris</label>
-        </div>
-      </fieldset>
-      <fieldset
-        class="border-gray-600 text-white bg-gray border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
-        <legend class="px-2 bg-gray rounded">Candy checkbox</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="checkbox" checked id="id-checkbox-1" />
-          <label for="id-checkbox-1">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="checkbox" id="id-checkbox-2" />
-          <label for="id-checkbox-2">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check" type="checkbox" disabled id="id-checkbox-3" />
-          <label for="id-checkbox-3">I want disabled suris</label>
-        </div>
-      </fieldset>
+      <UForm :initial-values="{ checkbox: 'kola' }">
+        <UFormFieldset legend="Checkbox fieldset">
+          <UFormCheckbox class="px-2" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
+        </UFormFieldset>
+      </UForm>
       <UForm :initial-values="{ test: 'c' }">
         <UFormFieldset legend="Square radio buttons">
           <ul class="grid gap-6 mb-4 md:grid-cols-3">
@@ -68,50 +26,31 @@
           </ul>
         </UFormFieldset>
       </UForm>
+      <div class="w-full">
+        <h3 class="text-xl my-4">Usage</h3>
+        <Prism language="html" class="codesnippet">{{ code }}</Prism>
+      </div>
     </div>
     <h3 class="text-xl my-4">Other inputs</h3>
     <div class="flex flex-wrap gap-4">
-      <label class="block">
-        Select...
-        <select class="mt-1 block min-w-52">
-          <option>Alla</option>
-          <option>Kola</option>
-          <option>Dumle</option>
-        </select>
-      </label>
-      <div>
-        <label class="block">
-          Textarea
-          <textarea class="mt-1 block min-w-52" rows="3"></textarea>
-        </label>
-        <div class="mt-1 text-sm">hjälp eller instruktion här</div>
-      </div>
-      <div>
-        <label class="block">
-          Input text
-          <input type="text" class="mt-1 block min-w-52" rows="3" />
-        </label>
-        <div class="mt-1 text-sm">hjälp eller instruktion här</div>
-      </div>
-      <div>
-        <label class="block">
-          Input date
-          <input type="date" class="mt-1 block min-w-52" rows="3" />
-        </label>
-        <div class="mt-1 text-sm">hjälp eller instruktion här</div>
-      </div>
-      <div>
-        <label class="block">
-          Input email
-          <input type="email" class="mt-1 block min-w-52" rows="3" />
-        </label>
-      </div>
-      <div>
-        <label class="block">
-          Input file
-          <input type="file" class="mt-1 block min-w-52" rows="3" />
-        </label>
-      </div>
+      <UFormSelect label="Select..." name="formSelect" :options="selectoptions" :disabled="false" />
+      <UFormText
+        textarea
+        label="Textarea"
+        name="feedback"
+        placeholder="Skriv in något..."
+        hint="hjälp eller instruktion här"
+      />
+      <UFormText
+        text
+        label="Input text"
+        name="feedback"
+        placeholder="Skriv in något..."
+        hint="hjälp eller instruktion här"
+      />
+      <UFormText type="date" label="Input date" name="date" hint="Välj datum" />
+      <UFormText email label="Input email" name="email" placeholder="namn@domain.se" hint="Skriv in din emailadress" />
+      <UFormText type="file" label="Input file" name="date" />
     </div>
     <h3 class="text-xl my-4">Multiselect</h3>
     <p class="my-4">
@@ -145,10 +84,37 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
-import UFormFancySlider from '../components/u-forms/UFormFancySlider.vue';
 import UForm from '../components/u-forms/UForm.vue';
+import UFormCheckbox from '../components/u-forms/UFormCheckbox.vue';
+import UFormFancySlider from '../components/u-forms/UFormFancySlider.vue';
+import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 import UFormRadio from '../components/u-forms/UFormRadio.vue';
+import UFormSelect from '../components/u-forms/UFormSelect.vue';
+import Prism from '../lib/code-block';
+
+const code = `<!-- Possibility to modify div, fieldset and legend by different props -->\n<!-- Props: show-border (default is true), legend (mandatory) -->
+        <UFormFieldset
+          legend="Checkbox fieldset"
+          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
+          class="text-white"
+          fieldset-class="bg-evergreen dark:bg-darkgreen"
+          hint="hjälp eller instruktion här"
+          show-border="true"
+        >
+          <UFormCheckbox class="px-2" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
+        </UFormFieldset>
+
+<!-- SquareRadioButton, Props: required (default is false) -->          
+        <UFormFieldset legend="Square radio buttons">
+          <ul class="grid gap-6 mb-4 md:grid-cols-3">
+            <UFormSquareRadioButton label="Hello" name="test" value="a" />
+            <UFormSquareRadioButton label="World" name="test" value="b" />
+            <UFormSquareRadioButton label="!" name="test" value="c" />
+          </ul>
+        </UFormFieldset>
+`;
 
 const selectKind = ref('multi');
 const multiselect = computed(() => selectKind.value == 'multi');
@@ -199,6 +165,23 @@ const options = [
   {
     value: 'b14',
     label: 'More2',
+  },
+];
+const selectoptions = [
+  {
+    label: 'Alla',
+    value: 0,
+    disabled: false,
+  },
+  {
+    label: 'Kola',
+    value: 1,
+    disabled: false,
+  },
+  {
+    label: 'Dumle',
+    value: 2,
+    disabled: true,
   },
 ];
 </script>
