@@ -17,30 +17,6 @@
           <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
         </UFormFieldset>
       </UForm>
-      <UForm :initial-values="{ radio: 'kola' }">
-        <UFormFieldset
-          legend="Radio fieldset 2"
-          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
-          class="text-white"
-          fieldset-class="bg-evergreen dark:bg-darkgreen"
-        >
-          <UFormRadio class="px-2 !border-white" label="I want kola" value="kola" name="radio" />
-          <UFormRadio class="px-2" label="I want dumle" value="dumle" name="radio" />
-          <UFormRadio class="px-2" label="I want suris" value="suris" name="radio" />
-        </UFormFieldset>
-      </UForm>
-      <UForm :initial-values="{ checkbox: 'kola' }">
-        <UFormFieldset
-          legend="Checkbox fieldset 2"
-          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
-          class="text-white"
-          fieldset-class="bg-evergreen dark:bg-darkgreen"
-        >
-          <UFormCheckbox class="px-2 !border-white" label="I want kola" value="kola" name="checkbox" />
-          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
-          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
-        </UFormFieldset>
-      </UForm>
       <UForm :initial-values="{ test: 'c' }">
         <UFormFieldset legend="Square radio buttons">
           <ul class="grid gap-6 mb-4 md:grid-cols-3">
@@ -50,8 +26,10 @@
           </ul>
         </UFormFieldset>
       </UForm>
-      <h3 class="text-xl my-4">Usage</h3>
-      <Prism language="html" class="codesnippet">{{ code }}</Prism>
+      <div class="w-full">
+        <h3 class="text-xl my-4">Usage</h3>
+        <Prism language="html" class="codesnippet">{{ code }}</Prism>
+      </div>
     </div>
     <h3 class="text-xl my-4">Other inputs</h3>
     <div class="flex flex-wrap gap-4">
@@ -116,14 +94,14 @@ import Prism from '../lib/code-block';
 
 const code = `<!-- Possibility to modify div, fieldset and legend by different props -->\n<!-- Props: show-border (default is true), legend (mandatory) -->
         <UFormFieldset
-          legend="Checkbox fieldset 2"
+          legend="Checkbox fieldset"
           legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
           class="text-white"
           fieldset-class="bg-evergreen dark:bg-darkgreen"
           hint="hjälp eller instruktion här"
           show-border="true"
         >
-          <UFormCheckbox class="px-2 !border-white" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want kola" value="kola" name="checkbox" />
           <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
           <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
         </UFormFieldset>
