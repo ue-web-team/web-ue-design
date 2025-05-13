@@ -50,6 +50,8 @@
           </ul>
         </UFormFieldset>
       </UForm>
+      <h3 class="text-xl my-4">Usage</h3>
+      <Prism language="html" class="codesnippet">{{ code }}</Prism>
     </div>
     <h3 class="text-xl my-4">Other inputs</h3>
     <div class="flex flex-wrap gap-4">
@@ -110,6 +112,31 @@ import UFormFancySlider from '../components/u-forms/UFormFancySlider.vue';
 import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 import UFormRadio from '../components/u-forms/UFormRadio.vue';
 import UFormSelect from '../components/u-forms/UFormSelect.vue';
+import Prism from '../lib/code-block';
+
+const code = `<!-- Possibility to modify div, fieldset and legend by different classes -->\n<!-- show-border (default is true), legend (mandatory) -->
+        <UFormFieldset
+          legend="Checkbox fieldset 2"
+          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
+          class="text-white"
+          fieldset-class="bg-evergreen dark:bg-darkgreen"
+          hint="hjälp eller instruktion här"
+          show-border="true"
+        >
+          <UFormCheckbox class="px-2 !border-white" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
+        </UFormFieldset>
+
+<!-- SquareRadioButton, also required=false (default) -->          
+        <UFormFieldset legend="Square radio buttons">
+          <ul class="grid gap-6 mb-4 md:grid-cols-3">
+            <UFormSquareRadioButton label="Hello" name="test" value="a" />
+            <UFormSquareRadioButton label="World" name="test" value="b" />
+            <UFormSquareRadioButton label="!" name="test" value="c" />
+          </ul>
+        </UFormFieldset>
+`;
 
 const selectKind = ref('multi');
 const multiselect = computed(() => selectKind.value == 'multi');
