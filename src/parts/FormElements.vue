@@ -114,7 +114,7 @@ import UFormRadio from '../components/u-forms/UFormRadio.vue';
 import UFormSelect from '../components/u-forms/UFormSelect.vue';
 import Prism from '../lib/code-block';
 
-const code = `<!-- Possibility to modify div, fieldset and legend by different classes -->\n<!-- show-border (default is true), legend (mandatory) -->
+const code = `<!-- Possibility to modify div, fieldset and legend by different props -->\n<!-- Props: show-border (default is true), legend (mandatory) -->
         <UFormFieldset
           legend="Checkbox fieldset 2"
           legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
@@ -128,7 +128,7 @@ const code = `<!-- Possibility to modify div, fieldset and legend by different c
           <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
         </UFormFieldset>
 
-<!-- SquareRadioButton, also required=false (default) -->          
+<!-- SquareRadioButton, Props: required (default is false) -->          
         <UFormFieldset legend="Square radio buttons">
           <ul class="grid gap-6 mb-4 md:grid-cols-3">
             <UFormSquareRadioButton label="Hello" name="test" value="a" />
