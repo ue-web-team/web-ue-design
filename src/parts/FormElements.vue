@@ -10,55 +10,37 @@
           <UFormRadio class="px-2" label="I want suris" value="suris" name="radio" />
         </UFormFieldset>
       </UForm>
-      <fieldset class="border-gray-600 dark:border-white border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2">
-        <legend class="px-2">Candy checkbox</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" checked id="id-checkbox-1" />
-          <label for="id-checkbox-1">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" id="id-checkbox-2" />
-          <label for="id-checkbox-2">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input type="checkbox" disabled id="id-checkbox-3" />
-          <label for="id-checkbox-3">I want disabled suris</label>
-        </div>
-      </fieldset>
-      <fieldset
-        class="border-gray-600 bg-evergreen dark:bg-darkgreen text-white border-2 px-3 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
-        <legend class="px-2 bg-evergreen rounded dark:bg-darkgreen">Radio fieldset</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="radio" value="kola" v-model="radio" id="id11" />
-          <label for="id11">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="radio" value="dumle" v-model="radio" id="id22" />
-          <label for="id22">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="radio" disabled value="suris" v-model="radio" id="id32" />
-          <label for="id32">I want disabled suris</label>
-        </div>
-      </fieldset>
-      <fieldset
-        class="border-gray-600 text-white bg-evergreen dark:bg-darkgreen border-2 px-2 pt-2 pb-4 rounded-md inline-flex flex-col gap-2"
-      >
-        <legend class="px-2 bg-evergreen rounded dark:bg-darkgreen">Candy checkbox</legend>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="checkbox" checked id="id-checkbox-1" />
-          <label for="id-checkbox-1">I want kola</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="checkbox" id="id-checkbox-2" />
-          <label for="id-checkbox-2">I want dumle</label>
-        </div>
-        <div class="pl-2 flex items-center gap-2">
-          <input class="light-check border-white" type="checkbox" disabled id="id-checkbox-3" />
-          <label for="id-checkbox-3">I want disabled suris</label>
-        </div>
-      </fieldset>
+      <UForm :initial-values="{ checkbox: 'kola' }">
+        <UFormFieldset legend="Checkbox fieldset">
+          <UFormCheckbox class="px-2" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
+        </UFormFieldset>
+      </UForm>
+      <UForm :initial-values="{ radio: 'kola' }">
+        <UFormFieldset
+          legend="Radio fieldset 2"
+          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
+          class="text-white"
+          fieldset-class="bg-evergreen dark:bg-darkgreen"
+        >
+          <UFormRadio class="px-2 !border-white" label="I want kola" value="kola" name="radio" />
+          <UFormRadio class="px-2" label="I want dumle" value="dumle" name="radio" />
+          <UFormRadio class="px-2" label="I want suris" value="suris" name="radio" />
+        </UFormFieldset>
+      </UForm>
+      <UForm :initial-values="{ checkbox: 'kola' }">
+        <UFormFieldset
+          legend="Checkbox fieldset 2"
+          legend-classes="bg-evergreen rounded-md dark:bg-darkgreen"
+          class="text-white"
+          fieldset-class="bg-evergreen dark:bg-darkgreen"
+        >
+          <UFormCheckbox class="px-2 !border-white" label="I want kola" value="kola" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want dumle" value="dumle" name="checkbox" />
+          <UFormCheckbox class="px-2" label="I want suris" value="suris" name="checkbox" />
+        </UFormFieldset>
+      </UForm>
       <UForm :initial-values="{ test: 'c' }">
         <UFormFieldset legend="Square radio buttons">
           <ul class="grid gap-6 mb-4 md:grid-cols-3">
@@ -123,6 +105,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import UForm from '../components/u-forms/UForm.vue';
+import UFormCheckbox from '../components/u-forms/UFormCheckbox.vue';
 import UFormFancySlider from '../components/u-forms/UFormFancySlider.vue';
 import UFormFieldset from '../components/u-forms/UFormFieldset.vue';
 import UFormRadio from '../components/u-forms/UFormRadio.vue';
