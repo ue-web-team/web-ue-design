@@ -36,7 +36,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@fontsource/raleway": "^4.5.0",
     "@iconify/json": "^1.1.432",
     "@rollup/plugin-typescript": "^8.3.1",
     "@tailwindcss/typography": "^0.5.15",

@@ -1,8 +1,6 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import "@fontsource/raleway/variable.css"
-import './assets/base.postcss'
-import "prismjs/themes/prism-tomorrow.css";
+import 'prismjs/themes/prism-tomorrow.css';
+import { createApp } from 'vue';
+import App from './App.vue';
+import './assets/base.postcss';
 
-
-createApp(App).mount('#app')
+createApp(App).mount('#app');
