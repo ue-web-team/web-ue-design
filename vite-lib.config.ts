@@ -1,12 +1,13 @@
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
-import typescript from '@rollup/plugin-typescript'
-import fs from 'fs'
+import typescript from '@rollup/plugin-typescript';
+import vue from '@vitejs/plugin-vue';
+import fs from 'fs';
+import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  assetsInclude: ['**/*.otf'],
   plugins: [
     typescript({
       tsconfig: './tsconfig.json',
@@ -23,18 +24,15 @@ export default defineConfig({
           resolve('./src/config/theme.ts'),
           resolve('./dist/theme.ts')
         );*/
-        fs.copyFileSync(
-          resolve('./src/assets/base.postcss'),
-          resolve('./dist/base.postcss')
-        );
-      }
-    }
+        fs.copyFileSync(resolve('./src/assets/base.postcss'), resolve('./dist/base.postcss'));
+      },
+    },
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(__dirname, './src'),
     },
-    dedupe: ['vue']
+    dedupe: ['vue'],
   },
   build: {
     lib: {
@@ -54,4 +52,4 @@ export default defineConfig({
       },
     },
   },
-})
+});
