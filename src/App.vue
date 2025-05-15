@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { isDark } from './logic';
+import Logo from './parts/Logo.vue';
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import { isDark } from './logic';
       </UIconButton>
     </header>
     <main class="grid grid-cols-1 bg-white rounded-xl gap-8 mb-28 p-8 dark:bg-evergreen">
+      <Logo></Logo>
       <Colors></Colors>
       <Buttons></Buttons>
       <IconButtons></IconButtons>
