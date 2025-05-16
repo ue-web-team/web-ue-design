@@ -27,6 +27,18 @@ export default defineConfig({
         fs.copyFileSync(resolve('./src/assets/base.postcss'), resolve('./dist/base.postcss'));
       },
     },
+    {
+      name: 'copy favicons',
+      generateBundle() {
+        const src = resolve(__dirname, './src/assets/favicons');
+        const dest = resolve(__dirname, './dist/favicons');
+        fs.mkdirSync(dest, { recursive: true });
+
+        fs.copyFileSync(`${src}/favicon.svg`, `${dest}/favicon.svg`);
+        fs.copyFileSync(`${src}/favicon.ico`, `${dest}/favicon.ico`);
+        fs.copyFileSync(`${src}/apple-touch-icon.png`, `${dest}/apple-touch-icon.png`);
+      },
+    },
   ],
   resolve: {
     alias: {
@@ -38,6 +50,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'uedesign',
+      fileName: (format) => `ue-design.${format}.js`, // this matches your package.json
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

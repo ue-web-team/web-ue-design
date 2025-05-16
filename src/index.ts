@@ -25,8 +25,14 @@ export { default as ULoadingOverlay } from '@/components/u-loading-overlay/ULoad
 export { default as ULogo } from '@/components/u-logo/ULogo.vue';
 export { default as UTransitionHeight } from '@/components/u-transition-height/UTransitionHeight.vue';
 
+// hooks
+export { default as useFavicons } from './utils/useFavicon';
+
+//Types
+
 export { colors } from '@/config/colors';
 export { theme } from '@/config/theme';
 export { default as forms } from '@/plugin';
+export { favicons } from './utils/favicons';
 import '@/assets/base.postcss';
 import '@/assets/borna.css';

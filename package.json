@@ -6,7 +6,8 @@
   "author": "Björn Yttergren et al",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "dist/favicons"
   ],
   "types": "./dist/index.d.ts",
   "main": "./dist/ue-design.es.js",
@@ -14,7 +15,8 @@
   "exports": {
     ".": {
       "import": "./dist/ue-design.es.js",
-      "require": "./dist/ue-design.umd.js"
+      "require": "./dist/ue-design.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
