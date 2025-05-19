@@ -33,6 +33,6 @@ export { default as useFavicons } from './utils/useFavicon';
 export { colors } from '@/config/colors';
 export { theme } from '@/config/theme';
 export { default as forms } from '@/plugin';
-export { favicons } from './utils/favicons';
+
 import '@/assets/base.postcss';
 import '@/assets/borna.css';
