@@ -28,7 +28,8 @@ export { default as UTransitionHeight } from '@/components/u-transition-height/U
 // hooks
 export { default as useFavicons } from './utils/useFavicon';
 
-//Types
+// Plugins
+export { default as tippyPlugin } from './plugin/tippy-plugin';
 
 export { colors } from '@/config/colors';
 export { theme } from '@/config/theme';
