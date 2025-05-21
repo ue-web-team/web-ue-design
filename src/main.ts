@@ -7,7 +7,7 @@ import '../tippy.css';
 import App from './App.vue';
 import './assets/base.postcss';
 import './assets/borna.css';
-import tooltip from './directives/tooltip';
+
 // import './tooltip.css';
 
 createApp(App)
@@ -26,6 +26,4 @@ createApp(App)
       }, // => Global default options * see all props
     }
   )
-
-  .directive('tooltip', tooltip)
   .mount('#app');
