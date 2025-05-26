@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="focus-style"
-    @pointerdown="onDown"
-    :class="buttonClasses"
-    :disabled="isDisabled"
-  >
+  <button class="focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled">
     <span v-if="loading" class="mr-2 animate-spin">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -16,10 +11,7 @@
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 24 24"
       >
-        <path
-          d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z"
-          fill="currentColor"
-        />
+        <path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z" fill="currentColor" />
       </svg>
     </span>
     <span class="mr-2" v-if="$slots.before && !loading">
@@ -33,14 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from "vue";
+import { computed, PropType } from 'vue';
 
 const props = defineProps({
   kind: {
-    type: String as PropType<string>,
-    default: "dark",
-    validator: (value: string) =>
-      ["dark", "light", "white", "ghost", "warn"].indexOf(value) !== -1,
+    type: String as PropType<'dark' | 'light' | 'white' | 'ghost' | 'warn'>,
+    default: 'dark',
+    validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
   },
 
   outline: {
@@ -69,12 +60,7 @@ const props = defineProps({
 });
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
-  return [
-    props.kind,
-    props.outline ? "outline-type" : "",
-    props.hover ? "hover" : "",
-    props.active ? "active" : "",
-  ];
+  return [props.kind, props.outline ? 'outline-type' : '', props.hover ? 'hover' : '', props.active ? 'active' : ''];
 });
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)

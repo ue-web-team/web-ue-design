@@ -1,11 +1,6 @@
 <template>
   <div class="h-1 w-full">
-    <transition
-      v-on:before-enter="beforeEnter"
-      v-on:enter="enter"
-      v-on:after-enter="afterEnter"
-      v-bind:css="false"
-    >
+    <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter" v-bind:css="false">
       <div class="top-progress" :style="barStyle" v-if="show">
         <div class="peg"></div>
       </div>
@@ -14,154 +9,116 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
+import { computed, onMounted, ref, watch, type CSSProperties } from 'vue';
 
 const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
 const queue = (() => {
-  const pending: any[] = []
+  const pending: ((next: () => void) => void)[] = [];
   function next() {
-    let fn = pending.shift()
-    if (fn) {
-      fn(next)
-    }
+    const fn = pending.shift();
+    if (fn) fn(next);
   }
-  return (fn: any) => {
-    pending.push(fn)
-    if (pending.length === 1) {
-      next()
-    }
-  }
+  return (fn: (next: () => void) => void) => {
+    pending.push(fn);
+    if (pending.length === 1) next();
+  };
 })();
 
-const props = defineProps(
-  {
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    speed: {
-      type: Number,
-      default: 350
-    },
-    color: {
-      type: String,
-      default: '#29d'
-    },
-    colorShadow: String,
-    errorColor: {
-      type: String,
-      default: '#f44336'
-    },
-    trickle: {
-      type: Boolean,
-      default: true
-    },
-    trickleSpeed: {
-      type: Number,
-      default: 250
-    },
-    easing: {
-      type: String,
-      default: 'linear'
-    },
-    height: {
-      type: Number,
-      default: 3
-    },
-    minimum: {
-      type: Number,
-      default: 0.8
-    },
-    maximum: {
-      type: Number,
-      default: 97.5
-    },
-    zIndex: {
-      type: Number,
-      default: 9999
-    }
-  }
-);
+const props = defineProps<{
+  loading?: boolean;
+  speed?: number;
+  color?: string;
+  colorShadow?: string;
+  errorColor?: string;
+  trickle?: boolean;
+  trickleSpeed?: number;
+  easing?: string;
+  height?: number;
+  minimum?: number;
+  maximum?: number;
+  zIndex?: number;
+}>();
 
 const error = ref(false);
 const show = ref(false);
 const progress = ref(0);
 const opacity = ref(1);
-const status = ref(null);
+const status = ref<number | null>(null);
 const isPaused = ref(false);
 
-watch(() => props.loading, (loading) => {
-  loading ? start() : done()
-});
+watch(
+  () => props.loading,
+  (loading) => {
+    loading ? start() : done();
+  }
+);
 
-const progressColor = computed(() => error.value ? props.errorColor : props.color);
+const progressColor = computed(() => (error.value ? props.errorColor ?? '#f44336' : props.color ?? '#29d'));
+
 const isStarted = computed(() => typeof status.value === 'number');
-const barStyle = computed(() => ({
+
+const barStyle = computed<CSSProperties>(() => ({
   position: 'relative',
   top: '0',
   left: '0',
   right: '0',
   width: `${progress.value}%`,
-  height: `${props.height}px`,
+  height: `${props.height ?? 3}px`,
   backgroundColor: progressColor.value,
-  transition: `all ${props.speed}ms ${props.easing}`,
+  transition: `all ${props.speed ?? 350}ms ${props.easing ?? 'linear'}`,
   opacity: `${opacity.value}`,
-  //zIndex: `${props.zIndex}`
+  // zIndex: props.zIndex?.toString() ?? '9999',
 }));
 
-const beforeEnter = (el) => {
-  opacity.value = 0
-  progress.value = 0
+const beforeEnter = () => {
+  opacity.value = 0;
+  progress.value = 0;
 };
 
-const enter = (el, done) => {
-  opacity.value = 1
+const enter = (_el: Element, done: () => void) => {
+  opacity.value = 1;
   done();
 };
 
-const afterEnter = (el) => {
-  _runStart()
+const afterEnter = (_el: Element) => {
+  _runStart();
 };
 
 const _work = () => {
   setTimeout(() => {
-    if (!isStarted.value || isPaused.value) {
-      return
-    }
+    if (!isStarted.value || isPaused.value) return;
     increase();
     _work();
-  }, props.trickleSpeed)
+  }, props.trickleSpeed ?? 250);
 };
 
 const _runStart = () => {
-  status.value = (progress.value === 100 ? null : progress.value)
-  if (props.trickle) {
-    _work()
+  status.value = progress.value === 100 ? null : progress.value;
+  if (props.trickle ?? true) {
+    _work();
   }
 };
 
 const start = () => {
-  isPaused.value = false
+  isPaused.value = false;
   if (show.value) {
-    _runStart()
+    _runStart();
   } else {
-    show.value = true
+    show.value = true;
   }
 };
 
-const set = (amount) => {
+const set = (amount: number) => {
   isPaused.value = false;
-  let o;
+  let o: number;
   if (isStarted.value) {
-    o = amount < progress.value
-      ? clamp(amount, 0, 100)
-      : clamp(amount, props.minimum, 100);
+    o = amount < progress.value ? clamp(amount, 0, 100) : clamp(amount, props.minimum ?? 0.8, 100);
   } else {
     o = 0;
   }
-  status.value = (o === 100 ? null : o);
-  queue(next => {
+  status.value = o === 100 ? null : o;
+  queue((next) => {
     progress.value = o;
     if (o === 100) {
       setTimeout(() => {
@@ -169,37 +126,35 @@ const set = (amount) => {
         setTimeout(() => {
           show.value = false;
           error.value = false;
-          next()
-        }, props.speed)
-      }, props.speed)
+          next();
+        }, props.speed ?? 350);
+      }, props.speed ?? 350);
     } else {
-      setTimeout(next, props.speed)
+      setTimeout(next, props.speed ?? 350);
     }
-  })
+  });
 };
 
-const increase = (amount) => {
+const increase = (amount?: number) => {
   let o = progress.value;
   if (o < 100 && typeof amount !== 'number') {
     if (o >= 0 && o < 25) {
-      amount = Math.random() * 3 + 3
+      amount = Math.random() * 3 + 3;
     } else if (o >= 25 && o < 50) {
-      amount = Math.random() * 3
+      amount = Math.random() * 3;
     } else if (o >= 50 && o < 85) {
-      amount = Math.random() * 2
+      amount = Math.random() * 2;
     } else if (o >= 85 && o < 99) {
-      amount = 0.5
+      amount = 0.5;
     } else {
-      amount = 0
+      amount = 0;
     }
   }
-  set(clamp(o + amount, 0, props.maximum));
+  set(clamp(o + (amount ?? 0), 0, props.maximum ?? 97.5));
 };
 
-const decrease = (amount) => {
-  if (progress.value === 0) {
-    return
-  }
+const decrease = (amount: number) => {
+  if (progress.value === 0) return;
   increase(-amount);
 };
 
@@ -208,7 +163,7 @@ const done = () => {
 };
 
 const fail = () => {
-  error.value = true
+  error.value = true;
   done();
 };
 
@@ -217,7 +172,6 @@ onMounted(() => {
     start();
   }
 });
-
 </script>
 
 <style lang="pcss" scoped>

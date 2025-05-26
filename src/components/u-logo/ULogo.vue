@@ -75,20 +75,16 @@
   </svg>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  props: {
-    short: {
-      type: Boolean,
-      default: false,
-    },
-    color: {
-      type: Boolean,
-      default: true,
-    },
+<script setup lang="ts">
+defineProps({
+  short: {
+    type: Boolean,
+    default: false,
   },
-  setup() {},
+  color: {
+    type: Boolean,
+    default: true,
+  },
 });
 </script>
 

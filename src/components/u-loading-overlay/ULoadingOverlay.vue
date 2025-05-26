@@ -13,13 +13,7 @@
       <div class="ld-icon">
         <slot name="before" />
         <slot name="loader">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 30 30"
-            :height="height"
-            :width="width"
-            :fill="color"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" :height="height" :width="width" :fill="color">
             <rect x="0" y="13" width="4" height="5">
               <animate
                 attributeName="height"
@@ -83,9 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, PropType, ref, render, watch } from "vue";
-import { colors } from "@/config/colors";
-
+import { onBeforeUnmount, onMounted, PropType, ref, watch } from 'vue';
+import { colors } from '../../config/colors';
 const props = defineProps({
   modelValue: Boolean,
   contained: {
@@ -105,7 +98,7 @@ const props = defineProps({
   },
   transition: {
     type: String,
-    default: "fade",
+    default: 'fade',
   },
   zIndex: {
     type: Number,
@@ -125,7 +118,7 @@ const props = defineProps({
   },
   bgColor: {
     type: String,
-    default: colors.gray[700]
+    default: colors.gray[700],
   },
   programmatic: Boolean,
 });
@@ -141,37 +134,39 @@ watch(
 const root = ref<HTMLElement>();
 
 const onFocusIn = (event: FocusEvent) => {
-      // Do not trap if inactive
-      if (!isActive) return;
+  // Do not trap if inactive
+  if (!isActive) return;
 
-      if (
-        // Event target is the loading div element itself
-        event.target === root.value ||
-        // Event target is inside the loading div
-        root.value?.contains(event.target as Node)
-      ) return;
+  if (
+    // Event target is the loading div element itself
+    event.target === root.value ||
+    // Event target is inside the loading div
+    root.value?.contains(event.target as Node)
+  )
+    return;
 
-      // Use container as parent when available otherwise use parent element when isFullPage is false
-      let parent = props.container ? props.container : (props.contained ? root.value?.parentElement :null );
+  // Use container as parent when available otherwise use parent element when isFullPage is false
+  let parent = props.container ? props.container : props.contained ? root.value?.parentElement : null;
 
-      if (
-        // Always prevent when loading is full screen
-        !props.contained ||
-        // When a parent exist means loader is running inside a container
-        // When loading is NOT full screen and event target is inside the given container
-        (parent && parent.contains(event.target))
-      ) {
-        event.preventDefault();
-        root.value?.focus()
-      }
-}
+  if (
+    // Always prevent when loading is full screen
+    !props.contained ||
+    // When a parent exist means loader is running inside a container
+    // When loading is NOT full screen and event target is inside the given container
+    // @ts-ignore
+    (parent && parent.contains(event.target))
+  ) {
+    event.preventDefault();
+    root.value?.focus();
+  }
+};
 
 onMounted(() => {
-  document.addEventListener('focusin', onFocusIn)
-})
+  document.addEventListener('focusin', onFocusIn);
+});
 onBeforeUnmount(() => {
-  document.removeEventListener('focusin', onFocusIn)
-})
+  document.removeEventListener('focusin', onFocusIn);
+});
 </script>
 
 <style scoped>

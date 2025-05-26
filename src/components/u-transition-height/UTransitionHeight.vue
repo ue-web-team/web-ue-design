@@ -1,39 +1,35 @@
 <template>
-  <transition
-    name="u-expand"
-    @enter="enter"
-    @after-enter="afterEnter"
-    @leave="leave"
-  >
+  <transition name="u-expand" @enter="enter" @after-enter="afterEnter" @leave="leave">
     <slot />
   </transition>
 </template>
 
-<script setup lang="ts">import { PropType } from 'vue';
-
+<script setup lang="ts">
+import { PropType } from 'vue';
 
 const props = defineProps({
   duration: {
     type: Number as PropType<Number>,
-    default: 300
-  }
-})
+    default: 300,
+  },
+});
 
-const enter = (element: HTMLElement) => {
+const enter = (el: Element) => {
+  const element = el as HTMLElement;
   const width = getComputedStyle(element).width;
 
   element.style.width = width;
-  element.style.position = "absolute";
-  element.style.visibility = "hidden";
-  element.style.height = "auto";
+  element.style.position = 'absolute';
+  element.style.visibility = 'hidden';
+  element.style.height = 'auto';
 
   const height = getComputedStyle(element).height;
 
-  element.style.width = "";
-  element.style.position = "";
-  element.style.visibility = "";
-  element.style.height = "0";
-  element.style.transitionDuration = `${props.duration}ms`
+  element.style.width = '';
+  element.style.position = '';
+  element.style.visibility = '';
+  element.style.height = '0';
+  element.style.transitionDuration = `${props.duration}ms`;
 
   // Force repaint to make sure the
   // animation is triggered correctly.
@@ -49,21 +45,23 @@ const enter = (element: HTMLElement) => {
   });
 };
 
-const afterEnter = (element: HTMLElement) => {
-  element.style.height = "auto";
+const afterEnter = (el: Element) => {
+  const element = el as HTMLElement;
+  element.style.height = 'auto';
 };
-const leave = (element: HTMLElement) => {
+const leave = (el: Element) => {
+  const element = el as HTMLElement;
   const height = getComputedStyle(element).height;
 
   element.style.height = height;
-  element.style.transitionDuration = `${props.duration}ms`
+  element.style.transitionDuration = `${props.duration}ms`;
 
   // Force repaint to make sure the
   // animation is triggered correctly.
   getComputedStyle(element).height;
 
   requestAnimationFrame(() => {
-    element.style.height = "0";
+    element.style.height = '0';
   });
 };
 </script>

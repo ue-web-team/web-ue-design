@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import ULogo from '../components/u-logo/ULogo.vue';
 
-import Prism from '@/lib/code-block';
+import Prism from '../lib/code-block';
 
 const code = `
 <ULogo class="h-10"  />

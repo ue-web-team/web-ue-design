@@ -1,32 +1,33 @@
-import typescript from '@rollup/plugin-typescript';
 import vue from '@vitejs/plugin-vue';
 import fs from 'fs';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   assetsInclude: ['**/*.otf'],
   plugins: [
-    typescript({
-      tsconfig: './tsconfig.json',
-    }),
     vue(),
+    dts({
+      insertTypesEntry: true,
+      copyDtsFiles: true,
+    }),
     visualizer({
       open: false,
       title: 'UCL Bundle Visualizer',
     }),
-    {
-      name: 'copy tailwind config',
-      generateBundle() {
-        /*fs.copyFileSync(
-          resolve('./src/config/theme.ts'),
-          resolve('./dist/theme.ts')
-        );*/
-        fs.copyFileSync(resolve('./src/assets/base.postcss'), resolve('./dist/base.postcss'));
-      },
-    },
+    // {
+    //   name: 'copy tailwind config',
+    //   generateBundle() {
+    //     /*fs.copyFileSync(
+    //       resolve('./src/config/theme.ts'),
+    //       resolve('./dist/theme.ts')
+    //     );*/
+    //     fs.copyFileSync(resolve('./src/assets/base.postcss'), resolve('./dist/base.postcss'));
+    //   },
+    // },
     {
       name: 'copy favicons',
       generateBundle() {
@@ -40,6 +41,10 @@ export default defineConfig({
       },
     },
   ],
+  css: {
+    postcss: './postcss.config.js',
+  },
+
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -51,6 +56,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'uedesign',
       fileName: (format) => `ue-design.${format}.js`, // this matches your package.json
+      formats: ['es', 'umd'],
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
