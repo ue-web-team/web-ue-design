@@ -75,7 +75,7 @@ button {
       @apply bg-evergreen text-white dark:bg-sun/85 dark:text-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen;
+      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen pointer-events-none;
     }
   }
   &.light {
@@ -87,7 +87,7 @@ button {
       @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen;
+      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen pointer-events-none;
     }
   }
   &.white {
@@ -99,7 +99,7 @@ button {
       @apply bg-typegreen text-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
   &.ghost {
@@ -111,7 +111,7 @@ button {
       @apply bg-typegreen/10 text-typegreen dark:bg-sun/20 dark:text-sun;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
   &.warn {
@@ -120,7 +120,7 @@ button {
       @apply bg-red-600;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
 }
@@ -136,7 +136,7 @@ button.outline-type {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
   &.light {
@@ -148,7 +148,7 @@ button.outline-type {
       @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
   &.white {
@@ -160,7 +160,7 @@ button.outline-type {
       @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
   &.warn {
@@ -172,7 +172,7 @@ button.outline-type {
       @apply bg-red text-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen;
+      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
     }
   }
 }
