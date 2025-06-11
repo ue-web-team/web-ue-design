@@ -1,6 +1,25 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { isDark } from './logic';
 import Logo from './parts/Logo.vue';
+const isMounted = ref(false);
+
+function handleKeyDown(e: KeyboardEvent) {
+  // Check for Ctrl+D or Cmd+D
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+    e.preventDefault();
+    // toggleTheme();
+    isDark.value = !isDark.value;
+  }
+}
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+  isMounted.value = true;
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeyDown);
+});
 </script>
 
 <template>
