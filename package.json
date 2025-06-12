@@ -1,6 +1,6 @@
 {
   "name": "@umeaenergi/ue-design",
-  "version": "0.2.52-test.2",
+  "version": "0.2.53",
   "description": "UE Component library (Vue 3 + Tailwind CSS + Typescript)",
   "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
