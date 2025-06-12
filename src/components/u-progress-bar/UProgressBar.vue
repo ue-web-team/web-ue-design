@@ -9,36 +9,73 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch, type CSSProperties } from 'vue';
+import { computed, CSSProperties, onMounted, ref, watch } from 'vue';
 
 const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
 const queue = (() => {
-  const pending: ((next: () => void) => void)[] = [];
+  const pending: any[] = [];
   function next() {
-    const fn = pending.shift();
-    if (fn) fn(next);
+    let fn = pending.shift();
+    if (fn) {
+      fn(next);
+    }
   }
-  return (fn: (next: () => void) => void) => {
+  return (fn: any) => {
     pending.push(fn);
-    if (pending.length === 1) next();
+    if (pending.length === 1) {
+      next();
+    }
   };
 })();
 
-const props = defineProps<{
-  loading?: boolean;
-  speed?: number;
-  color?: string;
-  colorShadow?: string;
-  errorColor?: string;
-  trickle?: boolean;
-  trickleSpeed?: number;
-  easing?: string;
-  height?: number;
-  minimum?: number;
-  maximum?: number;
-  zIndex?: number;
-}>();
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  speed: {
+    type: Number,
+    default: 350,
+  },
+  color: {
+    type: String,
+    default: '#29d',
+  },
+  colorShadow: String,
+  errorColor: {
+    type: String,
+    default: '#f44336',
+  },
+  trickle: {
+    type: Boolean,
+    default: true,
+  },
+  trickleSpeed: {
+    type: Number,
+    default: 250,
+  },
+  easing: {
+    type: String,
+    default: 'linear',
+  },
+  height: {
+    type: Number,
+    default: 3,
+  },
+  minimum: {
+    type: Number,
+    default: 0.8,
+  },
+  maximum: {
+    type: Number,
+    default: 97.5,
+  },
+  zIndex: {
+    type: Number,
+    default: 9999,
+  },
+});
 
 const error = ref(false);
 const show = ref(false);
@@ -54,21 +91,19 @@ watch(
   }
 );
 
-const progressColor = computed(() => (error.value ? props.errorColor ?? '#f44336' : props.color ?? '#29d'));
-
+const progressColor = computed(() => (error.value ? props.errorColor : props.color));
 const isStarted = computed(() => typeof status.value === 'number');
-
 const barStyle = computed<CSSProperties>(() => ({
   position: 'relative',
   top: '0',
   left: '0',
   right: '0',
   width: `${progress.value}%`,
-  height: `${props.height ?? 3}px`,
+  height: `${props.height}px`,
   backgroundColor: progressColor.value,
-  transition: `all ${props.speed ?? 350}ms ${props.easing ?? 'linear'}`,
+  transition: `all ${props.speed}ms ${props.easing}`,
   opacity: `${opacity.value}`,
-  // zIndex: props.zIndex?.toString() ?? '9999',
+  //zIndex: `${props.zIndex}`
 }));
 
 const beforeEnter = () => {
@@ -76,26 +111,28 @@ const beforeEnter = () => {
   progress.value = 0;
 };
 
-const enter = (_el: Element, done: () => void) => {
+const enter = (el: any, done: any) => {
   opacity.value = 1;
   done();
 };
 
-const afterEnter = (_el: Element) => {
+const afterEnter = () => {
   _runStart();
 };
 
 const _work = () => {
   setTimeout(() => {
-    if (!isStarted.value || isPaused.value) return;
+    if (!isStarted.value || isPaused.value) {
+      return;
+    }
     increase();
     _work();
-  }, props.trickleSpeed ?? 250);
+  }, props.trickleSpeed);
 };
 
 const _runStart = () => {
   status.value = progress.value === 100 ? null : progress.value;
-  if (props.trickle ?? true) {
+  if (props.trickle) {
     _work();
   }
 };
@@ -109,16 +146,16 @@ const start = () => {
   }
 };
 
-const set = (amount: number) => {
+const set = (amount: any) => {
   isPaused.value = false;
-  let o: number;
+  let o;
   if (isStarted.value) {
-    o = amount < progress.value ? clamp(amount, 0, 100) : clamp(amount, props.minimum ?? 0.8, 100);
+    o = amount < progress.value ? clamp(amount, 0, 100) : clamp(amount, props.minimum, 100);
   } else {
     o = 0;
   }
   status.value = o === 100 ? null : o;
-  queue((next) => {
+  queue((next: any) => {
     progress.value = o;
     if (o === 100) {
       setTimeout(() => {
@@ -127,10 +164,10 @@ const set = (amount: number) => {
           show.value = false;
           error.value = false;
           next();
-        }, props.speed ?? 350);
-      }, props.speed ?? 350);
+        }, props.speed);
+      }, props.speed);
     } else {
-      setTimeout(next, props.speed ?? 350);
+      setTimeout(next, props.speed);
     }
   });
 };
@@ -150,11 +187,13 @@ const increase = (amount?: number) => {
       amount = 0;
     }
   }
-  set(clamp(o + (amount ?? 0), 0, props.maximum ?? 97.5));
+  set(clamp(o + amount!, 0, props.maximum));
 };
 
-const decrease = (amount: number) => {
-  if (progress.value === 0) return;
+const decrease = (amount: any) => {
+  if (progress.value === 0) {
+    return;
+  }
   increase(-amount);
 };
 
