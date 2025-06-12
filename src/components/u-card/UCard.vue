@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, provide, ref } from "vue";
-import { useId } from "../../logic";
-import UProgressBar from "../u-progress-bar/UProgressBar.vue";
-import { CardContext } from "./UCardContext";
+import { PropType, provide, ref } from 'vue';
+import { useId } from '../../logic';
+import UProgressBar from '../u-progress-bar/UProgressBar.vue';
+import { CardContext } from './UCardContext';
 
 // provide id of card to nested components
 const titleId = ref(`u-card-${useId()}`);

@@ -16,13 +16,13 @@
         <tr>
           <th>Dark</th>
           <td>
-            <UIconButton><i-mdi-cog /></UIconButton>
+            <UIconButton v-tippy="{ content: 'default button', placement: 'right' }"><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton hover><i-mdi-cog /></UIconButton>
+            <UIconButton hover v-tippy="'hover button'"><i-mdi-cog /></UIconButton>
           </td>
-          <td>
-            <UIconButton active><i-mdi-cog /></UIconButton>
+          <td class="flex justify-center">
+            <UIconButton active to="/home" v-tippy="'active button'"><i-mdi-cog /></UIconButton>
           </td>
           <td>
             <UIconButton class="ring ring-offset-1 ring-blue-600 ring-opacity-90"><i-mdi-cog /></UIconButton>
@@ -43,10 +43,7 @@
             <UIconButton outline active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton
-              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
-              outline
-            ><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring ring-offset-1 ring-blue-600 ring-opacity-90" outline><i-mdi-cog /></UIconButton>
           </td>
           <td>
             <UIconButton outline disabled><i-mdi-cog /></UIconButton>
@@ -64,10 +61,9 @@
             <UIconButton kind="ghost" active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton
-              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
-              kind="ghost"
-            ><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring ring-offset-1 ring-blue-600 ring-opacity-90" kind="ghost"
+              ><i-mdi-cog
+            /></UIconButton>
           </td>
           <td>
             <UIconButton kind="ghost" disabled><i-mdi-cog /></UIconButton>
@@ -81,14 +77,19 @@
 </template>
 
 <script setup lang="ts">
-import Prism from "../lib/code-block"
+import Prism from '../lib/code-block';
 
-const code =
-  `<!-- Variants. default(dark), ghost -->
+const code = `<!-- Variants. default(dark), ghost -->
 <UIconButton><i-mdi-cog /></UIconButton>
 <UIconButton kind="ghost"><i-mdi-cog /></UIconButton>
 
 <!-- whith outline (not ghost) -->
 <UIconButton outline><i-mdi-cog /></UIconButton>
-`
+`;
 </script>
+<style scoped>
+.tippy-box[data-theme~='tomato'] {
+  background-color: tomato;
+  color: yellow;
+}
+</style>

@@ -1,11 +1,6 @@
 <template>
   <div class="h-1 w-full">
-    <transition
-      v-on:before-enter="beforeEnter"
-      v-on:enter="enter"
-      v-on:after-enter="afterEnter"
-      v-bind:css="false"
-    >
+    <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter" v-bind:css="false">
       <div class="top-progress" :style="barStyle" v-if="show">
         <div class="peg"></div>
       </div>
@@ -14,90 +9,91 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
+import { computed, CSSProperties, onMounted, ref, watch } from 'vue';
 
 const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
 const queue = (() => {
-  const pending: any[] = []
+  const pending: any[] = [];
   function next() {
-    let fn = pending.shift()
+    let fn = pending.shift();
     if (fn) {
-      fn(next)
+      fn(next);
     }
   }
   return (fn: any) => {
-    pending.push(fn)
+    pending.push(fn);
     if (pending.length === 1) {
-      next()
+      next();
     }
-  }
+  };
 })();
 
-const props = defineProps(
-  {
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    speed: {
-      type: Number,
-      default: 350
-    },
-    color: {
-      type: String,
-      default: '#29d'
-    },
-    colorShadow: String,
-    errorColor: {
-      type: String,
-      default: '#f44336'
-    },
-    trickle: {
-      type: Boolean,
-      default: true
-    },
-    trickleSpeed: {
-      type: Number,
-      default: 250
-    },
-    easing: {
-      type: String,
-      default: 'linear'
-    },
-    height: {
-      type: Number,
-      default: 3
-    },
-    minimum: {
-      type: Number,
-      default: 0.8
-    },
-    maximum: {
-      type: Number,
-      default: 97.5
-    },
-    zIndex: {
-      type: Number,
-      default: 9999
-    }
-  }
-);
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  speed: {
+    type: Number,
+    default: 350,
+  },
+  color: {
+    type: String,
+    default: '#29d',
+  },
+  colorShadow: String,
+  errorColor: {
+    type: String,
+    default: '#f44336',
+  },
+  trickle: {
+    type: Boolean,
+    default: true,
+  },
+  trickleSpeed: {
+    type: Number,
+    default: 250,
+  },
+  easing: {
+    type: String,
+    default: 'linear',
+  },
+  height: {
+    type: Number,
+    default: 3,
+  },
+  minimum: {
+    type: Number,
+    default: 0.8,
+  },
+  maximum: {
+    type: Number,
+    default: 97.5,
+  },
+  zIndex: {
+    type: Number,
+    default: 9999,
+  },
+});
 
 const error = ref(false);
 const show = ref(false);
 const progress = ref(0);
 const opacity = ref(1);
-const status = ref(null);
+const status = ref<number | null>(null);
 const isPaused = ref(false);
 
-watch(() => props.loading, (loading) => {
-  loading ? start() : done()
-});
+watch(
+  () => props.loading,
+  (loading) => {
+    loading ? start() : done();
+  }
+);
 
-const progressColor = computed(() => error.value ? props.errorColor : props.color);
+const progressColor = computed(() => (error.value ? props.errorColor : props.color));
 const isStarted = computed(() => typeof status.value === 'number');
-const barStyle = computed(() => ({
+const barStyle = computed<CSSProperties>(() => ({
   position: 'relative',
   top: '0',
   left: '0',
@@ -110,58 +106,56 @@ const barStyle = computed(() => ({
   //zIndex: `${props.zIndex}`
 }));
 
-const beforeEnter = (el) => {
-  opacity.value = 0
-  progress.value = 0
+const beforeEnter = () => {
+  opacity.value = 0;
+  progress.value = 0;
 };
 
-const enter = (el, done) => {
-  opacity.value = 1
+const enter = (el: any, done: any) => {
+  opacity.value = 1;
   done();
 };
 
-const afterEnter = (el) => {
-  _runStart()
+const afterEnter = () => {
+  _runStart();
 };
 
 const _work = () => {
   setTimeout(() => {
     if (!isStarted.value || isPaused.value) {
-      return
+      return;
     }
     increase();
     _work();
-  }, props.trickleSpeed)
+  }, props.trickleSpeed);
 };
 
 const _runStart = () => {
-  status.value = (progress.value === 100 ? null : progress.value)
+  status.value = progress.value === 100 ? null : progress.value;
   if (props.trickle) {
-    _work()
+    _work();
   }
 };
 
 const start = () => {
-  isPaused.value = false
+  isPaused.value = false;
   if (show.value) {
-    _runStart()
+    _runStart();
   } else {
-    show.value = true
+    show.value = true;
   }
 };
 
-const set = (amount) => {
+const set = (amount: any) => {
   isPaused.value = false;
   let o;
   if (isStarted.value) {
-    o = amount < progress.value
-      ? clamp(amount, 0, 100)
-      : clamp(amount, props.minimum, 100);
+    o = amount < progress.value ? clamp(amount, 0, 100) : clamp(amount, props.minimum, 100);
   } else {
     o = 0;
   }
-  status.value = (o === 100 ? null : o);
-  queue(next => {
+  status.value = o === 100 ? null : o;
+  queue((next: any) => {
     progress.value = o;
     if (o === 100) {
       setTimeout(() => {
@@ -169,36 +163,36 @@ const set = (amount) => {
         setTimeout(() => {
           show.value = false;
           error.value = false;
-          next()
-        }, props.speed)
-      }, props.speed)
+          next();
+        }, props.speed);
+      }, props.speed);
     } else {
-      setTimeout(next, props.speed)
+      setTimeout(next, props.speed);
     }
-  })
+  });
 };
 
-const increase = (amount) => {
+const increase = (amount?: number) => {
   let o = progress.value;
   if (o < 100 && typeof amount !== 'number') {
     if (o >= 0 && o < 25) {
-      amount = Math.random() * 3 + 3
+      amount = Math.random() * 3 + 3;
     } else if (o >= 25 && o < 50) {
-      amount = Math.random() * 3
+      amount = Math.random() * 3;
     } else if (o >= 50 && o < 85) {
-      amount = Math.random() * 2
+      amount = Math.random() * 2;
     } else if (o >= 85 && o < 99) {
-      amount = 0.5
+      amount = 0.5;
     } else {
-      amount = 0
+      amount = 0;
     }
   }
-  set(clamp(o + amount, 0, props.maximum));
+  set(clamp(o + amount!, 0, props.maximum));
 };
 
-const decrease = (amount) => {
+const decrease = (amount: any) => {
   if (progress.value === 0) {
-    return
+    return;
   }
   increase(-amount);
 };
@@ -208,7 +202,7 @@ const done = () => {
 };
 
 const fail = () => {
-  error.value = true
+  error.value = true;
   done();
 };
 
@@ -217,7 +211,6 @@ onMounted(() => {
     start();
   }
 });
-
 </script>
 
 <style lang="pcss" scoped>
