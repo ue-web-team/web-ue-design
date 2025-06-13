@@ -23,6 +23,7 @@ createApp(App)
         allowHTML: true,
         theme: 'ue-tooltip',
         animation: 'scale',
+        touch: false,
       }, // => Global default options * see all props
     }
   )
