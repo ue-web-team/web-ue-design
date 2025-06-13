@@ -1,5 +1,5 @@
 <template>
-  <button class="focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled">
+  <button class="focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled" :type="type">
     <span v-if="loading" class="mr-2 animate-spin">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +57,20 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  type: {
+    type: String as PropType<'button' | 'submit' | 'reset'>,
+    default: 'submit',
+  },
 });
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
-  return [props.kind, props.outline ? 'outline-type' : '', props.hover ? 'hover' : '', props.active ? 'active' : ''];
+  return [
+    props.kind,
+    props.outline ? 'outline-type' : '',
+    props.hover ? 'hover' : '',
+    props.active ? 'active' : '',
+    props.disabled ? 'btn-disabled' : '',
+  ];
 });
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
@@ -70,14 +80,15 @@ const onDown = () => {};
 button {
   @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold;
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
-  @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
+  /* @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500; */
+
   &.dark {
     @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &:hover, &.hover, &:active, &.active {
       @apply bg-evergreen text-white dark:bg-sun/85 dark:text-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen pointer-events-none;
+      @apply  pointer-events-none opacity-50 ;
     }
   }
   &.light {
@@ -89,7 +100,7 @@ button {
       @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 text-darkgreen hover:bg-gray-300 hover:text-darkgreen pointer-events-none;
+       @apply  pointer-events-none opacity-50 ;
     }
   }
   &.white {
@@ -101,7 +112,7 @@ button {
       @apply bg-typegreen text-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+       @apply  pointer-events-none opacity-50 ;
     }
   }
   &.ghost {
@@ -113,7 +124,7 @@ button {
       @apply bg-typegreen/10 text-typegreen dark:bg-sun/20 dark:text-sun;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+ @apply  pointer-events-none opacity-50 ;
     }
   }
   &.warn {
@@ -122,7 +133,7 @@ button {
       @apply bg-red-600;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+      @apply  pointer-events-none opacity-50 ;
     }
   }
 }
@@ -138,7 +149,7 @@ button.outline-type {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+       @apply  pointer-events-none opacity-50 ;
     }
   }
   &.light {
@@ -150,7 +161,7 @@ button.outline-type {
       @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+      @apply  pointer-events-none opacity-50 ;
     }
   }
   &.white {
@@ -162,7 +173,7 @@ button.outline-type {
       @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+      @apply  pointer-events-none opacity-50 ;
     }
   }
   &.warn {
@@ -174,7 +185,7 @@ button.outline-type {
       @apply bg-red text-white;
     }
     &:disabled {
-      @apply bg-gray-300 border-darkgreen text-darkgreen hover:bg-gray-300 hover:text-darkgreen hover:border-darkgreen pointer-events-none;
+     @apply  pointer-events-none opacity-50 ;
     }
   }
 }
