@@ -143,17 +143,20 @@ button.outline-type {
   &.primary {
     @apply border-darkgreen bg-transparent text-black dark:text-white dark:border-sun;
     &:hover, &.hover {
-      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+      @apply bg-evergreen/20 text-black dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:active, &.active {
-      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+      @apply bg-evergreen text-white dark:bg-sun dark:text-black dark:border-sun;
     }
   }
 
    &.light-variant {
     @apply  bg-transparent text-white border-sun;
-    &:hover, &.hover, &:active, &.active {
+    &:hover, &.hover  {
      @apply  bg-sun/20 text-white border-sun;
+    }
+    &:active, &.active {
+     @apply  bg-sun text-black border-sun;
     }
   }
 
