@@ -29,9 +29,9 @@ import { computed, PropType } from 'vue';
 
 const props = defineProps({
   kind: {
-    type: String as PropType<'dark' | 'light' | 'white' | 'ghost' | 'warn'>,
-    default: 'dark',
-    validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
+    type: String as PropType<'primary' | 'light' | 'white' | 'ghost' | 'warn'>,
+    default: 'primary',
+    validator: (value: string) => ['primary', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
   },
 
   outline: {
@@ -82,7 +82,7 @@ button {
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
   /* @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500; */
 
-  &.dark {
+  &.primary {
     @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &:hover, &.hover, &:active, &.active {
       @apply bg-evergreen text-white dark:bg-sun/85 dark:text-typegreen;
@@ -140,7 +140,7 @@ button {
 
 button.outline-type {
   @apply border-2;
-  &.dark {
+  &.primary {
     @apply border-darkgreen bg-transparent text-typegreen dark:text-white dark:border-sun;
     &:hover, &.hover {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;

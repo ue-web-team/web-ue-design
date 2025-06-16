@@ -15,7 +15,7 @@
         <tr>
           <th>Dark</th>
           <td>
-            <UButton kind="dark">Simple states</UButton>
+            <UButton kind="primary">Simple states</UButton>
           </td>
           <td>
             <UButton hover>Simple states</UButton>
