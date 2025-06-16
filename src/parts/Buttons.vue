@@ -191,7 +191,7 @@
       <UButton kind="ghost">
         <template #after> <i-mdi-chevron-down /> </template>Ghost with icon
       </UButton>
-      <UButton>
+      <UButton :variant="ColorVariant.DARKGREEN">
         <template #before> <i-mdi-cog /> </template>With icon before
       </UButton>
       <UButton loading>
@@ -212,7 +212,9 @@
 <script setup lang="ts">
 import Prism from '@/lib/code-block';
 import UButton from '../components/u-button/UButton.vue';
+import { useVariant } from '../composables/useVariant';
 import { ColorVariant } from '../config/colorVariant';
+useVariant(ColorVariant.FOG);
 
 const code = `<!-- Variants. default(dark), ghost, warn, light, white -->
 <UButton> Button text </UButton>

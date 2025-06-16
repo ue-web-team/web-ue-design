@@ -22,13 +22,15 @@
 
 <script setup lang="ts">
 import { computed, PropType, useAttrs } from 'vue';
+import { useVariant } from '../../composables/useVariant';
+import { ColorVariant } from '../../config/colorVariant';
 import { useRippleEffect } from '../../logic/use-ripple';
 
 const props = defineProps({
   kind: {
-    type: String as PropType<string>,
-    default: 'dark',
-    validator: (value: string) => ['dark', 'ghost'].indexOf(value) !== -1,
+    type: String as PropType<'primary' | 'ghost'>,
+    default: 'primary',
+    validator: (value: string) => ['primary', 'ghost'].indexOf(value) !== -1,
   },
 
   outline: {
@@ -65,13 +67,29 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  variant: {
+    type: String as PropType<ColorVariant>,
+  },
 });
 
 const attrs = useAttrs();
+const variantRef = props.variant ? computed(() => props.variant) : undefined;
+const { variant } = useVariant(computed(() => props.variant));
 
+const getVariantType = (variant: ColorVariant) => {
+  console.log({ variant });
+  switch (variant) {
+    case ColorVariant.DARKGREEN:
+    case ColorVariant.EVERGREEN:
+      return 'light-variant';
+    default:
+      return 'dark-variant';
+  }
+};
 const buttonClasses = computed(() => {
   return [
     props.kind,
+    getVariantType(variant.value),
     props.outline ? 'outline-type' : '',
     props.hover ? 'hover' : '',
     props.active ? 'active' : '',
@@ -87,7 +105,7 @@ button, a, .btn {
   @apply w-11 h-11 rounded-full flex items-center justify-center relative overflow-hidden;
   @apply transition-all transform-gpu ease-out duration-200 active:scale-95;
   @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500;
-  &.dark {
+  &.primary {
     @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &.theme-inverse {
       @apply bg-white text-black dark:bg-evergreen dark:text-sun ;
@@ -102,6 +120,12 @@ button, a, .btn {
     &:active, &.active {
       @apply bg-evergreen dark:bg-sun/85 dark:text-typegreen;
     }
+  &.light-variant {
+    @apply  bg-sun text-typegreen;
+    &:hover, &.hover, &:active, &.active {
+      @apply bg-sun/85 text-typegreen;
+    }
+  }
   }
   &.ghost {
     @apply disabled:bg-transparent dark:text-sun;
@@ -116,7 +140,7 @@ button, a, .btn {
 
 button.outline-type {
   @apply border-2;
-  &.dark {
+  &.primary {
     @apply border-darkgreen bg-transparent text-black dark:text-white dark:border-sun;
     &:hover, &.hover {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
@@ -125,6 +149,14 @@ button.outline-type {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
     }
   }
+
+   &.light-variant {
+    @apply  bg-transparent text-white border-sun;
+    &:hover, &.hover, &:active, &.active {
+     @apply  bg-sun/20 text-white border-sun;
+    }
+  }
+
 }
 button:active .wrapper {
   @apply scale-75;

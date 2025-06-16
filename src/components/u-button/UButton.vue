@@ -67,7 +67,7 @@ const props = defineProps({
     type: String as PropType<ColorVariant>,
   },
 });
-const { variant } = useVariant(computed(() => props.variant ?? ColorVariant.WHITE));
+const { variant } = useVariant(computed(() => props.variant));
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
   return [
@@ -80,7 +80,6 @@ const buttonClasses = computed(() => {
   ];
 });
 const getVariantType = (variant: ColorVariant) => {
-  console.log({ variant });
   switch (variant) {
     case ColorVariant.DARKGREEN:
     case ColorVariant.EVERGREEN:

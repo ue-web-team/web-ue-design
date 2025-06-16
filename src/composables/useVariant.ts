@@ -1,7 +1,7 @@
 import { computed, inject, MaybeRef, provide, ref, Ref, unref } from 'vue';
 import { ColorVariant } from '../config/colorVariant';
 
-export function useVariant(variantStyle?: MaybeRef<ColorVariant>, adapted: boolean = false) {
+export function useVariant(variantStyle?: MaybeRef<ColorVariant | undefined>, adapted: boolean = false) {
   const injectedVariant = inject<Ref<ColorVariant | undefined>>('variant', ref(undefined)); // Provide a default
 
   const baseVariant = computed(() => unref(variantStyle) || injectedVariant.value);

@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr>
-          <th>Dark</th>
+          <th>Primary on Light</th>
           <td>
             <UIconButton v-tippy="{ content: 'default button', placement: 'right' }"><i-mdi-cog /></UIconButton>
           </td>
@@ -31,8 +31,32 @@
             <UIconButton disabled><i-mdi-cog /></UIconButton>
           </td>
         </tr>
+        <tr class="bg-evergreen">
+          <th class="text-white">Primary on Dark</th>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" v-tippy="{ content: 'default button', placement: 'right' }"
+              ><i-mdi-cog
+            /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" hover v-tippy="'hover button'"><i-mdi-cog /></UIconButton>
+          </td>
+          <td class="flex justify-center">
+            <UIconButton :variant="ColorVariant.DARKGREEN" active to="/home" v-tippy="'active button'"
+              ><i-mdi-cog
+            /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
+              ><i-mdi-cog
+            /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" disabled><i-mdi-cog /></UIconButton>
+          </td>
+        </tr>
         <tr>
-          <th>Dark outline</th>
+          <th>Primary outline on Light BG</th>
           <td>
             <UIconButton outline><i-mdi-cog /></UIconButton>
           </td>
@@ -47,6 +71,29 @@
           </td>
           <td>
             <UIconButton outline disabled><i-mdi-cog /></UIconButton>
+          </td>
+        </tr>
+        <tr class="bg-evergreen">
+          <th class="text-white">Dark outline on Dark BG</th>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" outline><i-mdi-cog /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" outline hover><i-mdi-cog /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" outline active><i-mdi-cog /></UIconButton>
+          </td>
+          <td>
+            <UIconButton
+              :variant="ColorVariant.DARKGREEN"
+              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
+              outline
+              ><i-mdi-cog
+            /></UIconButton>
+          </td>
+          <td>
+            <UIconButton :variant="ColorVariant.DARKGREEN" outline disabled><i-mdi-cog /></UIconButton>
           </td>
         </tr>
         <tr>
@@ -77,8 +124,12 @@
 </template>
 
 <script setup lang="ts">
+import UIconButton from '../components/u-icon-button/UIconButton.vue';
+import { useVariant } from '../composables/useVariant';
+import { ColorVariant } from '../config/colorVariant';
 import Prism from '../lib/code-block';
 
+useVariant(ColorVariant.WHITE);
 const code = `<!-- Variants. default(dark), ghost -->
 <UIconButton><i-mdi-cog /></UIconButton>
 <UIconButton kind="ghost"><i-mdi-cog /></UIconButton>
