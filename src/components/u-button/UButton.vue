@@ -26,6 +26,8 @@
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
+import { useVariant } from '../../composables/useVariant';
+import { ColorVariant } from '../../config/colorVariant';
 
 const props = defineProps({
   kind: {
@@ -61,17 +63,32 @@ const props = defineProps({
     type: String as PropType<'button' | 'submit' | 'reset'>,
     default: 'submit',
   },
+  variant: {
+    type: String as PropType<ColorVariant>,
+  },
 });
+const { variant } = useVariant(computed(() => props.variant ?? ColorVariant.WHITE));
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
   return [
     props.kind,
+    getVariantType(variant.value),
     props.outline ? 'outline-type' : '',
     props.hover ? 'hover' : '',
     props.active ? 'active' : '',
     props.disabled ? 'btn-disabled' : '',
   ];
 });
+const getVariantType = (variant: ColorVariant) => {
+  console.log({ variant });
+  switch (variant) {
+    case ColorVariant.DARKGREEN:
+    case ColorVariant.EVERGREEN:
+      return 'light-variant';
+    default:
+      return 'dark-variant';
+  }
+};
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
 </script>
@@ -89,6 +106,13 @@ button {
     }
     &:disabled {
       @apply  pointer-events-none opacity-50 ;
+    }
+     &.light-variant {
+      @apply bg-sun text-typegreen;
+      &:hover, &.hover, &:active, &.active {
+      @apply  bg-sun/85 text-typegreen;
+    }
+
     }
   }
   &.light {
@@ -151,6 +175,14 @@ button.outline-type {
     &:disabled {
        @apply  pointer-events-none opacity-50 ;
     }
+    &.light-variant {
+      @apply bg-transparent  text-white border-sun;
+      &:hover, &.hover, &:active, &.active {
+      @apply text-white bg-sun/20 border-sun;
+    }
+
+    }
+
   }
   &.light {
     @apply border-white bg-transparent text-white dark:border-white dark:text-sun;

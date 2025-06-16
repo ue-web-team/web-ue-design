@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr>
-          <th>Dark</th>
+          <th>Primary on Light</th>
           <td>
             <UButton kind="primary">Simple states</UButton>
           </td>
@@ -27,8 +27,23 @@
             <UButton class="ring ring-offset-1 ring-blue">Simple states</UButton>
           </td>
         </tr>
+        <tr class="bg-evergreen">
+          <th class="text-white">Primary on Dark</th>
+          <td>
+            <UButton kind="primary" :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton hover :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton active :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton class="ring ring-offset-1 ring-blue" :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+        </tr>
         <tr>
-          <th>Dark outline</th>
+          <th>Primary outline on Light</th>
           <td>
             <UButton outline>Simple states</UButton>
           </td>
@@ -40,6 +55,23 @@
           </td>
           <td>
             <UButton class="ring ring-offset-1 ring-blue" outline>Simple states</UButton>
+          </td>
+        </tr>
+        <tr class="bg-evergreen">
+          <th class="text-white">Primary outline on Dark</th>
+          <td>
+            <UButton outline :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton outline hover :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton outline active :variant="ColorVariant.DARKGREEN">Simple states</UButton>
+          </td>
+          <td>
+            <UButton class="ring ring-offset-1 ring-blue" outline :variant="ColorVariant.DARKGREEN"
+              >Simple states</UButton
+            >
           </td>
         </tr>
 
@@ -180,6 +212,7 @@
 <script setup lang="ts">
 import Prism from '@/lib/code-block';
 import UButton from '../components/u-button/UButton.vue';
+import { ColorVariant } from '../config/colorVariant';
 
 const code = `<!-- Variants. default(dark), ghost, warn, light, white -->
 <UButton> Button text </UButton>
