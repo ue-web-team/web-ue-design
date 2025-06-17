@@ -26,7 +26,7 @@ const api = {
   titleId,
 };
 provide(CardContext, api);
-const { variant } = useVariant(computed(() => props.variant));
+const { variant, cardBackgroundColor } = useVariant(computed(() => props.variant));
 const colorVariant = computed(() => {
   switch (variant.value) {
     case ColorVariant.DARKGREEN:
@@ -55,7 +55,7 @@ const props = defineProps({
     type: String as PropType<ColorVariant>,
   },
 });
-const { cardBackgroundColor } = useVariant(computed(() => props.variant));
+// const { cardBackgroundColor } = useVariant(computed(() => props.variant));
 </script>
 
 <style lang="pcss" scoped>

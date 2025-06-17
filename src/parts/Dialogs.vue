@@ -8,13 +8,13 @@
     <br />
     <br />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <UCard>
+      <UCard :variant="ColorVariant.FOG">
         <UCardHeader>
           <UCardTitle>Dialog 1</UCardTitle>
         </UCardHeader>
         <UCardContent>
           Tillgänglig dialog baserad på headless/ui
-          <UDialog v-model:open="isDialogOpen1" title="Change candy preference">
+          <UDialog v-model:open="isDialogOpen1" title="Change candy preference" :variant="ColorVariant.DARKGREEN">
             Det här är en tillgänglig dialog med fokus-fälla rätt role attribut och tillgänglig titel. stänger om man
             klickar utanför eller på esc
             <template #actions>
@@ -28,7 +28,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard>
+      <UCard :variant="ColorVariant.DARKGREEN">
         <UCardHeader>
           <UCardTitle>Dialog 2</UCardTitle>
         </UCardHeader>
@@ -64,7 +64,7 @@
         </UCardActions>
       </UCard>
 
-      <UCard colorClasses="bg-lightgreen">
+      <UCard :variant="ColorVariant.WHITE">
         <UCardHeader>
           <UCardTitle>Dialog 3</UCardTitle>
         </UCardHeader>
@@ -73,17 +73,17 @@
           <UDialog v-model:open="isDialogOpen3" title="Hipp färg">
             Hippare färg. kanske för att göra ett glatt val?
             <template #actions>
-              <UButton kind="dark" @click="isDialogOpen3 = false">Ja</UButton>
-              <UButton kind="dark" outline @click="isDialogOpen3 = false">Nej</UButton>
+              <UButton kind="primary" @click="isDialogOpen3 = false">Ja</UButton>
+              <UButton kind="primary" outline @click="isDialogOpen3 = false">Nej</UButton>
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="white" outline @click="isDialogOpen3 = true">Open dialog</UButton>
+          <UButton class="w-full" outline @click="isDialogOpen3 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
 
-      <UCard colorClasses="bg-warm dark:bg-evergreen">
+      <UCard :variant="ColorVariant.SUN">
         <UCardHeader>
           <UCardTitle>Dialog 4</UCardTitle>
         </UCardHeader>
@@ -99,17 +99,17 @@
           >
             Allvarlig dialog som kräver ett val. kan inte avslutas med click utanför eller 'esc'
             <template #actions>
-              <UButton kind="dark" outline @click="mockSave">Ja</UButton>
-              <UButton kind="dark" @click="isDialogOpen4 = false">Nej</UButton>
+              <UButton kind="primary" outline @click="mockSave">Ja</UButton>
+              <UButton kind="primary" @click="isDialogOpen4 = false">Nej</UButton>
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="dark" outline @click="isDialogOpen4 = true">Open dialog</UButton>
+          <UButton class="w-full" kind="primary" outline @click="isDialogOpen4 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
 
-      <UCard colorClasses="bg-evergreen text-white">
+      <UCard :class="ColorVariant.LIGHTGREEN">
         <UCardHeader>
           <UCardTitle>Dialog 5</UCardTitle>
         </UCardHeader>
@@ -118,20 +118,19 @@
           <UDialog
             big
             colorClasses="bg-green dark:bg-evergreen text-white"
-            headingClasses="text-white dark:text-lightgreen"
             v-model:open="isDialogOpen5"
             title="Hipp färg"
             :isLoading="isLoading"
           >
             Bred dialog med mer plats. typ 2 kolumner om det finns plats
             <template #actions>
-              <UButton :kind="isDark ? 'dark' : 'white'" outline @click="mockSave">Ja</UButton>
-              <UButton :kind="isDark ? 'dark' : 'white'" @click="isDialogOpen5 = false">Nej</UButton>
+              <UButton outline @click="mockSave">Ja</UButton>
+              <UButton @click="isDialogOpen5 = false">Nej</UButton>
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="white" outline @click="isDialogOpen5 = true">Open dialog</UButton>
+          <UButton class="w-full" kind="primary" outline @click="isDialogOpen5 = true">Open dialog</UButton>
         </UCardActions>
       </UCard>
     </div>
@@ -156,7 +155,14 @@
 <script setup lang="ts">
 import Prism from '@/lib/code-block';
 import { ref } from 'vue';
-import { isDark } from '../logic';
+import UButton from '../components/u-button/UButton.vue';
+import UCard from '../components/u-card/UCard.vue';
+import UCardActions from '../components/u-card/UCardActions.vue';
+import UCardContent from '../components/u-card/UCardContent.vue';
+import UCardHeader from '../components/u-card/UCardHeader.vue';
+import UCardTitle from '../components/u-card/UCardTitle.vue';
+import UDialog from '../components/u-dialog/UDialog.vue';
+import { ColorVariant } from '../config/colorVariant';
 
 const code = `<!-- Trigger button -->
 <UButton @click="isDialogOpen = true">Open dialog</UButton>

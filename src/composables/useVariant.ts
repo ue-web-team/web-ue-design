@@ -112,9 +112,9 @@ const getCardBackgroundColor = (variant: ColorVariant) => {
     case ColorVariant.LIGHTGREEN:
       return 'bg-lightgreen dark:bg-darkgreen';
     case ColorVariant.EVERGREEN:
-      return 'bg-darkgreen text-white ';
+      return 'bg-evergreen text-white dark:bg-darkgreen ';
     case ColorVariant.DARKGREEN:
-      return 'bg-evergreen text-white';
+      return 'bg-darkgreen text-white';
     case ColorVariant.FOG:
       return 'bg-fog dark:bg-darkgreen ';
     case ColorVariant.WARM:
