@@ -1,61 +1,37 @@
 <template>
   <article>
-    <h2 class="text-3xl border-b pb-4 mb-6 font-medium bg-li">
-      Loaders and state
-    </h2>
+    <h2 class="text-3xl border-b pb-4 mb-6 font-medium bg-li">Loaders and state</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <UCard :color="colors.white.DEFAULT" focusable>
+      <UCard :variant="ColorVariant.FOG" focusable>
         <ULoadingOverlay v-model="isLoadingFull" />
         <UCardHeader>
           <UCardTitle>Full screen loader</UCardTitle>
         </UCardHeader>
         <UCardContent>
-          Click start to emulate backend ajax call. A full screen loader will
-          appear and the appropriate aria role will be set
+          Click start to emulate backend ajax call. A full screen loader will appear and the appropriate aria role will
+          be set
         </UCardContent>
-        <UCardActions
-          ><UButton @click="startFull">Start loader</UButton></UCardActions
-        >
+        <UCardActions><UButton @click="startFull">Start loader</UButton></UCardActions>
       </UCard>
-      <UCard
-        :color="colors.white.DEFAULT"
-        focusable
-        class="relative overflow-hidden"
-      >
+      <UCard :color="colors.white.DEFAULT" focusable class="relative overflow-hidden">
         <ULoadingOverlay contained v-model="isLoadingContained" />
         <UCardHeader>
           <UCardTitle>Contained loader</UCardTitle>
         </UCardHeader>
         <UCardContent>
-          Same, but contained to it's parent element. make sure to set relative
-          positioning on that element
+          Same, but contained to it's parent element. make sure to set relative positioning on that element
         </UCardContent>
-        <UCardActions
-          ><UButton @click="startContained">Start loader</UButton></UCardActions
-        >
+        <UCardActions><UButton @click="startContained">Start loader</UButton></UCardActions>
       </UCard>
-      <UCard
-        :bg-color="colors.white.DEFAULT"
-        :color="colors.white.DEFAULT"
-        focusable
-        class="relative overflow-hidden"
-      >
-        <ULoadingOverlay
-          :bg-color="colors.red[400]"
-          :color="colors.red.DEFAULT"
-          contained
-          v-model="isLoadingContained2"
+      <UCard :bg-color="colors.white.DEFAULT" :color="colors.white.DEFAULT" focusable class="relative overflow-hidden">
+        <ULoadingOverlay :bg-color="colors.red[400]" :color="colors.red.DEFAULT" contained v-model="isLoadingContained2"
           ><span class="text-xl font-bold text-white">Loading...</span>
         </ULoadingOverlay>
         <UCardHeader>
           <UCardTitle>Contained with message</UCardTitle>
         </UCardHeader>
         <UCardContent> This time with some text and funky colors </UCardContent>
-        <UCardActions
-          ><UButton @click="startContained2"
-            >Start loader</UButton
-          ></UCardActions
-        >
+        <UCardActions><UButton @click="startContained2">Start loader</UButton></UCardActions>
       </UCard>
     </div>
     <h3 class="text-xl my-4">Usage</h3>
@@ -64,9 +40,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { colors } from "@/config/colors";
-import Prism from "@/lib/code-block";
+import { colors } from '@/config/colors';
+import Prism from '@/lib/code-block';
+import { ref } from 'vue';
+import UButton from '../components/u-button/UButton.vue';
+import UCard from '../components/u-card/UCard.vue';
+import UCardActions from '../components/u-card/UCardActions.vue';
+import UCardContent from '../components/u-card/UCardContent.vue';
+import UCardHeader from '../components/u-card/UCardHeader.vue';
+import UCardTitle from '../components/u-card/UCardTitle.vue';
+import ULoadingOverlay from '../components/u-loading-overlay/ULoadingOverlay.vue';
+import { ColorVariant } from '../config/colorVariant';
 
 const isLoadingFull = ref(false);
 const startFull = () => {

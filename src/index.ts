@@ -27,6 +27,7 @@ export { default as UTransitionHeight } from './components/u-transition-height/U
 
 // hooks
 
+export { useVariant } from './composables/useVariant';
 export { default as useFavicons } from './utils/useFavicon';
 
 // Plugins
