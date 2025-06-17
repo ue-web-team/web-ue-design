@@ -29,22 +29,15 @@
                 'max-height': 'min(85vh, 1200px)',
               }"
               class="flex flex-col w-full p-4 md:px-8 md:py-6 mx-auto transition-all relative transform shadow-xl rounded-lg"
-              :class="[
-                isLoading ? 'overflow-hidden' : '',
-                big ? 'max-w-3xl' : 'max-w-lg',
-                colorClasses ? colorClasses : 'bg-white dark:bg-black',
-              ]"
+              :class="[isLoading ? 'overflow-hidden' : '', big ? 'max-w-3xl' : 'max-w-lg', backgroundColor]"
             >
               <div class="progress-wrapper" v-if="isLoading">
                 <UProgressBar :loading="isLoading" />
               </div>
 
-              <DialogTitle
-                as="h2"
-                class="title"
-                :class="headingClasses ? headingClasses : 'text dark:text-sun'"
-                >{{ title }}</DialogTitle
-              >
+              <DialogTitle as="h2" class="title" :class="headingClasses ? headingClasses : 'text dark:text-sun'">{{
+                title
+              }}</DialogTitle>
               <DialogDescription class="overflow-y-auto">
                 <slot name="default"></slot>
               </DialogDescription>
@@ -68,10 +61,12 @@ import {
   DialogTitle,
   TransitionChild,
   TransitionRoot,
-} from "@headlessui/vue";
-import { PropType, ref, watch } from "vue";
+} from '@headlessui/vue';
+import { computed, PropType, ref, watch } from 'vue';
 
-import UProgressBar from "../u-progress-bar/UProgressBar.vue";
+import { useVariant } from '../../composables/useVariant';
+import { ColorVariant } from '../../config/colorVariant';
+import UProgressBar from '../u-progress-bar/UProgressBar.vue';
 
 const props = defineProps({
   colorClasses: {
@@ -88,7 +83,7 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
   },
   title: {
-    default: "Ingen titel",
+    default: 'Ingen titel',
     type: String as PropType<string>,
   },
   requireInteraction: {
@@ -103,8 +98,12 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  variant: {
+    type: String as PropType<ColorVariant>,
+  },
 });
-const emit = defineEmits(["update:open"]);
+const { backgroundColor } = useVariant(computed(() => props.variant));
+const emit = defineEmits(['update:open']);
 const isOpen = ref(props.open);
 watch(
   () => props.open,
@@ -114,7 +113,7 @@ watch(
 );
 const closeModal = () => {
   if (!props.requireInteraction) {
-    emit("update:open", false);
+    emit('update:open', false);
   }
 };
 </script>

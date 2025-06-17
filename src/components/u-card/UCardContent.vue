@@ -1,8 +1,13 @@
 <template>
-  <div class="content">
+  <div class="content" :class="textColor">
     <slot />
   </div>
 </template>
+<script setup lang="ts">
+import { useVariant } from '../../composables/useVariant';
+
+const { textColor, proseVariant } = useVariant();
+</script>
 
 <style lang="pcss" scoped>
 .content {

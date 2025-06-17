@@ -3,7 +3,7 @@
     :aria-labelledby="titleId"
     :tabindex="focusable ? 0 : -1"
     class="focus-style card"
-    :class="[colorClasses ? colorClasses : 'bg-white dark:bg-evergreen']"
+    :class="cardBackgroundColor"
   >
     <div class="progress-wrapper">
       <UProgressBar :loading="isLoading" />
@@ -13,7 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, provide, ref } from 'vue';
+import { computed, PropType, provide, ref } from 'vue';
+import { useVariant } from '../../composables/useVariant';
+import { ColorVariant } from '../../config/colorVariant';
 import { useId } from '../../logic';
 import UProgressBar from '../u-progress-bar/UProgressBar.vue';
 import { CardContext } from './UCardContext';
@@ -24,12 +26,22 @@ const api = {
   titleId,
 };
 provide(CardContext, api);
+const { variant } = useVariant(computed(() => props.variant));
+const colorVariant = computed(() => {
+  switch (variant.value) {
+    case ColorVariant.DARKGREEN:
+    case ColorVariant.EVERGREEN:
+      return 'dark';
+    default:
+      return 'light';
+  }
+});
 
 const props = defineProps({
-  colorClasses: {
-    type: String as PropType<string>,
-    required: false,
-  },
+  // colorClasses: {
+  //   type: String as PropType<string>,
+  //   required: false,
+  // },
 
   isLoading: {
     type: Boolean as PropType<boolean>,
@@ -39,7 +51,11 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  variant: {
+    type: String as PropType<ColorVariant>,
+  },
 });
+const { cardBackgroundColor } = useVariant(computed(() => props.variant));
 </script>
 
 <style lang="pcss" scoped>

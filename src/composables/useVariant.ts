@@ -192,8 +192,8 @@ const getProseVariant = (variant: ColorVariant) => {
     case ColorVariant.DARKGREEN:
     case ColorVariant.EVERGREEN:
     case ColorVariant.GREEN:
-      return 'prose-invert';
+      return 'prose prose-invert';
     default:
-      return 'prose-slate dark:prose-invert';
+      return 'prose dark:prose-invert';
   }
 };
