@@ -1,13 +1,12 @@
 {
   "name": "@umeaenergi/ue-design",
-  "version": "0.2.54-beta.1",
+  "version": "0.2.53",
   "description": "UE Component library (Vue 3 + Tailwind CSS + Typescript)",
   "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
   "license": "MIT",
   "files": [
-    "dist",
-    "dist/favicons"
+    "dist"
   ],
   "types": "./dist/index.d.ts",
   "main": "./dist/ue-design.es.js",
@@ -15,8 +14,7 @@
   "exports": {
     ".": {
       "import": "./dist/ue-design.es.js",
-      "require": "./dist/ue-design.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/ue-design.umd.js"
     }
   },
   "scripts": {
@@ -34,11 +32,11 @@
     "mini-svg-data-uri": "^1.4.3",
     "prismjs": "^1.25.0",
     "vee-validate": "^4.5.6",
-    "vue": "^3.5.14",
-    "vue-tippy": "^6.7.0",
+    "vue": "^3.2.31",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@fontsource/raleway": "^4.5.0",
     "@iconify/json": "^1.1.432",
     "@rollup/plugin-typescript": "^8.3.1",
     "@tailwindcss/typography": "^0.5.15",
@@ -51,13 +49,12 @@
     "rollup-plugin-visualizer": "^5.5.2",
     "tailwindcss": "^3.4.15",
     "tslib": "^2.3.1",
-    "typescript": "^5.8.3",
+    "typescript": "^4.6.2",
     "unplugin-icons": "^0.12.9",
     "unplugin-vue-components": "^0.15.2",
     "vite": "^2.8.6",
-    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-mkcert": "^1.5.2",
     "vitepress": "^0.19.2",
-    "vue-tsc": "^2.2.10"
+    "vue-tsc": "^0.3.0"
   }
 }
