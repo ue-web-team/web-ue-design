@@ -2,8 +2,8 @@
   <article>
     <h2 class="text-3xl border-b pb-4 mb-4 font-medium">Dialogs</h2>
     <p>
-      By default, the dialog adapts to dark mode automatically. However, you can override the colors by adding the
-      forceColor prop.
+      By default, the dialog adapts to dark mode automatically. However, you can
+      override the colors by adding the forceColor prop.
     </p>
     <br />
     <br />
@@ -15,8 +15,8 @@
         <UCardContent>
           Tillgänglig dialog baserad på headless/ui
           <UDialog v-model:open="isDialogOpen1" title="Change candy preference">
-            Det här är en tillgänglig dialog med fokus-fälla rätt role attribut och tillgänglig titel. stänger om man
-            klickar utanför eller på esc
+            Det här är en tillgänglig dialog med fokus-fälla rätt role attribut
+            och tillgänglig titel. stänger om man klickar utanför eller på esc
             <template #actions>
               <UButton outline @click="isDialogOpen1 = false">Cancel</UButton>
               <UButton @click="isDialogOpen1 = false">Ok</UButton>
@@ -24,7 +24,9 @@
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" @click="isDialogOpen1 = true">Open dialog</UButton>
+          <UButton class="w-full" @click="isDialogOpen1 = true"
+            >Open dialog</UButton
+          >
         </UCardActions>
       </UCard>
 
@@ -35,24 +37,35 @@
         <UCardContent>
           Dialog med massa text för att se om scroll blir rätt (i mobil)
           <UDialog v-model:open="isDialogOpen2" title="Change candy preference">
-            I'm baby taiyaki bespoke neutra kickstarter. Af kombucha pinterest bicycle rights synth offal. Farm-to-table
-            enamel pin quinoa, mumblecore vexillologist food truck YOLO pinterest church-key normcore seitan pabst
-            poutine put a bird on it tumeric. Messenger bag hell of venmo gluten-free jean shorts helvetica squid direct
-            trade sriracha. Vape flexitarian gluten-free PBR&B. Thundercats marfa pickled lyft. Cornhole vice master
-            cleanse cardigan, ethical farm-to-table hot chicken freegan pug. Art party iceland wayfarers butcher
-            actually pinterest food truck. Sustainable listicle waistcoat ugh plaid 90's butcher cornhole. Godard photo
-            booth chillwave palo santo pop-up iceland skateboard ramps food truck. Church-key tote bag green juice venmo
-            synth, viral ramps pug live-edge humblebrag fanny pack hot chicken artisan microdosing taiyaki. Tumblr
-            waistcoat tofu try-hard vexillologist af. Tbh poutine hoodie coloring book vexillologist whatever actually
-            skateboard narwhal air plant asymmetrical tacos helvetica. Poutine echo park thundercats, you probably
-            haven't heard of them glossier godard keytar affogato letterpress flexitarian direct trade swag taxidermy
-            migas woke. Kombucha chillwave poutine edison bulb roof party vexillologist scenester pabst. Live-edge irony
-            deep v vape chambray forage single-origin coffee meggings enamel pin pitchfork heirloom aesthetic kogi
-            street art la croix. Blog yr unicorn enamel pin, live-edge scenester intelligentsia microdosing swag 90's
-            narwhal etsy adaptogen. Wayfarers cliche sustainable +1 stumptown vape, literally 8-bit pop-up lumbersexual
-            echo park. Jean shorts hoodie shaman, truffaut single-origin coffee you probably haven't heard of them
-            keytar fixie tattooed kombucha master cleanse letterpress pug. Edison bulb master cleanse humblebrag, tbh
-            subway tile before they sold out sustainable venmo normcore literally VHS.
+            I'm baby taiyaki bespoke neutra kickstarter. Af kombucha pinterest
+            bicycle rights synth offal. Farm-to-table enamel pin quinoa,
+            mumblecore vexillologist food truck YOLO pinterest church-key
+            normcore seitan pabst poutine put a bird on it tumeric. Messenger
+            bag hell of venmo gluten-free jean shorts helvetica squid direct
+            trade sriracha. Vape flexitarian gluten-free PBR&B. Thundercats
+            marfa pickled lyft. Cornhole vice master cleanse cardigan, ethical
+            farm-to-table hot chicken freegan pug. Art party iceland wayfarers
+            butcher actually pinterest food truck. Sustainable listicle
+            waistcoat ugh plaid 90's butcher cornhole. Godard photo booth
+            chillwave palo santo pop-up iceland skateboard ramps food truck.
+            Church-key tote bag green juice venmo synth, viral ramps pug
+            live-edge humblebrag fanny pack hot chicken artisan microdosing
+            taiyaki. Tumblr waistcoat tofu try-hard vexillologist af. Tbh
+            poutine hoodie coloring book vexillologist whatever actually
+            skateboard narwhal air plant asymmetrical tacos helvetica. Poutine
+            echo park thundercats, you probably haven't heard of them glossier
+            godard keytar affogato letterpress flexitarian direct trade swag
+            taxidermy migas woke. Kombucha chillwave poutine edison bulb roof
+            party vexillologist scenester pabst. Live-edge irony deep v vape
+            chambray forage single-origin coffee meggings enamel pin pitchfork
+            heirloom aesthetic kogi street art la croix. Blog yr unicorn enamel
+            pin, live-edge scenester intelligentsia microdosing swag 90's
+            narwhal etsy adaptogen. Wayfarers cliche sustainable +1 stumptown
+            vape, literally 8-bit pop-up lumbersexual echo park. Jean shorts
+            hoodie shaman, truffaut single-origin coffee you probably haven't
+            heard of them keytar fixie tattooed kombucha master cleanse
+            letterpress pug. Edison bulb master cleanse humblebrag, tbh subway
+            tile before they sold out sustainable venmo normcore literally VHS.
             <template #actions>
               <UButton outline @click="isDialogOpen2 = false">Cancel</UButton>
               <UButton @click="isDialogOpen2 = false">Ok</UButton>
@@ -60,7 +73,9 @@
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" @click="isDialogOpen2 = true">Open dialog</UButton>
+          <UButton class="w-full" @click="isDialogOpen2 = true"
+            >Open dialog</UButton
+          >
         </UCardActions>
       </UCard>
 
@@ -74,12 +89,20 @@
             Hippare färg. kanske för att göra ett glatt val?
             <template #actions>
               <UButton kind="dark" @click="isDialogOpen3 = false">Ja</UButton>
-              <UButton kind="dark" outline @click="isDialogOpen3 = false">Nej</UButton>
+              <UButton kind="dark" outline @click="isDialogOpen3 = false"
+                >Nej</UButton
+              >
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="white" outline @click="isDialogOpen3 = true">Open dialog</UButton>
+          <UButton
+            class="w-full"
+            kind="white"
+            outline
+            @click="isDialogOpen3 = true"
+            >Open dialog</UButton
+          >
         </UCardActions>
       </UCard>
 
@@ -88,8 +111,8 @@
           <UCardTitle>Dialog 4</UCardTitle>
         </UCardHeader>
         <UCardContent>
-          Allvarlig dialog som kräver ett val. kan inte avslutas med klick utanför eller 'esc' Dialog har även en
-          laddningsidikator.
+          Allvarlig dialog som kräver ett val. kan inte avslutas med klick
+          utanför eller 'esc' Dialog har även en laddningsidikator.
           <UDialog
             require-interaction
             v-model:open="isDialogOpen4"
@@ -97,7 +120,8 @@
             :isLoading="isLoading"
             colorClasses="bg-red dark:bg-green text-white"
           >
-            Allvarlig dialog som kräver ett val. kan inte avslutas med click utanför eller 'esc'
+            Allvarlig dialog som kräver ett val. kan inte avslutas med click
+            utanför eller 'esc'
             <template #actions>
               <UButton kind="dark" outline @click="mockSave">Ja</UButton>
               <UButton kind="dark" @click="isDialogOpen4 = false">Nej</UButton>
@@ -105,7 +129,13 @@
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="dark" outline @click="isDialogOpen4 = true">Open dialog</UButton>
+          <UButton
+            class="w-full"
+            kind="dark"
+            outline
+            @click="isDialogOpen4 = true"
+            >Open dialog</UButton
+          >
         </UCardActions>
       </UCard>
 
@@ -125,13 +155,28 @@
           >
             Bred dialog med mer plats. typ 2 kolumner om det finns plats
             <template #actions>
-              <UButton :kind="isDark ? 'dark' : 'white'" outline @click="mockSave">Ja</UButton>
-              <UButton :kind="isDark ? 'dark' : 'white'" @click="isDialogOpen5 = false">Nej</UButton>
+              <UButton
+                :kind="isDark ? 'dark' : 'white'"
+                outline
+                @click="mockSave"
+                >Ja</UButton
+              >
+              <UButton
+                :kind="isDark ? 'dark' : 'white'"
+                @click="isDialogOpen5 = false"
+                >Nej</UButton
+              >
             </template>
           </UDialog>
         </UCardContent>
         <UCardActions>
-          <UButton class="w-full" kind="white" outline @click="isDialogOpen5 = true">Open dialog</UButton>
+          <UButton
+            class="w-full"
+            kind="white"
+            outline
+            @click="isDialogOpen5 = true"
+            >Open dialog</UButton
+          >
         </UCardActions>
       </UCard>
     </div>
@@ -143,7 +188,10 @@
         <li>requireInteraction: boolean // default: false</li>
         <li>big: boolean // default: false >>> used to show big dialog</li>
         <li>isLoading: boolean // default: false</li>
-        <li>colorClasses?: string // tailwind classes to use for background and text color</li>
+        <li>
+          colorClasses?: string // tailwind classes to use for background and
+          text color
+        </li>
         <li>headingClasses?: string // tailwind classes for heading color</li>
       </ul>
     </div>
@@ -154,9 +202,9 @@
 </template>
 
 <script setup lang="ts">
-import Prism from '@/lib/code-block';
-import { ref } from 'vue';
-import { isDark } from '../logic';
+import Prism from "@/lib/code-block";
+import { ref } from "vue";
+import { isDark } from "../logic";
 
 const code = `<!-- Trigger button -->
 <UButton @click="isDialogOpen = true">Open dialog</UButton>

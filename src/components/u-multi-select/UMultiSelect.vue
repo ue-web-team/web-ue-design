@@ -64,7 +64,7 @@
         </li>
         <li
           v-for="(option, index) in options"
-          :ref="el => optionRefs[index] = el as HTMLElement"
+          :ref="setOptionRef"
           class="u-ms__option"
           :class="{
             'u-ms__option--checked': isSelected(option),
@@ -189,15 +189,14 @@ const selectAllOption = {
 const isAllSelected = ref(false);
 
 // reference to all options
-// let optionRefs: HTMLBaseElement[] = [];
-const optionRefs = ref<HTMLElement[]>([]);
-// const setOptionRef = (el: HTMLBaseElement) => {
-//   if (el) {
-//     optionRefs.push(el);
-//   }
-// };
+let optionRefs: HTMLBaseElement[] = [];
+const setOptionRef = (el: HTMLBaseElement) => {
+  if (el) {
+    optionRefs.push(el);
+  }
+};
 onBeforeUpdate(() => {
-  optionRefs.value = [];
+  optionRefs = [];
 });
 
 // position of dropdown listbox (top)
@@ -267,9 +266,9 @@ watch(open, (isOpen: boolean) => {
       // focus listbox
       listbox.value?.focus();
       // Do wee have any selected options?
-      if (props.modelValue?.length && optionRefs.value.length && listbox.value) {
+      if (props.modelValue?.length && optionRefs.length && listbox.value) {
         // set focus to first selected option
-        activeDescendantIndex.value = getFirstSelectedOptionIndex(props.modelValue, optionRefs.value);
+        activeDescendantIndex.value = getFirstSelectedOptionIndex(props.modelValue, optionRefs);
       }
     });
   } else {
@@ -280,21 +279,17 @@ watch(open, (isOpen: boolean) => {
 
 // watch active decendant for scroll into view
 watch(activeDescendantIndex, () => {
-  if (open && optionRefs.value.length && listbox.value) {
+  if (open && optionRefs.length && listbox.value) {
     // scroll to first selected option
-    scrollToActiveDescendant(optionRefs.value, listbox.value, activeDescendantIndex.value);
+    scrollToActiveDescendant(optionRefs, listbox.value, activeDescendantIndex.value);
   }
 });
 
-// const getFirstSelectedOptionIndex = (modelValue: any, options: HTMLElement[]) => {
-//   return options.findIndex((option) => option.classList.contains('u-ms__option--checked')) || 0;
-// };
-const getFirstSelectedOptionIndex = (modelValue: any, options: (HTMLElement | null)[]) => {
-  const filtered = options.filter((el): el is HTMLElement => el !== null);
-  return filtered.findIndex((option) => option.classList.contains('u-ms__option--checked')) || 0;
+const getFirstSelectedOptionIndex = (modelValue: any, options: HTMLBaseElement[]) => {
+  return options.findIndex((option) => option.classList.contains('u-ms__option--checked')) || 0;
 };
 
-const scrollToActiveDescendant = (options: HTMLElement[], listbox: HTMLElement, activeDescendantIndex: number) => {
+const scrollToActiveDescendant = (options: HTMLBaseElement[], listbox: HTMLElement, activeDescendantIndex: number) => {
   const selectedOption = options[activeDescendantIndex];
   const { offsetTop, clientHeight } = selectedOption;
   const currentVisibleArea = listbox.scrollTop + listbox.clientHeight;
