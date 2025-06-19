@@ -23,6 +23,7 @@ export { default as UFormText } from '@/components/u-forms/UFormText.vue';
 
 export { default as ULoadingOverlay } from '@/components/u-loading-overlay/ULoadingOverlay.vue';
 export { default as UTransitionHeight } from '@/components/u-transition-height/UTransitionHeight.vue';
+export { default as ULogo } from './components/u-logo/ULogo.vue';
 
 export { colors } from './config/colors';
 export { theme } from './config/theme';
