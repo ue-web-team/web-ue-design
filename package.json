@@ -21,6 +21,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:library": "vite build --config vite-lib.config.ts",
+    "build:types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build:all": "npm run build:library && npm run build:types",
     "serve": "vite preview",
     "publish:library": "npm publish --access public",
     "yalc": "yalc publish --no-scripts"
