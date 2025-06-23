@@ -29,9 +29,9 @@ import { computed, PropType } from 'vue';
 
 const props = defineProps({
   kind: {
-    type: String as PropType<string>,
-    default: 'dark',
-    validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
+    type: String as PropType<'primary' | 'light' | 'white' | 'ghost' | 'warn'>,
+    default: 'primary',
+    validator: (value: string) => ['primary', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
   },
 
   outline: {
@@ -61,11 +61,32 @@ const props = defineProps({
     type: String as PropType<'button' | 'submit' | 'reset'>,
     default: 'submit',
   },
+  variant: {
+    type: String as PropType<string>,
+  },
 });
+// const { variant } = useVariant(computed(() => props.variant));
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
-  return [props.kind, props.outline ? 'outline-type' : '', props.hover ? 'hover' : '', props.active ? 'active' : ''];
+  return [
+    props.kind,
+    props.variant ? props.variant : '',
+    // getVariantType(variant.value),
+    props.outline ? 'outline-type' : '',
+    props.hover ? 'hover' : '',
+    props.active ? 'active' : '',
+    props.disabled ? 'btn-disabled' : '',
+  ];
 });
+// const getVariantType = (variant: ColorVariant) => {
+//   switch (variant) {
+//     case ColorVariant.DARKGREEN:
+//     case ColorVariant.EVERGREEN:
+//       return 'light-variant';
+//     default:
+//       return 'dark-variant';
+//   }
+// };
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
 </script>
@@ -76,13 +97,20 @@ button {
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
   /* @apply disabled:bg-gray-200 disabled:border-gray-400 disabled:text-gray-500; */
 
-  &.dark {
+  &.primary {
     @apply bg-darkgreen text-white dark:bg-sun dark:text-typegreen;
     &:hover, &.hover, &:active, &.active {
       @apply bg-evergreen text-white dark:bg-sun/85 dark:text-typegreen;
     }
     &:disabled {
       @apply  pointer-events-none opacity-50 ;
+    }
+     &.light-variant {
+      @apply bg-sun text-typegreen;
+      &:hover, &.hover, &:active, &.active {
+      @apply  bg-sun/85 text-typegreen;
+    }
+
     }
   }
   &.light {
@@ -134,10 +162,10 @@ button {
 
 button.outline-type {
   @apply border-2;
-  &.dark {
+  &.primary {
     @apply border-darkgreen bg-transparent text-typegreen dark:text-white dark:border-sun;
     &:hover, &.hover {
-      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+      @apply bg-evergreen/20  dark:bg-sun/20 dark:text-white dark:border-sun;
     }
     &:active, &.active {
       @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
@@ -145,6 +173,17 @@ button.outline-type {
     &:disabled {
        @apply  pointer-events-none opacity-50 ;
     }
+    &.light-variant {
+      @apply bg-transparent  text-white border-sun;
+      &:hover, &.hover {
+      @apply text-white bg-sun/20 border-sun;
+    }
+    &:active, &.active {
+      @apply bg-sun text-typegreen border-sun;
+    }
+
+    }
+
   }
   &.light {
     @apply border-white bg-transparent text-white dark:border-white dark:text-sun;
