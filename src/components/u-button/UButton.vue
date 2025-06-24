@@ -29,7 +29,7 @@ import { computed, PropType } from 'vue';
 
 const props = defineProps({
   kind: {
-    type: String as PropType<'dark' | 'light' | 'white' | 'ghost' | 'warn'>,
+    type: String as PropType<string>,
     default: 'dark',
     validator: (value: string) => ['dark', 'light', 'white', 'ghost', 'warn'].indexOf(value) !== -1,
   },
@@ -64,13 +64,7 @@ const props = defineProps({
 });
 const isDisabled = computed(() => props.disabled || props.loading);
 const buttonClasses = computed(() => {
-  return [
-    props.kind,
-    props.outline ? 'outline-type' : '',
-    props.hover ? 'hover' : '',
-    props.active ? 'active' : '',
-    props.disabled ? 'btn-disabled' : '',
-  ];
+  return [props.kind, props.outline ? 'outline-type' : '', props.hover ? 'hover' : '', props.active ? 'active' : ''];
 });
 const onDown = () => {};
 //const { onDown } = useRippleEffect(isDisabled.value as boolean)
