@@ -1,8 +1,8 @@
 import { colors } from './colors';
 
 export const theme = {
+  colors,
   extend: {
-    colors,
     fontFamily: {
       sans: ['Borna', 'sans-serif'],
     },
