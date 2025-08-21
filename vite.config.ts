@@ -24,8 +24,5 @@ export default defineConfig({
     }),
     Icons({ /* options */ }),
     mkcert()
-  ],
-  server: {
-    https: true,
-  }
+  ]
 })

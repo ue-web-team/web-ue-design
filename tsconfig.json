@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "declaration": true,                            /* Generates corresponding '.d.ts' file. */
+    "declaration": true /* Generates corresponding '.d.ts' file. */,
     "outDir": "dist",
     "target": "esnext",
     "useDefineForClassFields": true,
+    "emitDeclarationOnly": true,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -12,9 +13,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "unplugin-icons/types/vue",
-    ]
+    "noEmit": false,
+    "types": ["unplugin-icons/types/vue", "node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

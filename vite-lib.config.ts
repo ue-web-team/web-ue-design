@@ -51,6 +51,10 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.names[0] == "ue-design.css") return "style.css";
+          return assetInfo.names;
+        },
       },
     },
   },
