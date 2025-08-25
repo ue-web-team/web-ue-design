@@ -6,13 +6,6 @@ html {
   font-size: 16px;
 }
 
-.focus-style {
-  @apply focus:outline-none
-         focus-visible:ring
-         focus-visible:ring-offset-1
-         focus-visible:ring-blue;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -26,7 +19,6 @@ html {
 .rise-enter-active,
 .rise-leave-active {
   transition: all 0.3s ease;
-  
 }
 
 .rise-enter-from,
@@ -73,14 +65,200 @@ span.ripple {
 
 .table {
   @apply table-fixed w-full;
-  td, th {
+  td,
+  th {
     @apply px-3 py-4;
   }
   th:first-of-type {
-     @apply text-left;
+    @apply text-left;
   }
   button {
     @apply m-auto;
   }
- }
+}
 
+.ubutton {
+  @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold leading-5 text-base !no-underline tracking-wider;
+  @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
+
+  &.primary,
+  &.dark {
+    @apply bg-darkgreen text-white dark:bg-sun dark:text-black;
+    &:hover,
+    &.hover,
+    &:active,
+    &.active {
+      @apply bg-evergreen text-white dark:bg-sun/85 dark:text-black;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+    &.light-variant {
+      @apply bg-sun text-typegreen;
+      &:hover,
+      &.hover,
+      &:active,
+      &.active {
+        @apply bg-sun/85 text-typegreen;
+      }
+    }
+    &.ue-dark-variant {
+      @apply bg-sun text-darkgreen dark:bg-sun dark:text-black;
+      &:hover,
+      &.hover,
+      &:active,
+      &.active {
+        @apply bg-[#C9C355]  no-underline;
+      }
+    }
+  }
+
+  &.light {
+    @apply bg-white text-typegreen dark:bg-sun dark:text-typegreen;
+    &:hover,
+    &.hover {
+      @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
+    }
+    &:active,
+    &.active {
+      @apply bg-typegreen text-white dark:text-sun dark:bg-typegreen;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+  &.white {
+    @apply bg-white text-darkgreen dark:text-typegreen;
+    &:hover,
+    &.hover {
+      @apply bg-typegreen text-white dark:bg-typegreen dark:text-white;
+    }
+    &:active,
+    &.active {
+      @apply bg-typegreen text-white;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+  &.ghost {
+    @apply text-typegreen dark:text-sun;
+    &:hover,
+    &.hover {
+      @apply bg-typegreen/10 dark:bg-sun/20;
+    }
+    &:active,
+    &.active {
+      @apply bg-typegreen/10 text-typegreen dark:bg-sun/20 dark:text-sun;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+  &.warn {
+    @apply bg-red text-white;
+    &:hover,
+    &.hover,
+    &:active,
+    &.active {
+      @apply bg-red-600;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+}
+
+.ubutton.outline-type {
+  @apply border-2 text-black dark:text-white;
+  &.primary,
+  &.dark {
+    @apply border-darkgreen bg-transparent dark:border-sun;
+    &:hover,
+    &.hover {
+      @apply bg-evergreen/20  dark:bg-sun/20 dark:text-white dark:border-sun;
+    }
+    &:active,
+    &.active {
+      @apply bg-evergreen text-white dark:bg-sun/20 dark:text-white dark:border-sun;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+    &.light-variant {
+      @apply bg-transparent  text-white border-sun;
+      &:hover,
+      &.hover {
+        @apply text-white bg-sun/20 border-sun;
+      }
+      &:active,
+      &.active {
+        @apply bg-sun text-typegreen border-sun;
+      }
+    }
+    &.ue-dark-variant {
+      @apply border-sun bg-transparent dark:border-warm text-white;
+      &:hover,
+      &.hover {
+        @apply bg-[#3f6e54] text-white;
+      }
+      &:active,
+      &.active {
+        @apply bg-[#3f6e54] text-white;
+      }
+    }
+    &.ue-light-variant {
+      @apply border-darkgreen bg-transparent dark:border-warm text-typegreen dark:text-white;
+      &:hover,
+      &.hover {
+        @apply bg-fog dark:bg-[rgba(246,224,84,0.2)];
+      }
+      &:active,
+      &.active {
+        @apply bg-[#3f6e54] text-white;
+      }
+    }
+  }
+  &.light {
+    @apply border-white bg-transparent text-white dark:border-white dark:text-sun;
+    &:hover,
+    &.hover {
+      @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
+    }
+    &:active,
+    &.active {
+      @apply bg-white text-typegreen border-typegreen dark:bg-sun dark:text-typegreen dark:border-white;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+  &.white {
+    @apply border-white bg-transparent text-white;
+    &:hover,
+    &.hover {
+      @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
+    }
+    &:active,
+    &.active {
+      @apply bg-white text-darkgreen dark:bg-white dark:text-typegreen;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+  &.warn {
+    @apply border-red bg-transparent text-black dark:text-white;
+    &:hover,
+    &.hover {
+      @apply bg-red-100 text-black dark:bg-red dark:text-white;
+    }
+    &:active,
+    &.active {
+      @apply bg-red text-white;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+}
