@@ -17,12 +17,13 @@ After that publish with
 ## Package for local testing (in another project)
 
 Build the library as above, then:
-`npm pack`
-Then change the package.json of the other projekt to point at the generated .tgz, for example:
-`    "@umeaenergi/ue-design": "file:/dev/web-ue-design/umeaenergi-ue-design-0.2.47.tgz",`
+`yarn link`
 and finally (in the other project):
-`npm install`
-`npm run dev`
+`yarn link "@umeaenergi/ue-design"`
+
+When you're done (in the other project):
+`yarn unlink "@umeaenergi/ue-design"`
+`yarn install --check-files`
 
 ### inspiration
 

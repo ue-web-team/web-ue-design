@@ -1,6 +1,6 @@
 {
   "name": "@umeaenergi/ue-design",
-  "version": "0.2.56",
+  "version": "0.2.57",
   "description": "UE Component library (Vue 3 + Tailwind CSS + Typescript)",
   "repository": "https://github.com/ue-web-team/web-ue-design.git",
   "author": "Björn Yttergren et al",
@@ -55,7 +55,7 @@
     "unplugin-icons": "^0.12.9",
     "unplugin-vue-components": "^0.15.2",
     "vite": "^7.0.0",
-    "vite-plugin-mkcert": "1.9.0",
+    "vite-plugin-mkcert": "1.17.8",
     "vitepress": "^0.19.2",
     "vue-tsc": "^0.3.0"
   }

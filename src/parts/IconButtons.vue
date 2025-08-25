@@ -25,7 +25,9 @@
             <UIconButton active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton class="ring ring-offset-1 ring-blue-600 ring-opacity-90"><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring-1 ring-offset-1 ring-white outline-none border-black border-2"
+              ><i-mdi-cog
+            /></UIconButton>
           </td>
           <td>
             <UIconButton disabled><i-mdi-cog /></UIconButton>
@@ -43,10 +45,9 @@
             <UIconButton outline active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton
-              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
-              outline
-            ><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring-1 ring-offset-1 ring-white outline-none !border-black border-2" outline
+              ><i-mdi-cog
+            /></UIconButton>
           </td>
           <td>
             <UIconButton outline disabled><i-mdi-cog /></UIconButton>
@@ -64,10 +65,9 @@
             <UIconButton kind="ghost" active><i-mdi-cog /></UIconButton>
           </td>
           <td>
-            <UIconButton
-              class="ring ring-offset-1 ring-blue-600 ring-opacity-90"
-              kind="ghost"
-            ><i-mdi-cog /></UIconButton>
+            <UIconButton class="ring-1 ring-offset-1 ring-white outline-none border-black border-2" kind="ghost"
+              ><i-mdi-cog
+            /></UIconButton>
           </td>
           <td>
             <UIconButton kind="ghost" disabled><i-mdi-cog /></UIconButton>
@@ -81,14 +81,13 @@
 </template>
 
 <script setup lang="ts">
-import Prism from "../lib/code-block"
+import Prism from '../lib/code-block';
 
-const code =
-  `<!-- Variants. default(dark), ghost -->
+const code = `<!-- Variants. default(dark), ghost -->
 <UIconButton><i-mdi-cog /></UIconButton>
 <UIconButton kind="ghost"><i-mdi-cog /></UIconButton>
 
 <!-- whith outline (not ghost) -->
 <UIconButton outline><i-mdi-cog /></UIconButton>
-`
+`;
 </script>
