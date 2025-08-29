@@ -81,6 +81,20 @@ span.ripple {
   @apply min-h-11 inline-flex justify-center items-center relative overflow-hidden rounded-full truncate px-6 font-semibold leading-5 text-base !no-underline tracking-wider;
   @apply transform-gpu transition-all ease-out duration-200 active:scale-95;
 
+  &.link {
+    @apply text-green dark:text-lightgreen font-bold;
+    &.ue-dark-variant {
+      @apply text-lightgreen hover:!text-green font-bold;
+    }
+
+    &:hover,
+    &.hover,
+    &:active,
+    &.active {
+      @apply text-lightgreen dark:text-green no-underline;
+    }
+  }
+
   &.primary,
   &.dark {
     @apply bg-darkgreen text-white dark:bg-sun dark:text-black;

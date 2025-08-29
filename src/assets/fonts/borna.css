@@ -17,7 +17,7 @@
 @font-face {
   font-family: 'Borna';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 500 600;
   font-display: swap;
   src: url('./Borna-Medium.otf') format('opentype');
 }
@@ -33,7 +33,7 @@
 @font-face {
   font-family: 'Borna';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 600 700;
   font-display: swap;
   src: url('./Borna-SemiBold.otf') format('opentype');
 }
