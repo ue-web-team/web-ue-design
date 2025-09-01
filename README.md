@@ -21,7 +21,9 @@ Build the library as above, then:
 and finally (in the other project):
 `yarn link "@umeaenergi/ue-design"`
 
-When you're done (in the other project):
+When you're done (in this project):
+`yarn unlink`
+and then (in the other project):
 `yarn unlink "@umeaenergi/ue-design"`
 `yarn install --check-files`
 
