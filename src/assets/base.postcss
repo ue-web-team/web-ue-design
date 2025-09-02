@@ -156,14 +156,13 @@ span.ripple {
     }
   }
   &.ghost {
-    @apply text-typegreen dark:text-sun;
     &:hover,
     &.hover {
-      @apply bg-typegreen/10 dark:bg-sun/20;
+      @apply bg-gray-400/40 dark:text-white;
     }
     &:active,
     &.active {
-      @apply bg-typegreen/10 text-typegreen dark:bg-sun/20 dark:text-sun;
+      @apply bg-gray-500 text-white;
     }
     &:disabled {
       @apply pointer-events-none opacity-50;
