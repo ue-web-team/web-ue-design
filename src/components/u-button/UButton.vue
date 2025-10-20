@@ -1,5 +1,11 @@
 <template>
-  <button class="ubutton focus-style" @pointerdown="onDown" :class="buttonClasses" :disabled="isDisabled" :type="type">
+  <button
+    class="ubutton focus-style focus:outline-3 focus:outline-offset-2 focus:outline-[#24A3F8]"
+    @pointerdown="onDown"
+    :class="buttonClasses"
+    :disabled="isDisabled"
+    :type="type"
+  >
     <span v-if="loading" class="mr-2 animate-spin">
       <svg
         xmlns="http://www.w3.org/2000/svg"
