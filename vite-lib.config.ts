@@ -1,9 +1,9 @@
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
-import typescript from '@rollup/plugin-typescript'
-import fs from 'fs'
+import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import typescript from '@rollup/plugin-typescript';
+import fs from 'fs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,18 +23,15 @@ export default defineConfig({
           resolve('./src/config/theme.ts'),
           resolve('./dist/theme.ts')
         );*/
-        fs.copyFileSync(
-          resolve('./src/assets/base.postcss'),
-          resolve('./dist/base.postcss')
-        );
-      }
-    }
+        fs.copyFileSync(resolve('./src/assets/base.postcss'), resolve('./dist/base.postcss'));
+      },
+    },
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(__dirname, './src'),
     },
-    dedupe: ['vue']
+    dedupe: ['vue'],
   },
   build: {
     lib: {
@@ -52,10 +49,10 @@ export default defineConfig({
           vue: 'Vue',
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.names[0] == "ue-design.css") return "style.css";
-          return assetInfo.names;
+          if (assetInfo.name == 'ue-design.css') return 'style.css';
+          return assetInfo.name;
         },
       },
     },
   },
-})
+});
